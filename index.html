@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nifty Trading Dashboard</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0f0f0f;color:#e8e8e8;font-size:13px}
+nav{background:#161616;border-bottom:1px solid #222;padding:0 20px;display:flex;align-items:center;gap:0;height:46px;position:sticky;top:0;z-index:100}
+.nav-brand{font-size:15px;font-weight:700;color:#fff;margin-right:24px}
+.nav-tab{padding:0 16px;height:46px;display:flex;align-items:center;font-size:12px;font-weight:600;color:#666;cursor:pointer;border-bottom:2px solid transparent;transition:all .15s}
+.nav-tab:hover{color:#aaa}
+.nav-tab.active{color:#fff;border-bottom-color:#3b82f6}
+.page{display:none;padding:16px 20px;max-width:780px;margin:0 auto}
+.page.active{display:block}
+
+/* ── DASHBOARD ── */
+.date-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.date-label{font-size:15px;font-weight:700;color:#fff}
+.date-sub{font-size:11px;color:#555}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.card{background:#161616;border:1px solid #222;border-radius:8px;padding:9px 12px}
+.cl{font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
+.cv{font-size:17px;font-weight:700}
+.cs{font-size:10px;color:#555;margin-top:2px}
+.sec{font-size:10px;font-weight:700;color:#444;letter-spacing:1.5px;text-transform:uppercase;margin:14px 0 8px;padding-bottom:4px;border-bottom:1px solid #1e1e1e}
+
+/* Signal table */
+.sig-table{width:100%;border-collapse:collapse;font-size:12px;margin-bottom:10px}
+.sig-table th{background:#161616;color:#555;font-weight:700;text-align:left;padding:6px 10px;border-bottom:1px solid #1e1e1e;font-size:10px;text-transform:uppercase}
+.sig-table td{padding:7px 10px;border-bottom:1px solid #161616;vertical-align:top}
+.sig-table tr:hover td{background:#161616}
+.tag{display:inline-block;font-size:10px;padding:2px 8px;border-radius:5px;font-weight:700}
+.tag-call{background:#0a2e0a;color:#22c55e}
+.tag-put{background:#2e0a0a;color:#ef4444}
+.tag-no{background:#1a1500;color:#f59e0b}
+.tag-watch{background:#111;color:#666}
+.bull{color:#22c55e;font-weight:700}.bear{color:#ef4444;font-weight:700}.wait{color:#f59e0b;font-weight:700}
+
+/* Calc */
+.calc{background:#0f0f1a;border:1px solid #1e1e3a;border-radius:8px;padding:12px 14px;margin-bottom:8px}
+.calc-title{font-size:10px;font-weight:700;color:#818cf8;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.cr{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.cr label{font-size:11px;color:#555;min-width:88px}
+.cr input{background:#111;border:1px solid #2a2a4a;border-radius:5px;color:#fff;padding:5px 9px;font-size:14px;font-weight:700;width:100px;text-align:right;outline:none}
+.cr input:focus{border-color:#3b82f6}
+.cres{font-size:13px;font-weight:700;padding:8px 11px;border-radius:6px;min-height:34px;display:flex;align-items:center;margin-top:3px}
+.cres-bull{background:#0a2e0a;color:#22c55e}
+.cres-bear{background:#2e0a0a;color:#ef4444}
+.cres-wait{background:#1a1500;color:#f59e0b}
+.cres-none{background:#161616;color:#555}
+
+/* Rules */
+.rules{background:#0f0a0a;border:1px solid #2a1a1a;border-radius:8px;padding:12px 14px}
+.rule{display:flex;gap:8px;padding:5px 0;border-bottom:1px solid #1a1010;font-size:12px;color:#cc9999}
+.rule:last-child{border-bottom:none}
+.ri{min-width:20px}
+
+/* ── SCORECARDS ── */
+.sc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.sc-card{background:#161616;border:1px solid #222;border-radius:8px;padding:12px 14px;cursor:pointer;transition:border-color .15s}
+.sc-card:hover{border-color:#3b82f6}
+.sc-card.bull-day{border-left:3px solid #22c55e}
+.sc-card.bear-day{border-left:3px solid #ef4444}
+.sc-date{font-size:12px;font-weight:700;color:#fff;margin-bottom:4px}
+.sc-stats{font-size:11px;color:#555;line-height:1.6}
+
+/* Scorecard detail */
+.sc-detail{background:#0f0f0f;border:1px solid #222;border-radius:8px;padding:14px;margin-top:10px;display:none}
+.sc-detail.open{display:block}
+.sc-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.sc-close-btn{font-size:11px;color:#555;cursor:pointer;padding:3px 8px;border:1px solid #333;border-radius:4px}
+.sc-close-btn:hover{color:#aaa}
+
+/* Pills */
+.pills{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.pill{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700}
+.p-on{background:#0a2e0a;color:#22c55e;border:1px solid #1a4a1a}
+.p-warn{background:#2a2000;color:#f59e0b;border:1px solid #3a3000}
+.p-dead{background:#181818;color:#3a3a3a;border:1px solid #222;text-decoration:line-through}
+
+/* Alert */
+.alert{border-radius:8px;padding:10px 13px;margin-bottom:12px;font-size:12px;line-height:1.6}
+.alert.bear{background:#1a0000;border:1px solid #3a0000;color:#cc8888}
+.alert.warn{background:#161000;border:1px solid #332200;color:#c8a060}
+.alert.bull{background:#001a00;border:1px solid #003300;color:#88cc88}
+.alert-t{font-size:13px;font-weight:800;margin-bottom:4px}
+.alert.bear .alert-t{color:#ef4444}
+.alert.warn .alert-t{color:#f59e0b}
+.alert.bull .alert-t{color:#22c55e}
+
+@media(max-width:500px){.g4{grid-template-columns:1fr 1fr}.sc-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">⚡ Nifty</div>
+  <div class="nav-tab active" onclick="showPage('dashboard',this)">Tomorrow</div>
+  <div class="nav-tab" onclick="showPage('scorecards',this)">Scorecards</div>
+  <div class="nav-tab" onclick="showPage('playbook',this)">Playbook</div>
+  <div class="nav-tab" onclick="showPage('calc',this)">Calculators</div>
+</nav>
+
+<!-- ═══════════════════════════════════════ DASHBOARD ═══ -->
+<div id="dashboard" class="page active">
+  <div id="dash-content"></div>
+</div>
+
+<!-- ═══════════════════════════════════════ SCORECARDS ═══ -->
+<div id="scorecards" class="page">
+  <div class="sec" style="margin-top:4px">All sessions</div>
+  <div id="sc-grid" class="sc-grid"></div>
+  <div id="sc-detail" class="sc-detail"></div>
+</div>
+
+<!-- ═══════════════════════════════════════ PLAYBOOK ═══ -->
+<div id="playbook" class="page">
+  <div class="sec" style="margin-top:4px">Daily signal sequence — in order</div>
+
+  <div style="background:#161616;border:1px solid #222;border-radius:8px;padding:10px 13px;margin-bottom:8px;border-left:3px solid #f59e0b">
+    <div style="font-size:10px;color:#f59e0b;font-weight:700;text-transform:uppercase;margin-bottom:4px">8:00 AM — Pre-open</div>
+    <div style="font-size:12px;color:#ccc;line-height:1.7">
+      Check <strong style="color:#fff">Brent crude</strong>: &lt;$98 = bull bias · $98-108 = neutral · &gt;$108 = bear bias<br>
+      Check <strong style="color:#fff">GIFT Nifty</strong>: Gap direction and size<br>
+      <strong style="color:#fff">Prev close position</strong>: Top 20% → morning trap · Bottom 20% → 71% bull · Mid 40-60% → 89% bear next day
+    </div>
+  </div>
+
+  <div style="background:#161616;border:1px solid #222;border-radius:8px;padding:10px 13px;margin-bottom:8px;border-left:3px solid #3b82f6">
+    <div style="font-size:10px;color:#3b82f6;font-weight:700;text-transform:uppercase;margin-bottom:4px">9:20 — First candle (check in order, stop at first match)</div>
+    <div style="font-size:12px;color:#ccc;line-height:1.7">
+      1. Gap &gt;1% UP + RSI &gt;75 + body &lt;0.30 + LW bigger → <span class="bull">BUY PUT 93%</span><br>
+      2. Gap &gt;1% DOWN + RSI &lt;25 + body &lt;0.30 + UW bigger → <span class="bull">BUY CALL 80%</span><br>
+      3. Open within 15pts of candle HIGH → <span class="bear">BEAR day 100%</span><br>
+      4. Volume &gt;2x AND bear candle → <span class="bear">SHORT continues 78%</span>
+    </div>
+  </div>
+
+  <div style="background:#161616;border:1px solid #222;border-radius:8px;padding:10px 13px;margin-bottom:8px;border-left:3px solid #3b82f6">
+    <div style="font-size:10px;color:#3b82f6;font-weight:700;text-transform:uppercase;margin-bottom:4px">10:35 — RSI at 10:30 candle (day classifier)</div>
+    <table class="sig-table" style="margin:0">
+      <tr><td style="color:#aaa;font-weight:700;width:80px">RSI 30–40</td><td class="bear">BEAR 79%</td><td style="color:#555">Short the next bounce</td></tr>
+      <tr><td style="color:#aaa;font-weight:700">RSI 40–50</td><td class="bull">BULL 60%</td><td style="color:#555">Buy the next dip</td></tr>
+      <tr><td style="color:#aaa;font-weight:700">RSI 50–70</td><td class="wait">NEUTRAL</td><td style="color:#555">Wait for 11:30</td></tr>
+      <tr><td style="color:#aaa;font-weight:700">RSI &gt;70</td><td class="bear">BEAR 80%</td><td style="color:#555">Short the bounce</td></tr>
+      <tr><td style="color:#aaa;font-weight:700">RSI &lt;30</td><td class="wait">NEUTRAL</td><td style="color:#555">Not a buy. Wait.</td></tr>
+    </table>
+  </div>
+
+  <div style="background:#161616;border:1px solid #222;border-radius:8px;padding:10px 13px;margin-bottom:8px;border-left:3px solid #22c55e">
+    <div style="font-size:10px;color:#22c55e;font-weight:700;text-transform:uppercase;margin-bottom:4px">11:35 ⭐ MAIN TRADE — price position check</div>
+    <div style="font-size:12px;color:#ccc;line-height:1.7">
+      Calculate: <strong>(Close − Day Low) ÷ (Day High − Day Low)</strong><br>
+      Result &lt;0.25 → <span class="bull">BUY CALL 87%</span><br>
+      Result &gt;0.75 → <span class="bear">BUY PUT 89%</span><br>
+      Result 0.25–0.75 → <span class="wait">NO TRADE. No edge. Skip.</span>
+    </div>
+  </div>
+
+  <div style="background:#161616;border:1px solid #222;border-radius:8px;padding:10px 13px;margin-bottom:8px;border-left:3px solid #3b82f6">
+    <div style="font-size:10px;color:#3b82f6;font-weight:700;text-transform:uppercase;margin-bottom:4px">12:05 — Midday RSI (confirms or cancels)</div>
+    <div style="font-size:12px;color:#ccc">RSI &gt;55 → hold longs · RSI &lt;45 → hold puts · RSI 45-55 → cut size half</div>
+  </div>
+
+  <div style="background:#161616;border:1px solid #222;border-radius:8px;padding:10px 13px;margin-bottom:8px;border-left:3px solid #ef4444">
+    <div style="font-size:10px;color:#ef4444;font-weight:700;text-transform:uppercase;margin-bottom:4px">14:30 — Hard exit</div>
+    <div style="font-size:12px;color:#cc8888;font-weight:600">CLOSE ALL. No exceptions. No "one more candle."</div>
+  </div>
+
+  <div class="sec">Day of week bias</div>
+  <table class="sig-table">
+    <tr><th>Day</th><th>Bias</th><th>Key rule</th></tr>
+    <tr><td style="color:#60a5fa;font-weight:700">Monday</td><td class="bull">58% Bull</td><td style="color:#555">After 13:30 — no shorts. Positive drift 14:00-15:00.</td></tr>
+    <tr><td style="color:#f87171;font-weight:700">Tuesday</td><td class="bear">58% Bear</td><td style="color:#555">Expiry. High/low at open. OS+Low reversal 83%.</td></tr>
+    <tr><td style="color:#4ade80;font-weight:700">Wednesday</td><td class="bull">69% Bull</td><td style="color:#555">Suppressed in war regime. Check open signal first.</td></tr>
+    <tr><td style="color:#f87171;font-weight:700">Thursday</td><td class="bear">82% Bear</td><td style="color:#555">Gap-downs NEVER fill. RSI≥70 reverses 70%.</td></tr>
+    <tr><td style="color:#fb923c;font-weight:700">Friday</td><td class="bear">64% Bear</td><td style="color:#555">Gap-ups fill 100%. OS signals don't bounce (29%).</td></tr>
+  </table>
+
+  <div class="sec">Pattern status — updated Apr 8</div>
+  <div class="pills">
+    <span class="pill p-on">11:30 position ✓</span>
+    <span class="pill p-on">OB+High open ✓</span>
+    <span class="pill p-on">OS+Low persistent ✓</span>
+    <span class="pill p-on">Thu bear 82% ✓</span>
+    <span class="pill p-on">Thu gap-down no fill ✓</span>
+    <span class="pill p-on">Mon 14:00 drift ✓</span>
+    <span class="pill p-warn">Wed bull ⚠ suppressed</span>
+    <span class="pill p-warn">Mon afternoon OB+High ⚠ suppressed</span>
+    <span class="pill p-warn">Gap 3%+ skip open ⚠ new rule</span>
+    <span class="pill p-dead">15:00 dump ✗ dead</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ CALCULATORS ═══ -->
+<div id="calc" class="page">
+  <div class="calc" style="margin-top:4px">
+    <div class="calc-title">⭐ 11:30 Position — BUY CALL / PUT / SKIP</div>
+    <div class="cr"><label>Day High</label><input type="number" id="dh" placeholder="24025" oninput="calcPos()"></div>
+    <div class="cr"><label>Day Low</label><input type="number" id="dl" placeholder="23700" oninput="calcPos()"></div>
+    <div class="cr"><label>Close at 11:30</label><input type="number" id="dc" placeholder="23850" oninput="calcPos()"></div>
+    <div class="cres cres-none" id="pos_res">Enter the three numbers above</div>
+  </div>
+
+  <div class="calc">
+    <div class="calc-title">💰 Stop Loss and Target</div>
+    <div class="cr"><label>Premium paid (₹)</label><input type="number" id="prem" placeholder="180" oninput="calcOpt()"></div>
+    <div id="opt_res" style="font-size:12px;color:#555;padding:4px 0;line-height:1.8">Enter premium above</div>
+  </div>
+
+  <div class="calc">
+    <div class="calc-title">📊 Gap Calculator</div>
+    <div class="cr"><label>Prev close</label><input type="number" id="pc" placeholder="24011" oninput="calcGap()"></div>
+    <div class="cr"><label>Today open</label><input type="number" id="to" placeholder="23850" oninput="calcGap()"></div>
+    <div id="gap_res" style="font-size:12px;color:#555;padding:4px 0;line-height:1.6">Enter values above</div>
+  </div>
+
+  <div class="calc">
+    <div class="calc-title">🎯 Delta / Strike Guide</div>
+    <div style="font-size:12px;color:#ccc;line-height:1.9">
+      <strong style="color:#aaa">9:20 open signal</strong> → Delta 0.27–0.38 (100-200 below ATM)<br>
+      <strong style="color:#aaa">10:30 signal</strong> → Delta 0.32–0.40 (100-150 below ATM)<br>
+      <strong style="color:#aaa">11:30 signal</strong> → Delta 0.38–0.48 (50-100 below ATM)<br>
+      <strong style="color:#ef4444">Never below delta 0.20 intraday.</strong> Theta destroys you.
+    </div>
+  </div>
+
+  <div class="rules" style="margin-top:4px">
+    <div class="sec" style="color:#ef4444;border-color:#2a1a1a;margin-top:0;margin-bottom:8px">Iron rules</div>
+    <div class="rule"><span class="ri">🔢</span>Max 2 lots. Always.</div>
+    <div class="rule"><span class="ri">🛑</span>Stop = 35% of premium. Set before entering.</div>
+    <div class="rule"><span class="ri">🎯</span>Target = 100% of premium (2x). Exit there.</div>
+    <div class="rule"><span class="ri">⏰</span>Last entry: 11:30 AM.</div>
+    <div class="rule"><span class="ri">🚪</span>Exit all by 14:30. Always.</div>
+    <div class="rule"><span class="ri">🎯</span>ATM or 1-2 strikes OTM. Delta 0.27–0.48.</div>
+  </div>
+</div>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────
+const DAYS = [{"date": "2026-03-30", "dow": "Monday", "gap_pts": 43.1, "gap_pct": 0.19, "open": 22578.95, "high": 22714.1, "low": 22283.85, "close": 22379.2, "range": 430.2, "direction": "Bear", "return_pct": -0.88, "close_pos": 0.22, "rsi_open": 11.2, "rsi_1030": 28.4, "pos_1130": 0.51, "rsi_mid": 49.6, "ob_count": 0, "os_count": 12, "signals": [{"t": "9:15", "s": "First Candle", "id": "RSI 11, moderate gap +0.19%", "a": "Wait", "hr": "\u2014"}, {"t": "10:30", "s": "RSI Classifier", "id": "RSI 28.4 \u2192 Neutral 43%", "a": "WAIT", "hr": "43%"}, {"t": "11:30", "s": "Position Check", "id": "51% of range \u2014 middle", "a": "NO TRADE", "hr": "\u2014"}, {"t": "12:00", "s": "Midday RSI", "id": "Avg 49.6 \u2192 Neutral", "a": "Hold/exit", "hr": "79-85%"}, {"t": "intraday", "s": "OS+Low PERSISTENT 12 consec", "id": "RSI<35 + bottom 30% of range", "a": "BUY CALL", "hr": "85%"}]}, {"date": "2026-04-01", "dow": "Wednesday", "gap_pts": 493.6, "gap_pct": 2.21, "open": 22872.85, "high": 22941.3, "low": 22618.6, "close": 22703.15, "range": 322.7, "direction": "Bear", "return_pct": -0.74, "close_pos": 0.26, "rsi_open": 83.9, "rsi_1030": 58.2, "pos_1130": 0.56, "rsi_mid": 59.7, "ob_count": 12, "os_count": 9, "signals": [{"t": "9:15", "s": "Gap Extreme Short", "id": "RSI 84, gap +2.2%, body 0.15, LW dominant", "a": "BUY PUT", "hr": "93%"}, {"t": "10:30", "s": "RSI Classifier", "id": "RSI 58.2 \u2192 Neutral 55%", "a": "WAIT", "hr": "55%"}, {"t": "11:30", "s": "Position Check", "id": "56% of range \u2014 middle", "a": "NO TRADE", "hr": "\u2014"}, {"t": "12:00", "s": "Midday RSI", "id": "Avg 59.7 \u2192 Bull confirmed", "a": "Hold/exit", "hr": "79-85%"}, {"t": "intraday", "s": "OB+High 12x", "id": "RSI>65 + top 70% of range", "a": "BUY PUT", "hr": "55% afternoon"}, {"t": "intraday", "s": "OS+Low 9x", "id": "RSI<35 + bottom 30% of range", "a": "BUY CALL", "hr": "68-83%"}]}, {"date": "2026-04-06", "dow": "Monday", "gap_pts": 88.7, "gap_pct": 0.39, "open": 22788.95, "high": 22998.35, "low": 22542.95, "close": 22959.45, "range": 455.4, "direction": "Bull", "return_pct": 0.75, "close_pos": 0.91, "rsi_open": 58.3, "rsi_1030": 52.6, "pos_1130": 0.15, "rsi_mid": 57.8, "ob_count": 16, "os_count": 0, "signals": [{"t": "9:15", "s": "First Candle", "id": "RSI 58, moderate gap +0.39%", "a": "Wait", "hr": "\u2014"}, {"t": "10:30", "s": "RSI Classifier", "id": "RSI 52.6 \u2192 Neutral 55%", "a": "WAIT", "hr": "55%"}, {"t": "11:30", "s": "Position Check", "id": "15% of range \u2014 bottom", "a": "BUY CALL", "hr": "87%"}, {"t": "12:00", "s": "Midday RSI", "id": "Avg 57.8 \u2192 Bull confirmed", "a": "Hold/exit", "hr": "79-85%"}, {"t": "intraday", "s": "OB+High 16x", "id": "RSI>65 + top 70% of range", "a": "BUY PUT", "hr": "55% afternoon"}]}, {"date": "2026-04-07", "dow": "Tuesday", "gap_pts": -119.7, "gap_pct": -0.52, "open": 22839.75, "high": 23153.85, "low": 22719.3, "close": 23129.95, "range": 434.5, "direction": "Bull", "return_pct": 1.27, "close_pos": 0.95, "rsi_open": 34.6, "rsi_1030": 53.1, "pos_1130": 0.52, "rsi_mid": 52.7, "ob_count": 9, "os_count": 1, "signals": [{"t": "9:15", "s": "First Candle", "id": "RSI 35, moderate gap -0.52%", "a": "Wait", "hr": "\u2014"}, {"t": "10:30", "s": "RSI Classifier", "id": "RSI 53.1 \u2192 Neutral 55%", "a": "WAIT", "hr": "55%"}, {"t": "11:30", "s": "Position Check", "id": "52% of range \u2014 middle", "a": "NO TRADE", "hr": "\u2014"}, {"t": "12:00", "s": "Midday RSI", "id": "Avg 52.7 \u2192 Neutral", "a": "Hold/exit", "hr": "79-85%"}, {"t": "intraday", "s": "OB+High 9x", "id": "RSI>65 + top 70% of range", "a": "BUY PUT", "hr": "55% afternoon"}, {"t": "intraday", "s": "OS+Low 1x", "id": "RSI<35 + bottom 30% of range", "a": "BUY CALL", "hr": "68-83%"}]}, {"date": "2026-04-08", "dow": "Wednesday", "gap_pts": 726.3, "gap_pct": 3.14, "open": 23856.25, "high": 24025.15, "low": 23828.5, "close": 24010.6, "range": 196.7, "direction": "Bull", "return_pct": 0.65, "close_pos": 0.93, "rsi_open": 92.5, "rsi_1030": 81.4, "pos_1130": 0.71, "rsi_mid": 62.0, "ob_count": 15, "os_count": 0, "signals": [{"t": "9:15", "s": "Large Gap Up \u2014 no clean signal", "id": "RSI 93, body 0.40 too large", "a": "WATCH", "hr": "\u2014"}, {"t": "9:15", "s": "Vol Spike 2.3x", "id": "Bull candle at open", "a": "FADE\u2192PUT", "hr": "62-78%"}, {"t": "10:30", "s": "RSI Classifier", "id": "RSI 81.4 \u2192 OB Bear 80%", "a": "SHORT", "hr": "Bear"}, {"t": "11:30", "s": "Position Check", "id": "71% of range \u2014 middle", "a": "NO TRADE", "hr": "\u2014"}, {"t": "12:00", "s": "Midday RSI", "id": "Avg 62.0 \u2192 Bull confirmed", "a": "Hold/exit", "hr": "79-85%"}, {"t": "intraday", "s": "OB+High 15x", "id": "RSI>65 + top 70% of range", "a": "BUY PUT", "hr": "55% afternoon"}]}];
+
+// ── NAV ──────────────────────────────────────────────────────────
+function showPage(id, el) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (el) el.classList.add('active');
+}
+
+// ── DASHBOARD ────────────────────────────────────────────────────
+function renderDashboard() {
+  const last = DAYS[DAYS.length - 1];
+  const nextDow = nextDay(last.dow);
+  const nextDate = nextTradingDate(last.date);
+  const cp = last.close_pos;
+
+  let cpSignal = '', cpColor = '#aaa';
+  if (cp > 0.80) { cpSignal = 'Morning trap -0.46% avg first hour'; cpColor = '#ef4444'; }
+  else if (cp < 0.20) { cpSignal = '71% Bull next day'; cpColor = '#22c55e'; }
+  else if (cp >= 0.40 && cp <= 0.60) { cpSignal = 'BEAR next day 89%'; cpColor = '#ef4444'; }
+  else { cpSignal = 'Neutral bias'; cpColor = '#aaa'; }
+
+  const dowBias = {
+    Thursday:  { pct: '82% Bear', color: '#ef4444', note: 'Gap-downs never fill (0%). RSI≥70 reverses 70%. Capitulation override: RSI<20 + 10+ OS+Low = LONG.' },
+    Friday:    { pct: '64% Bear', color: '#ef4444', note: 'Gap-ups fill 100%. OS signals don\'t bounce (29%). Sell into strength.' },
+    Monday:    { pct: '58% Bull', color: '#22c55e', note: '14:00–15:00 positive drift. OB+High suppressed after 13:30.' },
+    Tuesday:   { pct: '58% Bear', color: '#ef4444', note: 'Expiry. High/low often at open. OS+Low reversal 83% on Tuesday.' },
+    Wednesday: { pct: '69% Bull', color: '#22c55e', note: 'Suppressed in current regime. Check open signal first.' },
+  };
+  const db = dowBias[nextDow] || { pct: '—', color: '#aaa', note: '' };
+
+  document.getElementById('dash-content').innerHTML = `
+    <div class="date-bar" style="margin-top:4px">
+      <div>
+        <div class="date-label">Tomorrow — ${nextDow}, ${nextDate}</div>
+        <div class="date-sub">Based on ${last.date} (${last.dow}) close</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:13px;font-weight:700;color:${db.color}">${db.pct}</div>
+        <div style="font-size:10px;color:#555">DOW bias</div>
+      </div>
+    </div>
+
+    <div class="alert ${last.direction === 'Bull' && cp > 0.80 ? 'warn' : last.direction === 'Bear' ? 'bear' : 'bull'}">
+      <div class="alert-t">Today's close → tomorrow's morning signal</div>
+      Close at <strong>${(cp*100).toFixed(0)}%</strong> of today's range → <strong style="color:${cpColor}">${cpSignal}</strong><br>
+      PDH: ${last.high} · PDL: ${last.low} · PClose: ${last.close}
+    </div>
+
+    <div class="sec">Yesterday — ${last.date} (${last.dow})</div>
+    <div class="g4">
+      <div class="card">
+        <div class="cl">Gap</div>
+        <div class="cv" style="color:${last.gap_pct>=0?'#22c55e':'#ef4444'}">${last.gap_pct>=0?'+':''}${last.gap_pct}%</div>
+        <div class="cs">${last.gap_pts>=0?'+':''}${last.gap_pts} pts</div>
+      </div>
+      <div class="card">
+        <div class="cl">Direction</div>
+        <div class="cv" style="color:${last.direction==='Bull'?'#22c55e':'#ef4444'}">${last.direction}</div>
+        <div class="cs">${last.return_pct>=0?'+':''}${last.return_pct}%</div>
+      </div>
+      <div class="card">
+        <div class="cl">Range</div>
+        <div class="cv">${last.range} pts</div>
+        <div class="cs">${last.low} – ${last.high}</div>
+      </div>
+      <div class="card">
+        <div class="cl">Close pos</div>
+        <div class="cv" style="color:${cpColor}">${(cp*100).toFixed(0)}%</div>
+        <div class="cs">${cpSignal}</div>
+      </div>
+    </div>
+
+    <div class="sec">Signal summary — ${last.date}</div>
+    <table class="sig-table">
+      <tr><th>Time</th><th>Signal</th><th>Identifier</th><th>Action</th><th>Hit rate</th></tr>
+      ${last.signals.map(s => `
+        <tr>
+          <td style="color:#555;white-space:nowrap">${s.t}</td>
+          <td style="color:#ccc;font-weight:600">${s.s}</td>
+          <td style="color:#555">${s.id}</td>
+          <td>${actionTag(s.a)}</td>
+          <td style="color:#555">${s.hr}</td>
+        </tr>
+      `).join('')}
+    </table>
+
+    <div class="sec">Tomorrow's checklist — ${nextDow} ${nextDate}</div>
+    <div style="background:#161616;border:1px solid #222;border-radius:8px;padding:10px 13px;margin-bottom:8px;font-size:12px;color:#ccc;line-height:1.9">
+      <div style="color:${db.color};font-weight:700;margin-bottom:6px">${nextDow}: ${db.pct} — ${db.note}</div>
+      ⏰ <strong>8 AM</strong> — Check Brent crude + GIFT Nifty<br>
+      ⏰ <strong>9:20</strong> — First candle: RSI + body + wick + volume<br>
+      ⏰ <strong>10:35</strong> — RSI on 10:30 candle → day classifier<br>
+      ⏰ <strong style="color:#22c55e">11:35 ⭐</strong> — Position check → main trade entry<br>
+      ⏰ <strong>12:05</strong> — Midday RSI → confirm or cancel<br>
+      ⏰ <strong style="color:#ef4444">14:30</strong> — CLOSE ALL. No exceptions.
+    </div>
+  `;
+}
+
+function actionTag(a) {
+  if (a.includes('CALL')) return `<span class="tag tag-call">${a}</span>`;
+  if (a.includes('PUT')) return `<span class="tag tag-put">${a}</span>`;
+  if (a.includes('NO TRADE') || a.includes('WAIT') || a.includes('WATCH')) return `<span class="tag tag-no">${a}</span>`;
+  return `<span class="tag tag-watch">${a}</span>`;
+}
+
+// ── SCORECARDS ────────────────────────────────────────────────────
+function renderScorecards() {
+  const grid = document.getElementById('sc-grid');
+  grid.innerHTML = [...DAYS].reverse().map((d, i) => `
+    <div class="sc-card ${d.direction === 'Bull' ? 'bull-day' : 'bear-day'}" onclick="openScorecard(${DAYS.length - 1 - i})">
+      <div class="sc-date">${d.date} <span style="color:#555;font-weight:400">${d.dow}</span></div>
+      <div class="sc-stats">
+        <span style="color:${d.direction==='Bull'?'#22c55e':'#ef4444'};font-weight:700">${d.direction} ${d.return_pct>=0?'+':''}${d.return_pct}%</span>
+        &nbsp;·&nbsp; Gap ${d.gap_pct>=0?'+':''}${d.gap_pct}%<br>
+        Range ${d.range} pts &nbsp;·&nbsp; Close ${(d.close_pos*100).toFixed(0)}% of range<br>
+        RSI open ${d.rsi_open} &nbsp;·&nbsp; ${d.signals.length} signals
+      </div>
+    </div>
+  `).join('');
+}
+
+function openScorecard(idx) {
+  const d = DAYS[idx];
+  const detail = document.getElementById('sc-detail');
+  const cp = d.close_pos;
+  let cpNote = cp > 0.80 ? 'Morning trap next day' : cp < 0.20 ? 'Bull next day 71%' : cp >= 0.40 && cp <= 0.60 ? 'Bear next day 89%' : 'Neutral next day';
+
+  detail.innerHTML = `
+    <div class="sc-header">
+      <div>
+        <div style="font-size:14px;font-weight:700;color:#fff">${d.date} — ${d.dow}</div>
+        <div style="font-size:11px;color:#555;margin-top:2px">
+          <span style="color:${d.direction==='Bull'?'#22c55e':'#ef4444'};font-weight:700">${d.direction} ${d.return_pct>=0?'+':''}${d.return_pct}%</span>
+          &nbsp;·&nbsp; Gap ${d.gap_pct>=0?'+':''}${d.gap_pct}% &nbsp;·&nbsp; Range ${d.range} pts &nbsp;·&nbsp; Close ${(cp*100).toFixed(0)}% of range → ${cpNote}
+        </div>
+      </div>
+      <div class="sc-close-btn" onclick="closeScorecard()">Close ✕</div>
+    </div>
+    <div class="g4" style="margin-bottom:10px">
+      <div class="card"><div class="cl">Open</div><div class="cv" style="font-size:14px">${d.open}</div></div>
+      <div class="card"><div class="cl">High</div><div class="cv" style="font-size:14px;color:#22c55e">${d.high}</div></div>
+      <div class="card"><div class="cl">Low</div><div class="cv" style="font-size:14px;color:#ef4444">${d.low}</div></div>
+      <div class="card"><div class="cl">Close</div><div class="cv" style="font-size:14px">${d.close}</div></div>
+    </div>
+    <div class="g4" style="margin-bottom:10px">
+      <div class="card"><div class="cl">RSI open</div><div class="cv" style="font-size:14px;color:${d.rsi_open>70?'#ef4444':d.rsi_open<30?'#22c55e':'#aaa'}">${d.rsi_open}</div></div>
+      <div class="card"><div class="cl">RSI 10:30</div><div class="cv" style="font-size:14px">${d.rsi_1030 || '—'}</div></div>
+      <div class="card"><div class="cl">Pos 11:30</div><div class="cv" style="font-size:14px;color:${d.pos_1130<0.25?'#22c55e':d.pos_1130>0.75?'#ef4444':'#aaa'}">${d.pos_1130 !== null ? (d.pos_1130*100).toFixed(0)+'%' : '—'}</div></div>
+      <div class="card"><div class="cl">Mid RSI</div><div class="cv" style="font-size:14px">${d.rsi_mid || '—'}</div></div>
+    </div>
+    <table class="sig-table">
+      <tr><th>Time</th><th>Signal</th><th>Identifier</th><th>Action</th><th>Hit rate</th></tr>
+      ${d.signals.map(s => `
+        <tr>
+          <td style="color:#555;white-space:nowrap">${s.t}</td>
+          <td style="font-weight:600;color:#ccc">${s.s}</td>
+          <td style="color:#555;font-size:11px">${s.id}</td>
+          <td>${actionTag(s.a)}</td>
+          <td style="color:#555">${s.hr}</td>
+        </tr>
+      `).join('')}
+    </table>
+  `;
+  detail.classList.add('open');
+  detail.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+function closeScorecard() {
+  document.getElementById('sc-detail').classList.remove('open');
+}
+
+// ── CALCULATORS ───────────────────────────────────────────────────
+function calcPos() {
+  const h=parseFloat(document.getElementById('dh').value);
+  const l=parseFloat(document.getElementById('dl').value);
+  const c=parseFloat(document.getElementById('dc').value);
+  const el=document.getElementById('pos_res');
+  if(isNaN(h)||isNaN(l)||isNaN(c)||h<=l){el.className='cres cres-none';el.textContent='Enter the three numbers above';return}
+  const pos=(c-l)/(h-l), pct=Math.round(pos*100);
+  if(pos<0.25){el.className='cres cres-bull';el.innerHTML='✅ <b>BUY CALL</b> — '+pct+'% of range. Bottom 25%. 87% win rate.'}
+  else if(pos>0.75){el.className='cres cres-bear';el.innerHTML='🔴 <b>BUY PUT</b> — '+pct+'% of range. Top 25%. 89% win rate.'}
+  else{el.className='cres cres-wait';el.innerHTML='⏳ <b>NO TRADE</b> — '+pct+'% of range. Middle. No edge. Skip.'}
+}
+function calcOpt() {
+  const p=parseFloat(document.getElementById('prem').value);
+  const el=document.getElementById('opt_res');
+  if(isNaN(p)){el.innerHTML='Enter premium above';return}
+  const loss=Math.round(p*0.35*25*2), gain=Math.round(p*25*2);
+  el.innerHTML='Stop: <b style="color:#ef4444">₹'+(p*0.65).toFixed(1)+'</b> &nbsp;·&nbsp; Target: <b style="color:#22c55e">₹'+(p*2).toFixed(1)+'</b><br>2 lots: Max loss <b style="color:#ef4444">₹'+loss.toLocaleString()+'</b> &nbsp;·&nbsp; Profit target <b style="color:#22c55e">₹'+gain.toLocaleString()+'</b>';
+}
+function calcGap() {
+  const pc=parseFloat(document.getElementById('pc').value), to=parseFloat(document.getElementById('to').value);
+  const el=document.getElementById('gap_res');
+  if(isNaN(pc)||isNaN(to)){el.innerHTML='Enter values above';return}
+  const gap=to-pc, pct=(gap/pc*100).toFixed(2), abs=Math.abs(parseFloat(pct));
+  const dir=gap>0?'UP':'DOWN', col=gap>0?'#22c55e':'#ef4444';
+  let msg=abs>1?(dir==='UP'?'Large gap UP — check RSI+body for OB short at open.':'Large gap DOWN — Thursday fills 0%. Do NOT buy.'):(abs<0.1?'Tiny gap — fills 94%.':'Moderate gap.');
+  el.innerHTML='Gap <b style="color:'+col+'">'+dir+': '+(gap>0?'+':'')+gap.toFixed(0)+' pts ('+(gap>0?'+':'')+pct+'%)</b><br><span style="color:#555">'+msg+'</span>';
+}
+
+// ── HELPERS ───────────────────────────────────────────────────────
+function nextDay(dow) {
+  const order = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+  const days = ['Monday','Tuesday','Wednesday','Thursday','Friday'];
+  let i = order.indexOf(dow);
+  while(true) { i=(i+1)%7; if(days.includes(order[i])) return order[i]; }
+}
+function nextTradingDate(dateStr) {
+  const d = new Date(dateStr);
+  do { d.setDate(d.getDate()+1); } while(d.getDay()===0||d.getDay()===6);
+  return d.toISOString().split('T')[0];
+}
+
+// ── INIT ─────────────────────────────────────────────────────────
+renderDashboard();
+renderScorecards();
+</script>
+</body>
+</html>
