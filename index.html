@@ -102,27 +102,32 @@ tr:hover td{background:#161616}
   <div class="sec" style="margin-top:4px">Daily signal sequence — in order</div>
   <div class="blk wait"><div class="bdg">8:00 AM</div><div class="bb"><div class="bt">Pre-open checks</div><div class="ba wait">Brent crude + GIFT Nifty + prev close position</div><div class="bd">Crude &lt;$98=bull · $98-108=neutral · &gt;$108=bear &nbsp;|&nbsp; Top 20% close→trap · Bottom 20%→71% bull · Mid 40-60%→89% bear</div></div></div>
   <div class="blk info"><div class="bdg">9:20</div><div class="bb"><div class="bt">First candle — stop at first match</div><div class="bd">1. Gap &gt;1% UP + RSI &gt;75 + body &lt;0.30 + LW bigger → <span class="bull">BUY PUT 93%</span><br>2. Gap &gt;1% DOWN + RSI &lt;25 + body &lt;0.30 + UW bigger → <span class="bull">BUY CALL 80%</span><br>3. Open within 15pts of HIGH → <span class="bear">BEAR day 100%</span><br>4. Vol &gt;2x + bear candle → <span class="bear">SHORT 78%</span></div></div></div>
-  <div class="blk info"><div class="bdg">10:35</div><div class="bb"><div class="bt">RSI at 10:30 — day classifier</div><div class="bd"><span style="color:#aaa;font-weight:700">30-40</span> → <span class="bear">Bear 79%</span> &nbsp;|&nbsp; <span style="color:#aaa;font-weight:700">40-50</span> → <span class="bull">Bull 60%</span> &nbsp;|&nbsp; <span style="color:#aaa;font-weight:700">50-70</span> → <span class="wait">Wait</span> &nbsp;|&nbsp; <span style="color:#aaa;font-weight:700">&gt;70</span> → <span class="bear">Bear 80%</span> &nbsp;|&nbsp; <span style="color:#aaa;font-weight:700">&lt;30</span> → <span class="wait">Wait</span></div></div></div>
+  <div class="blk info"><div class="bdg">10:35</div><div class="bb"><div class="bt">RSI at 10:30 — day classifier</div><div class="bd"><span style="color:#aaa;font-weight:700">30-40</span> → <span class="bear">Bear 79%</span> &nbsp;|&nbsp; <span style="color:#aaa;font-weight:700">40-50</span> → <span class="bull">Bull 60%</span> &nbsp;|&nbsp; <span style="color:#aaa;font-weight:700">50-70</span> → <span class="wait">Wait</span> &nbsp;|&nbsp; <span style="color:#aaa;font-weight:700">&gt;70</span> → <span class="bear">Bear 80%</span> &nbsp;|&nbsp; <span style="color:#aaa;font-weight:700">&lt;30</span> → <span class="wait">Wait</span><br><span style="color:#444;font-size:10px">⚠ Overridden when major macro event is live (Iran ceasefire, RBI, etc.)</span></div></div></div>
   <div class="blk bull"><div class="bdg">11:35 ⭐</div><div class="bb"><div class="bt">MAIN TRADE — position check</div><div class="ba bull">(Close − Low) ÷ (High − Low)</div><div class="bd">&lt;0.25 → <span class="bull">BUY CALL 87%</span> &nbsp;|&nbsp; &gt;0.75 → <span class="bear">BUY PUT 89%</span> &nbsp;|&nbsp; 0.25-0.75 → <span class="wait">NO TRADE</span></div></div></div>
   <div class="blk info"><div class="bdg">12:05</div><div class="bb"><div class="bt">Midday RSI</div><div class="bd">RSI &gt;55 → hold longs · RSI &lt;45 → hold puts · 45-55 → cut size</div></div></div>
   <div class="blk bear"><div class="bdg">14:30</div><div class="bb"><div class="ba bear">CLOSE ALL. No exceptions.</div></div></div>
 
   <div class="sec">Day of week bias</div>
   <table><tr><th>Day</th><th>Bias</th><th>Key rule</th></tr>
-  <tr><td style="color:#60a5fa;font-weight:700">Monday</td><td class="bull">58% Bull</td><td style="color:#555">14:00 positive drift. No shorts after 13:30.</td></tr>
-  <tr><td style="color:#f87171;font-weight:700">Tuesday</td><td class="bear">58% Bear</td><td style="color:#555">Expiry. OS+Low reversal 83%.</td></tr>
-  <tr><td style="color:#4ade80;font-weight:700">Wednesday</td><td class="bull">69% Bull</td><td style="color:#555">Suppressed in regime. Check open first.</td></tr>
+  <tr><td style="color:#60a5fa;font-weight:700">Monday</td><td class="bull">58% Bull</td><td style="color:#555">14:00 positive drift. No shorts after 13:30. OB+High PM suppressed.</td></tr>
+  <tr><td style="color:#f87171;font-weight:700">Tuesday</td><td class="bear">58% Bear</td><td style="color:#555">Expiry. OS+Low reversal 83%. High/low often at open.</td></tr>
+  <tr><td style="color:#4ade80;font-weight:700">Wednesday</td><td class="bull">69% Bull</td><td style="color:#555">Suppressed in current regime. Check open signal first.</td></tr>
   <tr><td style="color:#f87171;font-weight:700">Thursday</td><td class="bear">82% Bear</td><td style="color:#555">Gap-downs NEVER fill. RSI≥70 reverses 70%.</td></tr>
   <tr><td style="color:#fb923c;font-weight:700">Friday</td><td class="bear">64% Bear</td><td style="color:#555">Gap-ups fill 100%. OS signals don't bounce (29%).</td></tr></table>
 
-  <div class="sec">Pattern status — updated Apr 9</div>
+  <div class="sec">Pattern status — updated Apr 10</div>
   <div class="pills">
-    <span class="pill p-on">11:30 position ✓</span><span class="pill p-on">OB+High open ✓</span>
-    <span class="pill p-on">Thu bear 82% ✓</span><span class="pill p-on">Thu gap-down no fill ✓</span>
-    <span class="pill p-on">Open near high → Bear ✓</span><span class="pill p-on">OS+Low persistent ✓</span>
-    <span class="pill p-on">OS+Low + new lows = skip ✓ NEW</span>
+    <span class="pill p-on">11:30 position ✓</span>
+    <span class="pill p-on">OB+High open ✓</span>
+    <span class="pill p-on">Thu bear 82% ✓</span>
+    <span class="pill p-on">Thu gap-down no fill ✓</span>
+    <span class="pill p-on">Open near high → Bear ✓</span>
+    <span class="pill p-on">OS+Low persistent ✓</span>
+    <span class="pill p-on">Fri gap-up fills 100% ✓</span>
+    <span class="pill p-on">OS+Low + new lows = skip ✓</span>
     <span class="pill p-warn">10:30 RSI ⚠ overridden by live macro</span>
-    <span class="pill p-warn">Wed bull ⚠ suppressed</span><span class="pill p-warn">Mon PM OB+High ⚠ suppressed</span>
+    <span class="pill p-warn">Wed bull ⚠ suppressed</span>
+    <span class="pill p-warn">Mon PM OB+High ⚠ suppressed</span>
     <span class="pill p-dead">15:00 dump ✗ dead (8 days)</span>
   </div>
 </div>
@@ -130,9 +135,9 @@ tr:hover td{background:#161616}
 <div id="calc" class="page">
   <div class="calc" style="margin-top:4px">
     <div class="ct">⭐ 11:30 Position — BUY CALL / PUT / SKIP</div>
-    <div class="cr"><label>Day High</label><input type="number" id="dh" placeholder="23991" oninput="calcPos()"></div>
-    <div class="cr"><label>Day Low</label><input type="number" id="dl" placeholder="23683" oninput="calcPos()"></div>
-    <div class="cr"><label>Close at 11:30</label><input type="number" id="dc" placeholder="23855" oninput="calcPos()"></div>
+    <div class="cr"><label>Day High</label><input type="number" id="dh" placeholder="24074" oninput="calcPos()"></div>
+    <div class="cr"><label>Day Low</label><input type="number" id="dl" placeholder="23856" oninput="calcPos()"></div>
+    <div class="cr"><label>Close at 11:30</label><input type="number" id="dc" placeholder="24000" oninput="calcPos()"></div>
     <div class="cres cr-none" id="pos_res">Enter the three numbers above</div>
   </div>
   <div class="calc">
@@ -142,8 +147,8 @@ tr:hover td{background:#161616}
   </div>
   <div class="calc">
     <div class="ct">📊 Gap Calculator</div>
-    <div class="cr"><label>Prev close</label><input type="number" id="pc" placeholder="23766" oninput="calcGap()"></div>
-    <div class="cr"><label>Today open</label><input type="number" id="to" placeholder="23700" oninput="calcGap()"></div>
+    <div class="cr"><label>Prev close</label><input type="number" id="pc" placeholder="24052" oninput="calcGap()"></div>
+    <div class="cr"><label>Today open</label><input type="number" id="to" placeholder="24000" oninput="calcGap()"></div>
     <div id="gap_res" style="font-size:12px;color:#555;padding:4px 0;line-height:1.6">Enter values above</div>
   </div>
   <div class="calc">
@@ -167,7 +172,7 @@ tr:hover td{background:#161616}
 </div>
 
 <script>
-const DAYS = [{"date": "2026-03-30", "dow": "Monday", "gap_pts": 43.1, "gap_pct": 0.19, "open": 22578.95, "high": 22714.1, "low": 22283.85, "close": 22379.2, "range": 430.2, "direction": "Bear", "return_pct": -0.88, "close_pos": 0.22, "rsi_open": 11.2, "rsi_1030": 28.4, "pos_1130": 0.51, "rsi_mid": 49.6, "ob_count": 0, "os_count": 12, "signals": [{"t": "9:15", "s": "First Candle", "id": "RSI 11, moderate gap +0.19%", "a": "Wait", "hr": "\u2014"}, {"t": "10:30", "s": "RSI Classifier", "id": "RSI 28.4 \u2192 Neutral 43%", "a": "WAIT", "hr": "43%"}, {"t": "11:30", "s": "Position Check", "id": "51% of range \u2014 middle", "a": "NO TRADE", "hr": "\u2014"}, {"t": "12:00", "s": "Midday RSI", "id": "Avg 49.6 \u2192 Neutral", "a": "Hold/exit", "hr": "79-85%"}, {"t": "intraday", "s": "OS+Low PERSISTENT 12 consec", "id": "RSI<35 + bottom 30% of range", "a": "BUY CALL", "hr": "85%"}]}, {"date": "2026-04-01", "dow": "Wednesday", "gap_pts": 493.6, "gap_pct": 2.21, "open": 22872.85, "high": 22941.3, "low": 22618.6, "close": 22703.15, "range": 322.7, "direction": "Bear", "return_pct": -0.74, "close_pos": 0.26, "rsi_open": 83.9, "rsi_1030": 58.2, "pos_1130": 0.56, "rsi_mid": 59.7, "ob_count": 12, "os_count": 9, "signals": [{"t": "9:15", "s": "Gap Extreme Short", "id": "RSI 84, gap +2.2%, body 0.15, LW dominant", "a": "BUY PUT", "hr": "93%"}, {"t": "10:30", "s": "RSI Classifier", "id": "RSI 58.2 \u2192 Neutral 55%", "a": "WAIT", "hr": "55%"}, {"t": "11:30", "s": "Position Check", "id": "56% of range \u2014 middle", "a": "NO TRADE", "hr": "\u2014"}, {"t": "12:00", "s": "Midday RSI", "id": "Avg 59.7 \u2192 Bull confirmed", "a": "Hold/exit", "hr": "79-85%"}, {"t": "intraday", "s": "OB+High 12x", "id": "RSI>65 + top 70% of range", "a": "BUY PUT", "hr": "55% afternoon"}, {"t": "intraday", "s": "OS+Low 9x", "id": "RSI<35 + bottom 30% of range", "a": "BUY CALL", "hr": "68-83%"}]}, {"date": "2026-04-06", "dow": "Monday", "gap_pts": 88.7, "gap_pct": 0.39, "open": 22788.95, "high": 22998.35, "low": 22542.95, "close": 22959.45, "range": 455.4, "direction": "Bull", "return_pct": 0.75, "close_pos": 0.91, "rsi_open": 58.3, "rsi_1030": 52.6, "pos_1130": 0.15, "rsi_mid": 57.8, "ob_count": 16, "os_count": 0, "signals": [{"t": "9:15", "s": "First Candle", "id": "RSI 58, moderate gap +0.39%", "a": "Wait", "hr": "\u2014"}, {"t": "10:30", "s": "RSI Classifier", "id": "RSI 52.6 \u2192 Neutral 55%", "a": "WAIT", "hr": "55%"}, {"t": "11:30", "s": "Position Check", "id": "15% of range \u2014 bottom", "a": "BUY CALL", "hr": "87%"}, {"t": "12:00", "s": "Midday RSI", "id": "Avg 57.8 \u2192 Bull confirmed", "a": "Hold/exit", "hr": "79-85%"}, {"t": "intraday", "s": "OB+High 16x", "id": "RSI>65 + top 70% of range", "a": "BUY PUT", "hr": "55% afternoon"}]}, {"date": "2026-04-07", "dow": "Tuesday", "gap_pts": -119.7, "gap_pct": -0.52, "open": 22839.75, "high": 23153.85, "low": 22719.3, "close": 23129.95, "range": 434.5, "direction": "Bull", "return_pct": 1.27, "close_pos": 0.95, "rsi_open": 34.6, "rsi_1030": 53.1, "pos_1130": 0.52, "rsi_mid": 52.7, "ob_count": 9, "os_count": 1, "signals": [{"t": "9:15", "s": "First Candle", "id": "RSI 35, moderate gap -0.52%", "a": "Wait", "hr": "\u2014"}, {"t": "10:30", "s": "RSI Classifier", "id": "RSI 53.1 \u2192 Neutral 55%", "a": "WAIT", "hr": "55%"}, {"t": "11:30", "s": "Position Check", "id": "52% of range \u2014 middle", "a": "NO TRADE", "hr": "\u2014"}, {"t": "12:00", "s": "Midday RSI", "id": "Avg 52.7 \u2192 Neutral", "a": "Hold/exit", "hr": "79-85%"}, {"t": "intraday", "s": "OB+High 9x", "id": "RSI>65 + top 70% of range", "a": "BUY PUT", "hr": "55% afternoon"}, {"t": "intraday", "s": "OS+Low 1x", "id": "RSI<35 + bottom 30% of range", "a": "BUY CALL", "hr": "68-83%"}]}, {"date": "2026-04-08", "dow": "Wednesday", "gap_pts": 726.3, "gap_pct": 3.14, "open": 23856.25, "high": 24025.15, "low": 23828.5, "close": 24010.6, "range": 196.7, "direction": "Bull", "return_pct": 0.65, "close_pos": 0.93, "rsi_open": 92.5, "rsi_1030": 81.4, "pos_1130": 0.71, "rsi_mid": 62.0, "ob_count": 15, "os_count": 0, "signals": [{"t": "9:15", "s": "Large Gap Up \u2014 no clean signal", "id": "RSI 93, body 0.40 too large", "a": "WATCH", "hr": "\u2014"}, {"t": "9:15", "s": "Vol Spike 2.3x", "id": "Bull candle at open", "a": "FADE\u2192PUT", "hr": "62-78%"}, {"t": "10:30", "s": "RSI Classifier", "id": "RSI 81.4 \u2192 OB Bear 80%", "a": "SHORT", "hr": "Bear"}, {"t": "11:30", "s": "Position Check", "id": "71% of range \u2014 middle", "a": "NO TRADE", "hr": "\u2014"}, {"t": "12:00", "s": "Midday RSI", "id": "Avg 62.0 \u2192 Bull confirmed", "a": "Hold/exit", "hr": "79-85%"}, {"t": "intraday", "s": "OB+High 15x", "id": "RSI>65 + top 70% of range", "a": "BUY PUT", "hr": "55% afternoon"}]}, {"date": "2026-04-09", "dow": "Thursday", "gap_pts": -88.0, "gap_pct": -0.37, "open": 23922.6, "high": 23990.75, "low": 23682.8, "close": 23766.05, "range": 307.9, "direction": "Bear", "return_pct": -0.65, "close_pos": 0.27, "rsi_open": 39.1, "rsi_1030": 42.7, "pos_1130": 0.56, "rsi_mid": 51.8, "ob_count": 0, "os_count": 12, "signals": [{"t": "9:15", "s": "First candle \u2014 bullish hammer", "id": "RSI 39, body 0.11, LW 107pts (massive), UW 2pts. Vol 1.0x", "a": "WATCH \u2014 Thu gap-down rule overrides", "hr": "\u2014"}, {"t": "9:25", "s": "Day high set early + RSI cross", "id": "High 23,991 at 9:25 = open near day high", "a": "BUY PUT", "hr": "100%"}, {"t": "9:30", "s": "Sharp collapse", "id": "RSI 51\u219235 one candle. -93pts from high", "a": "BEAR confirmed", "hr": "\u2014"}, {"t": "10:30", "s": "RSI Classifier", "id": "RSI 42.7 \u2192 Bull 60%", "a": "LONG bias", "hr": "60%"}, {"t": "11:30", "s": "Position Check", "id": "56% of range \u2014 middle zone", "a": "NO TRADE", "hr": "\u2014"}, {"t": "13:25-14:35", "s": "OS+Low fired 12x", "id": "RSI 24-35, pos 0.05-0.29 \u2014 but new lows kept forming", "a": "SKIP \u2014 new lows continuing", "hr": "0%"}, {"t": "intraday", "s": "New rule confirmed", "id": "OS+Low fires but price makes new lows = NOT capitulation. Skip.", "a": "DO NOT BUY", "hr": "\u2014"}]}];
+const DAYS = [{"date": "2026-03-30", "dow": "Monday", "gap_pts": 43.1, "gap_pct": 0.19, "open": 22578.95, "high": 22714.1, "low": 22283.85, "close": 22379.2, "range": 430.2, "direction": "Bear", "return_pct": -0.88, "close_pos": 0.22, "rsi_open": 11.2, "rsi_1030": 28.4, "pos_1130": 0.51, "rsi_mid": 49.6, "ob_count": 0, "os_count": 12, "signals": [{"t": "9:15", "s": "First Candle", "id": "RSI 11, moderate gap +0.19%", "a": "Wait", "hr": "\u2014"}, {"t": "10:30", "s": "RSI Classifier", "id": "RSI 28.4 \u2192 Neutral 43%", "a": "WAIT", "hr": "43%"}, {"t": "11:30", "s": "Position Check", "id": "51% of range \u2014 middle", "a": "NO TRADE", "hr": "\u2014"}, {"t": "12:00", "s": "Midday RSI", "id": "Avg 49.6 \u2192 Neutral", "a": "Hold/exit", "hr": "79-85%"}, {"t": "intraday", "s": "OS+Low PERSISTENT 12 consec", "id": "RSI<35 + bottom 30% of range", "a": "BUY CALL", "hr": "85%"}]}, {"date": "2026-04-01", "dow": "Wednesday", "gap_pts": 493.6, "gap_pct": 2.21, "open": 22872.85, "high": 22941.3, "low": 22618.6, "close": 22703.15, "range": 322.7, "direction": "Bear", "return_pct": -0.74, "close_pos": 0.26, "rsi_open": 83.9, "rsi_1030": 58.2, "pos_1130": 0.56, "rsi_mid": 59.7, "ob_count": 12, "os_count": 9, "signals": [{"t": "9:15", "s": "Gap Extreme Short", "id": "RSI 84, gap +2.2%, body 0.15, LW dominant", "a": "BUY PUT", "hr": "93%"}, {"t": "10:30", "s": "RSI Classifier", "id": "RSI 58.2 \u2192 Neutral 55%", "a": "WAIT", "hr": "55%"}, {"t": "11:30", "s": "Position Check", "id": "56% of range \u2014 middle", "a": "NO TRADE", "hr": "\u2014"}, {"t": "12:00", "s": "Midday RSI", "id": "Avg 59.7 \u2192 Bull confirmed", "a": "Hold/exit", "hr": "79-85%"}, {"t": "intraday", "s": "OB+High 12x", "id": "RSI>65 + top 70% of range", "a": "BUY PUT", "hr": "55% afternoon"}, {"t": "intraday", "s": "OS+Low 9x", "id": "RSI<35 + bottom 30% of range", "a": "BUY CALL", "hr": "68-83%"}]}, {"date": "2026-04-06", "dow": "Monday", "gap_pts": 88.7, "gap_pct": 0.39, "open": 22788.95, "high": 22998.35, "low": 22542.95, "close": 22959.45, "range": 455.4, "direction": "Bull", "return_pct": 0.75, "close_pos": 0.91, "rsi_open": 58.3, "rsi_1030": 52.6, "pos_1130": 0.15, "rsi_mid": 57.8, "ob_count": 16, "os_count": 0, "signals": [{"t": "9:15", "s": "First Candle", "id": "RSI 58, moderate gap +0.39%", "a": "Wait", "hr": "\u2014"}, {"t": "10:30", "s": "RSI Classifier", "id": "RSI 52.6 \u2192 Neutral 55%", "a": "WAIT", "hr": "55%"}, {"t": "11:30", "s": "Position Check", "id": "15% of range \u2014 bottom", "a": "BUY CALL", "hr": "87%"}, {"t": "12:00", "s": "Midday RSI", "id": "Avg 57.8 \u2192 Bull confirmed", "a": "Hold/exit", "hr": "79-85%"}, {"t": "intraday", "s": "OB+High 16x", "id": "RSI>65 + top 70% of range", "a": "BUY PUT", "hr": "55% afternoon"}]}, {"date": "2026-04-07", "dow": "Tuesday", "gap_pts": -119.7, "gap_pct": -0.52, "open": 22839.75, "high": 23153.85, "low": 22719.3, "close": 23129.95, "range": 434.5, "direction": "Bull", "return_pct": 1.27, "close_pos": 0.95, "rsi_open": 34.6, "rsi_1030": 53.1, "pos_1130": 0.52, "rsi_mid": 52.7, "ob_count": 9, "os_count": 1, "signals": [{"t": "9:15", "s": "First Candle", "id": "RSI 35, moderate gap -0.52%", "a": "Wait", "hr": "\u2014"}, {"t": "10:30", "s": "RSI Classifier", "id": "RSI 53.1 \u2192 Neutral 55%", "a": "WAIT", "hr": "55%"}, {"t": "11:30", "s": "Position Check", "id": "52% of range \u2014 middle", "a": "NO TRADE", "hr": "\u2014"}, {"t": "12:00", "s": "Midday RSI", "id": "Avg 52.7 \u2192 Neutral", "a": "Hold/exit", "hr": "79-85%"}, {"t": "intraday", "s": "OB+High 9x", "id": "RSI>65 + top 70% of range", "a": "BUY PUT", "hr": "55% afternoon"}, {"t": "intraday", "s": "OS+Low 1x", "id": "RSI<35 + bottom 30% of range", "a": "BUY CALL", "hr": "68-83%"}]}, {"date": "2026-04-08", "dow": "Wednesday", "gap_pts": 726.3, "gap_pct": 3.14, "open": 23856.25, "high": 24025.15, "low": 23828.5, "close": 24010.6, "range": 196.7, "direction": "Bull", "return_pct": 0.65, "close_pos": 0.93, "rsi_open": 92.5, "rsi_1030": 81.4, "pos_1130": 0.71, "rsi_mid": 62.0, "ob_count": 15, "os_count": 0, "signals": [{"t": "9:15", "s": "Large Gap Up \u2014 no clean signal", "id": "RSI 93, body 0.40 too large", "a": "WATCH", "hr": "\u2014"}, {"t": "9:15", "s": "Vol Spike 2.3x", "id": "Bull candle at open", "a": "FADE\u2192PUT", "hr": "62-78%"}, {"t": "10:30", "s": "RSI Classifier", "id": "RSI 81.4 \u2192 OB Bear 80%", "a": "SHORT", "hr": "Bear"}, {"t": "11:30", "s": "Position Check", "id": "71% of range \u2014 middle", "a": "NO TRADE", "hr": "\u2014"}, {"t": "12:00", "s": "Midday RSI", "id": "Avg 62.0 \u2192 Bull confirmed", "a": "Hold/exit", "hr": "79-85%"}, {"t": "intraday", "s": "OB+High 15x", "id": "RSI>65 + top 70% of range", "a": "BUY PUT", "hr": "55% afternoon"}]}, {"date": "2026-04-09", "dow": "Thursday", "gap_pts": -88.0, "gap_pct": -0.37, "open": 23922.6, "high": 23990.75, "low": 23682.8, "close": 23766.05, "range": 307.9, "direction": "Bear", "return_pct": -0.65, "close_pos": 0.27, "rsi_open": 39.1, "rsi_1030": 42.7, "pos_1130": 0.56, "rsi_mid": 51.8, "ob_count": 0, "os_count": 12, "signals": [{"t": "9:15", "s": "First candle \u2014 bullish hammer", "id": "RSI 39, body 0.11, LW 107pts (massive), UW 2pts. Vol 1.0x", "a": "WATCH \u2014 Thu gap-down rule overrides", "hr": "\u2014"}, {"t": "9:25", "s": "Day high set early + RSI cross", "id": "High 23,991 at 9:25 = open near day high", "a": "BUY PUT", "hr": "100%"}, {"t": "9:30", "s": "Sharp collapse", "id": "RSI 51\u219235 one candle. -93pts from high", "a": "BEAR confirmed", "hr": "\u2014"}, {"t": "10:30", "s": "RSI Classifier", "id": "RSI 42.7 \u2192 Bull 60%", "a": "LONG bias", "hr": "60%"}, {"t": "11:30", "s": "Position Check", "id": "56% of range \u2014 middle zone", "a": "NO TRADE", "hr": "\u2014"}, {"t": "13:25-14:35", "s": "OS+Low fired 12x", "id": "RSI 24-35, pos 0.05-0.29 \u2014 but new lows kept forming", "a": "SKIP \u2014 new lows continuing", "hr": "0%"}, {"t": "intraday", "s": "New rule confirmed", "id": "OS+Low fires but price makes new lows = NOT capitulation. Skip.", "a": "DO NOT BUY", "hr": "\u2014"}]}, {"date": "2026-04-10", "dow": "Friday", "gap_pts": 120.8, "gap_pct": 0.51, "open": 23886.8, "high": 24074.05, "low": 23856.35, "close": 24051.8, "range": 217.7, "direction": "Bull", "return_pct": 0.69, "close_pos": 0.9, "rsi_open": 75.6, "rsi_1030": 70.3, "pos_1130": 0.68, "rsi_mid": 58.2, "ob_count": 7, "os_count": 0, "signals": [{"t": "9:15", "s": "Gap-up Friday", "id": "Gap +0.51%. RSI 75.6. Body 0.70 \u2014 not doji. LW 30 UW 3.", "a": "WATCH", "hr": "\u2014"}, {"t": "9:15", "s": "Gap-up fills 100% (Friday rule)", "id": "Any gap-up on Friday fills \u2014 expect early fade", "a": "BUY PUT bias", "hr": "100%"}, {"t": "9:20", "s": "First fade", "id": "9:20 bear candle 23966\u219223919 (-47pts). RSI dropped 76\u219267", "a": "FADE confirmed", "hr": "\u2014"}, {"t": "10:30", "s": "RSI Classifier", "id": "RSI 70.3 \u2192 OB Bear 80%", "a": "SHORT bias", "hr": "80%"}, {"t": "10:15-10:30", "s": "OB+High 4x", "id": "RSI 69-72, pos 0.70-0.76. 10:30 high set.", "a": "BUY PUT 74%", "hr": "74%"}, {"t": "11:30", "s": "Position Check", "id": "Close 24,005 = 68% of range \u2014 mid zone", "a": "NO TRADE", "hr": "\u2014"}, {"t": "14:15", "s": "Vol spike 1.9x bear", "id": "RSI 45, bear candle, -81pts in one candle", "a": "SHORT signal", "hr": "62%"}, {"t": "14:15-14:30", "s": "Drop -85pts", "id": "24,046\u219223,948. RSI 54\u219238. Then recovered.", "a": "SHORT worked", "hr": "\u2014"}, {"t": "15:00-15:25", "s": "End of day ramp", "id": "15:00 bull, close at 90% of range. Day high 24,074 at 15:10", "a": "TRAP \u2014 do not chase", "hr": "\u2014"}]}];
 
 function showPage(id,el){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
@@ -189,8 +194,8 @@ function renderDashboard(){
 
   const db={
     Thursday:{pct:'82% Bear',col:'#ef4444',note:"Gap-downs NEVER fill (0%). RSI≥70 reverses 70%. Capitulation override: RSI&lt;20 + 10+ OS+Low + no new lows = LONG."},
-    Friday:{pct:'64% Bear',col:'#ef4444',note:"Gap-ups fill 100%. OS signals don't bounce (29%). Sell strength. Iran peace talks weekend."},
-    Monday:{pct:'58% Bull',col:'#22c55e',note:'14:00-15:00 positive drift. Suppress OB+High shorts after 13:30.'},
+    Friday:{pct:'64% Bear',col:'#ef4444',note:"Gap-ups fill 100% — fade the open. OS signals don't bounce (29%). Iran peace talks ongoing."},
+    Monday:{pct:'58% Bull',col:'#22c55e',note:'14:00-15:00 positive drift. Suppress OB+High after 13:30. Close at 90% → morning trap first hour.'},
     Tuesday:{pct:'58% Bear',col:'#ef4444',note:'Expiry day. OS+Low reversal 83%. High/low often set at open.'},
     Wednesday:{pct:'69% Bull',col:'#22c55e',note:'Suppressed in current regime. Check open signal first.'},
   };
@@ -208,11 +213,17 @@ function renderDashboard(){
       </div>
     </div>
 
-    <div class="alert ${cp>0.80||cp>=0.40&&cp<=0.60?'warn':cp<0.20?'bull':'info'}">
-      <div class="alert-t">Close position signal → ${nextDow}</div>
-      Yesterday closed at <b>${(cp*100).toFixed(0)}%</b> of range → <b style="color:${cpCol}">${cpSig}</b><br>
+    <div class="alert warn">
+      <div class="alert-t">⚠️ Monday — Morning trap alert</div>
+      Friday closed at <b>${(cp*100).toFixed(0)}%</b> of range → <b style="color:#ef4444">${cpSig}</b><br>
       PDH: ${last.high} · PDL: ${last.low} · PClose: ${last.close}<br>
       ${d.note}
+    </div>
+
+    <div class="alert info">
+      <div class="alert-t">Weekend context — Iran talks</div>
+      Peace talks in Islamabad this weekend (VP Vance leading US delegation). Outcome determines Monday gap direction.<br>
+      <b>Progress</b> → Crude falls → gap-up → Monday 58% bull · <b>Breakdown</b> → Crude back above $105 → gap-down → bear day
     </div>
 
     <div class="sec">Yesterday — ${last.date} (${last.dow})</div>
@@ -220,7 +231,7 @@ function renderDashboard(){
       <div class="card"><div class="cl">Gap</div><div class="cv" style="color:${last.gap_pct>=0?'#22c55e':'#ef4444'}">${last.gap_pct>=0?'+':''}${last.gap_pct}%</div><div class="cs">${last.gap_pts>=0?'+':''}${last.gap_pts} pts</div></div>
       <div class="card"><div class="cl">Direction</div><div class="cv" style="color:${last.direction==='Bull'?'#22c55e':'#ef4444'}">${last.direction}</div><div class="cs">${last.return_pct>=0?'+':''}${last.return_pct}%</div></div>
       <div class="card"><div class="cl">Range</div><div class="cv">${last.range} pts</div><div class="cs">${last.low}–${last.high}</div></div>
-      <div class="card"><div class="cl">Close pos</div><div class="cv" style="color:${cpCol}">${(cp*100).toFixed(0)}%</div><div class="cs">${cpSig}</div></div>
+      <div class="card"><div class="cl">Close pos</div><div class="cv" style="color:#ef4444">${(cp*100).toFixed(0)}%</div><div class="cs">${cpSig}</div></div>
     </div>
 
     <div class="sec">Signal table — ${last.date}</div>
@@ -229,13 +240,15 @@ function renderDashboard(){
       ${last.signals.map(s=>`<tr><td style="color:#555;white-space:nowrap">${s.t}</td><td style="color:#ccc;font-weight:600">${s.s}</td><td style="color:#555;font-size:11px">${s.id}</td><td>${atag(s.a)}</td><td style="color:#555">${s.hr}</td></tr>`).join('')}
     </table>
 
-    <div class="sec">Tomorrow's checklist — ${nextDow} ${nextDate}</div>
+    <div class="sec">Monday checklist — ${nextDate}</div>
     <div style="background:#161616;border:1px solid #222;border-radius:8px;padding:10px 13px;font-size:12px;color:#ccc;line-height:2">
-      ⏰ <b>8 AM</b> — Brent crude + GIFT Nifty<br>
-      ⏰ <b>9:20</b> — First candle signals<br>
-      ⏰ <b>10:35</b> — RSI at 10:30<br>
+      ⏰ <b>8 AM</b> — Brent crude (key: did Islamabad talks progress?) + GIFT Nifty<br>
+      ⏰ <b>9:20</b> — First candle. High set early → BEAR. Vol spike bear → SHORT.<br>
+      ⏰ <b>9:20–10:00</b> — Morning trap expected. Don't chase early strength.<br>
+      ⏰ <b>10:35</b> — RSI at 10:30 → day classifier<br>
       ⏰ <b style="color:#22c55e">11:35 ⭐</b> — Position check → MAIN TRADE<br>
       ⏰ <b>12:05</b> — Midday RSI confirm<br>
+      ⏰ <b style="color:#f59e0b">13:30</b> — No new short entries after this on Monday<br>
       ⏰ <b style="color:#ef4444">14:30</b> — CLOSE ALL
     </div>`;
 }
@@ -312,12 +325,20 @@ function calcGap(){
   const el=document.getElementById('gap_res');
   if(isNaN(pc)||isNaN(to)){el.innerHTML='Enter values above';return;}
   const gap=to-pc,pct=(gap/pc*100).toFixed(2),abs=Math.abs(parseFloat(pct)),dir=gap>0?'UP':'DOWN',col=gap>0?'#22c55e':'#ef4444';
-  let msg=abs>1?(dir==='UP'?'Large gap UP — watch RSI+body for OB short.':'Large gap DOWN — check day of week for fill probability.'):(abs<0.1?'Tiny gap — fills 94%.':'Moderate gap.');
+  let msg=abs>1?(dir==='UP'?'Large gap UP — watch RSI+body for OB short.':'Large gap DOWN — check DOW for fill probability.'):(abs<0.1?'Tiny gap — fills 94%.':'Moderate gap.');
   el.innerHTML='Gap <b style="color:'+col+'">'+dir+': '+(gap>0?'+':'')+gap.toFixed(0)+' pts ('+(gap>0?'+':'')+pct+'%)</b><br><span style="color:#555">'+msg+'</span>';
 }
-function nextDay(dow){const o=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],days=['Monday','Tuesday','Wednesday','Thursday','Friday'];let i=o.indexOf(dow);while(true){i=(i+1)%7;if(days.includes(o[i]))return o[i];}}
-function nextTradingDate(ds){const d=new Date(ds);do{d.setDate(d.getDate()+1);}while(d.getDay()===0||d.getDay()===6);return d.toISOString().split('T')[0];}
-
+function nextDay(dow){
+  const o=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+  const days=['Monday','Tuesday','Wednesday','Thursday','Friday'];
+  let i=o.indexOf(dow);
+  while(true){i=(i+1)%7;if(days.includes(o[i]))return o[i];}
+}
+function nextTradingDate(ds){
+  const d=new Date(ds);
+  do{d.setDate(d.getDate()+1);}while(d.getDay()===0||d.getDay()===6);
+  return d.toISOString().split('T')[0];
+}
 renderDashboard();
 renderScorecards();
 </script>
