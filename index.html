@@ -9,236 +9,243 @@
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0f0f0f;color:#e8e8e8;font-size:13px}
 nav{background:#161616;border-bottom:1px solid #222;padding:0 16px;display:flex;align-items:center;height:46px;position:sticky;top:0;z-index:100}
 .nb{font-size:15px;font-weight:700;color:#fff;margin-right:20px}
-.nt{padding:0 14px;height:46px;display:flex;align-items:center;font-size:12px;font-weight:600;color:#555;cursor:pointer;border-bottom:2px solid transparent}
+.nt{padding:0 12px;height:46px;display:flex;align-items:center;font-size:12px;font-weight:600;color:#555;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}
 .nt:hover{color:#aaa}.nt.active{color:#fff;border-bottom-color:#3b82f6}
-.page{display:none;padding:14px 16px;max-width:760px;margin:0 auto}.page.active{display:block}
-.sec{font-size:10px;font-weight:700;color:#444;letter-spacing:1.5px;text-transform:uppercase;margin:14px 0 8px;padding-bottom:4px;border-bottom:1px solid #1e1e1e}
-.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}
-.card{background:#161616;border:1px solid #222;border-radius:8px;padding:9px 11px}
-.cl{font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px}
-.cv{font-size:16px;font-weight:700}.cs{font-size:10px;color:#555;margin-top:2px}
-.al{border-radius:8px;padding:10px 13px;margin-bottom:9px;font-size:12px;line-height:1.7}
-.al.bear{background:#1a0000;border:1px solid #3a0000;color:#cc8888}
-.al.warn{background:#161000;border:1px solid #332200;color:#c8a060}
-.al.bull{background:#001a00;border:1px solid #003300;color:#88cc88}
-.al.info{background:#00101a;border:1px solid #003344;color:#88aacc}
-.al.purple{background:#10001a;border:1px solid #330044;color:#cc88ff}
-.al-t{font-size:13px;font-weight:800;margin-bottom:4px}
-.al.bear .al-t{color:#ef4444}.al.warn .al-t{color:#f59e0b}
-.al.bull .al-t{color:#22c55e}.al.info .al-t{color:#3b82f6}.al.purple .al-t{color:#a855f7}
-table{width:100%;border-collapse:collapse;font-size:12px}
-th{background:#161616;color:#555;font-weight:700;text-align:left;padding:6px 9px;border-bottom:1px solid #1e1e1e;font-size:10px;text-transform:uppercase}
-td{padding:6px 9px;border-bottom:1px solid #161616;color:#ccc;vertical-align:top}
-tr:hover td{background:#161616}
-.g{color:#22c55e;font-weight:700}.r{color:#ef4444;font-weight:700}.y{color:#f59e0b;font-weight:700}
-.tag{display:inline-block;font-size:10px;padding:2px 8px;border-radius:4px;font-weight:700}
-.tc{background:#0a2e0a;color:#22c55e}.tp{background:#2e0a0a;color:#ef4444}
-.tn{background:#1a1500;color:#f59e0b}.tw{background:#111;color:#555}
-.sg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
-.sc{background:#161616;border:1px solid #222;border-radius:8px;padding:11px 13px;cursor:pointer;transition:border-color .15s}
+.page{display:none;padding:12px 14px;max-width:900px;margin:0 auto}.page.active{display:block}
+.sec{font-size:10px;font-weight:700;color:#444;letter-spacing:1.5px;text-transform:uppercase;margin:12px 0 7px;padding-bottom:4px;border-bottom:1px solid #1e1e1e}
+
+/* CHART */
+#chart-wrap{background:#161616;border:1px solid #222;border-radius:8px;margin-bottom:8px;overflow:hidden}
+#day-selector{display:flex;gap:0;border-bottom:1px solid #222;overflow-x:auto}
+.ds-btn{padding:8px 14px;font-size:11px;font-weight:600;color:#555;cursor:pointer;white-space:nowrap;border-right:1px solid #1e1e1e;flex-shrink:0}
+.ds-btn:hover{color:#aaa}.ds-btn.active{color:#fff;background:#1e1e1e}
+.ds-btn.bull-d{border-bottom:2px solid #22c55e}.ds-btn.bear-d{border-bottom:2px solid #ef4444}
+#overlay-toggles{display:flex;gap:6px;padding:8px 12px;border-bottom:1px solid #1e1e1e;flex-wrap:wrap}
+.tog{font-size:10px;padding:3px 9px;border-radius:10px;cursor:pointer;font-weight:700;border:1px solid #333;color:#555;user-select:none}
+.tog.on{color:#fff}
+.tog.t-or{border-color:#3b82f6}.tog.t-or.on{background:#0a1a3a;color:#60a5fa}
+.tog.t-fvg{border-color:#a855f7}.tog.t-fvg.on{background:#1a0a2e;color:#c084fc}
+.tog.t-ob{border-color:#ef4444}.tog.t-ob.on{background:#2e0a0a;color:#f87171}
+.tog.t-os{border-color:#22c55e}.tog.t-os.on{background:#0a2e0a;color:#4ade80}
+.tog.t-sw{border-color:#f59e0b}.tog.t-sw.on{background:#1e1000;color:#fbbf24}
+.tog.t-sig{border-color:#ffffff}.tog.t-sig.on{background:#1e1e1e;color:#fff}
+.tog.t-prev{border-color:#6b7280}.tog.t-prev.on{background:#1a1a1a;color:#9ca3af}
+#chart-canvas-wrap{position:relative;width:100%;overflow:hidden}
+canvas{display:block}
+#tooltip{position:absolute;background:#1e1e1e;border:1px solid #333;border-radius:6px;padding:8px 10px;font-size:11px;line-height:1.6;pointer-events:none;display:none;z-index:10;min-width:160px}
+#rsi-info{padding:6px 12px;font-size:11px;color:#555;border-top:1px solid #1e1e1e;display:flex;gap:16px}
+
+/* SCORECARDS */
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.sc{background:#161616;border:1px solid #222;border-radius:8px;padding:10px 12px;cursor:pointer;transition:border-color .15s}
 .sc:hover{border-color:#3b82f6}.sc.bd{border-left:3px solid #22c55e}.sc.rd{border-left:3px solid #ef4444}
-.sd{font-size:12px;font-weight:700;color:#fff;margin-bottom:4px}.ss{font-size:11px;color:#555;line-height:1.7}
-.det{background:#111;border:1px solid #222;border-radius:8px;padding:13px;margin-top:8px;display:none}
+.scd{font-size:12px;font-weight:700;color:#fff;margin-bottom:3px}
+.scs{font-size:11px;color:#555;line-height:1.6}
+.det{background:#111;border:1px solid #222;border-radius:8px;padding:12px;margin-top:8px;display:none}
 .det.open{display:block}
 .dcl{font-size:11px;color:#555;cursor:pointer;padding:3px 8px;border:1px solid #333;border-radius:4px;float:right}
 .dcl:hover{color:#aaa}
-.calc{background:#0f0f1a;border:1px solid #1e1e3a;border-radius:8px;padding:11px 13px;margin-bottom:8px}
-.ct{font-size:10px;font-weight:700;color:#818cf8;text-transform:uppercase;letter-spacing:1px;margin-bottom:9px}
-.cr{display:flex;align-items:center;gap:8px;margin-bottom:7px}
-.cr label{font-size:11px;color:#555;min-width:100px}
-.cr input{background:#111;border:1px solid #2a2a4a;border-radius:5px;color:#fff;padding:5px 9px;font-size:14px;font-weight:700;width:110px;text-align:right;outline:none}
+
+/* INFO CARDS */
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:9px}
+.card{background:#161616;border:1px solid #222;border-radius:7px;padding:8px 10px}
+.cl{font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px}
+.cv{font-size:15px;font-weight:700}.cs{font-size:10px;color:#555;margin-top:2px}
+
+/* ALERTS */
+.al{border-radius:8px;padding:9px 12px;margin-bottom:8px;font-size:12px;line-height:1.7}
+.al.warn{background:#161000;border:1px solid #332200;color:#c8a060}
+.al.purple{background:#10001a;border:1px solid #330044;color:#cc88ff}
+.al-t{font-size:13px;font-weight:800;margin-bottom:3px}
+.al.warn .al-t{color:#f59e0b}.al.purple .al-t{color:#a855f7}
+
+/* TABLE */
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{background:#161616;color:#555;font-weight:700;text-align:left;padding:6px 8px;border-bottom:1px solid #1e1e1e;font-size:10px;text-transform:uppercase}
+td{padding:6px 8px;border-bottom:1px solid #161616;color:#ccc;vertical-align:top}
+tr:hover td{background:#161616}
+.g{color:#22c55e;font-weight:700}.r{color:#ef4444;font-weight:700}.y{color:#f59e0b;font-weight:700}
+.tag{display:inline-block;font-size:10px;padding:2px 7px;border-radius:4px;font-weight:700}
+.tc{background:#0a2e0a;color:#22c55e}.tp{background:#2e0a0a;color:#ef4444}
+.tn{background:#1a1500;color:#f59e0b}.tw{background:#111;color:#555}
+
+/* PLAYBOOK */
+.blk{background:#161616;border:1px solid #222;border-radius:8px;padding:9px 12px;margin-bottom:5px;display:flex;gap:9px}
+.blk.bear{border-left:3px solid #ef4444}.blk.bull{border-left:3px solid #22c55e}
+.blk.wait{border-left:3px solid #f59e0b}.blk.info{border-left:3px solid #3b82f6}.blk.purple{border-left:3px solid #a855f7}
+.bdg{background:#1e1e1e;border-radius:5px;padding:3px 7px;font-size:10px;font-weight:700;color:#555;white-space:nowrap;min-width:56px;text-align:center;flex-shrink:0;margin-top:1px}
+.bb{flex:1}.bt{font-size:10px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+.ba{font-size:12px;font-weight:800;margin-bottom:2px}
+.ba.bear{color:#ef4444}.ba.bull{color:#22c55e}.ba.wait{color:#f59e0b}.ba.info{color:#3b82f6}.ba.purple{color:#a855f7}
+.bd{font-size:11px;color:#666;line-height:1.6}
+
+/* CALC */
+.calc{background:#0f0f1a;border:1px solid #1e1e3a;border-radius:8px;padding:10px 12px;margin-bottom:8px}
+.ct{font-size:10px;font-weight:700;color:#818cf8;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.cr{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.cr label{font-size:11px;color:#555;min-width:90px}
+.cr input{background:#111;border:1px solid #2a2a4a;border-radius:5px;color:#fff;padding:5px 8px;font-size:13px;font-weight:700;width:100px;text-align:right;outline:none}
 .cr input:focus{border-color:#3b82f6}
-.cres{font-size:13px;font-weight:700;padding:8px 11px;border-radius:6px;margin-top:3px;min-height:34px;display:flex;align-items:center}
+.cres{font-size:12px;font-weight:700;padding:7px 10px;border-radius:6px;margin-top:3px;min-height:32px;display:flex;align-items:center}
 .cbull{background:#0a2e0a;color:#22c55e}.cbear{background:#2e0a0a;color:#ef4444}
 .cwait{background:#1a1500;color:#f59e0b}.cnone{background:#161616;color:#555}
-.rules{background:#0f0a0a;border:1px solid #2a1a1a;border-radius:8px;padding:11px 13px}
-.rule{display:flex;gap:8px;padding:5px 0;border-bottom:1px solid #1a1010;font-size:12px;color:#cc9999}
-.rule:last-child{border-bottom:none}.ri{min-width:20px}
-.pills{display:flex;flex-wrap:wrap;gap:5px}
-.pill{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700}
+.rules{background:#0f0a0a;border:1px solid #2a1a1a;border-radius:8px;padding:10px 12px}
+.rule{display:flex;gap:8px;padding:4px 0;border-bottom:1px solid #1a1010;font-size:11px;color:#cc9999}
+.rule:last-child{border-bottom:none}.ri{min-width:18px}
+.pills{display:flex;flex-wrap:wrap;gap:4px}
+.pill{font-size:10px;padding:2px 7px;border-radius:10px;font-weight:700}
 .pon{background:#0a2e0a;color:#22c55e;border:1px solid #1a4a1a}
 .pwarn{background:#2a2000;color:#f59e0b;border:1px solid #3a3000}
 .pnew{background:#10001a;color:#a855f7;border:1px solid #330044}
 .pdead{background:#181818;color:#3a3a3a;border:1px solid #222;text-decoration:line-through}
-.blk{background:#161616;border:1px solid #222;border-radius:8px;padding:10px 13px;margin-bottom:6px;display:flex;gap:10px}
-.blk.bear{border-left:3px solid #ef4444}.blk.bull{border-left:3px solid #22c55e}
-.blk.wait{border-left:3px solid #f59e0b}.blk.info{border-left:3px solid #3b82f6}.blk.purple{border-left:3px solid #a855f7}
-.bdg{background:#1e1e1e;border-radius:5px;padding:3px 8px;font-size:10px;font-weight:700;color:#555;white-space:nowrap;min-width:60px;text-align:center;flex-shrink:0;margin-top:1px}
-.bb{flex:1}.bt{font-size:10px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
-.ba{font-size:13px;font-weight:800;margin-bottom:3px}
-.ba.bear{color:#ef4444}.ba.bull{color:#22c55e}.ba.wait{color:#f59e0b}.ba.info{color:#3b82f6}.ba.purple{color:#a855f7}
-.bd{font-size:11px;color:#666;line-height:1.65}
-.fvg-row{font-size:11px;padding:4px 0;border-bottom:1px solid #1a1a1a;display:flex;gap:8px}
-.fvg-row:last-child{border-bottom:none}
-@media(max-width:500px){.g4{grid-template-columns:1fr 1fr}.sg{grid-template-columns:1fr}}
+@media(max-width:520px){.g4{grid-template-columns:1fr 1fr}.sg{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <nav>
   <div class="nb">&#9889; Nifty</div>
-  <div class="nt active" onclick="SP('dashboard',this)">Tomorrow</div>
+  <div class="nt active" onclick="SP('chart',this)">Chart</div>
+  <div class="nt" onclick="SP('dashboard',this)">Tomorrow</div>
   <div class="nt" onclick="SP('scorecards',this)">Scorecards</div>
   <div class="nt" onclick="SP('playbook',this)">Playbook</div>
   <div class="nt" onclick="SP('calc',this)">Calculators</div>
 </nav>
 
-<div id="dashboard" class="page active"><div id="dash-content"></div></div>
+<!-- CHART PAGE -->
+<div id="chart" class="page active">
+  <div id="chart-wrap">
+    <div id="day-selector"></div>
+    <div id="overlay-toggles">
+      <span class="tog t-or on" onclick="TG(this,'or')">OR Zone</span>
+      <span class="tog t-fvg on" onclick="TG(this,'fvg')">FVG</span>
+      <span class="tog t-ob on" onclick="TG(this,'ob')">OB+High</span>
+      <span class="tog t-os on" onclick="TG(this,'os')">OS+Low</span>
+      <span class="tog t-sw on" onclick="TG(this,'sw')">Sweeps</span>
+      <span class="tog t-sig on" onclick="TG(this,'sig')">11:30 Signal</span>
+      <span class="tog t-prev on" onclick="TG(this,'prev')">PDH/PDL</span>
+    </div>
+    <div id="chart-canvas-wrap">
+      <canvas id="main-canvas"></canvas>
+      <canvas id="rsi-canvas"></canvas>
+      <div id="tooltip"></div>
+    </div>
+    <div id="rsi-info"><span id="rsi-val">RSI: —</span><span id="candle-info">Hover over chart</span></div>
+  </div>
+  <div id="chart-legend" style="font-size:10px;color:#444;padding:4px 12px;display:flex;flex-wrap:wrap;gap:10px">
+    <span><span style="color:#22c55e">&#9646;</span> Bull candle</span>
+    <span><span style="color:#ef4444">&#9646;</span> Bear candle</span>
+    <span><span style="color:#3b82f6">&#9644;</span> OR zone</span>
+    <span><span style="color:#a855f7">&#9644;</span> FVG (unfilled)</span>
+    <span><span style="color:#c084fc;opacity:.4">&#9644;</span> FVG (filled)</span>
+    <span><span style="color:#ef4444">&#9650;</span> OB+High</span>
+    <span><span style="color:#22c55e">&#9660;</span> OS+Low</span>
+    <span><span style="color:#f59e0b">&#11835;</span> Sweep</span>
+    <span><span style="color:#fff">&#9670;</span> 11:30 signal</span>
+  </div>
+</div>
 
+<!-- TOMORROW PAGE -->
+<div id="dashboard" class="page"><div id="dash-content"></div></div>
+
+<!-- SCORECARDS PAGE -->
 <div id="scorecards" class="page">
-  <div class="sec" style="margin-top:4px">All sessions &#8212; click to expand</div>
+  <div class="sec" style="margin-top:4px">All sessions</div>
   <div id="sc-grid" class="sg"></div>
   <div id="sc-detail" class="det"></div>
 </div>
 
+<!-- PLAYBOOK PAGE -->
 <div id="playbook" class="page">
-  <div class="sec" style="margin-top:4px">Signal sequence &#8212; in order</div>
-
+  <div class="sec" style="margin-top:4px">Signal sequence</div>
   <div class="blk wait"><div class="bdg">8:00 AM</div><div class="bb">
     <div class="bt">Pre-open</div><div class="ba wait">Crude + GIFT Nifty + mark levels</div>
-    <div class="bd">Crude &lt;$98=bull &middot; $98-108=neutral &middot; &gt;$108=bear<br>
-    Mark on chart: PDH &middot; PDL &middot; PClose &middot; Active FVG zones<br>
-    Prev close &gt;80% &#8594; morning trap &middot; &lt;20% &#8594; 71% bull &middot; mid 40-60% &#8594; 89% bear</div>
+    <div class="bd">Crude &lt;$98=bull &middot; $98-108=neutral &middot; &gt;$108=bear &middot; Mark PDH/PDL/PClose + FVG zones</div>
   </div></div>
-
   <div class="blk info"><div class="bdg">9:15&#8211;9:45</div><div class="bb">
-    <div class="bt">Opening Range &#8212; fractal anchor &#9733; NEW</div>
-    <div class="ba info">Record OR High + Low. Calculate midpoint.</div>
-    <div class="bd">
-    OR mid = magnetic center (retested 1&#8211;10x every session, 7/7 confirmed)<br>
-    OR break UP = bull day bias &middot; OR break DOWN = bear day bias (7/7 confirmed)<br>
-    <b style="color:#a855f7">SWEEP</b>: price pierces OR by &gt;5pts then closes back = sweep. Real move is OPPOSITE.<br>
-    Entry = candle after the sweep. Sweep + RSI extreme = strongest signal of day.</div>
+    <div class="bt">Opening Range &#9733; NEW</div><div class="ba info">Record OR H+L. Calculate midpoint.</div>
+    <div class="bd">OR mid = magnetic center (retested every session, 7/7) &middot; OR break UP = bull day &middot; OR break DOWN = bear day<br>
+    <b style="color:#f59e0b">SWEEP</b>: price pierces level &gt;5pts then closes back = real move is opposite. Entry = next candle.</div>
   </div></div>
-
   <div class="blk info"><div class="bdg">9:20</div><div class="bb">
-    <div class="bt">First candle &#8212; stop at first match</div>
-    <div class="bd">1. Gap &gt;1% UP + RSI &gt;75 + body &lt;0.30 + LW bigger &#8594; <span class="g">PUT 93%</span><br>
-    2. Gap &gt;1% DOWN + RSI &lt;25 + body &lt;0.30 + UW bigger &#8594; <span class="g">CALL 80%</span><br>
-    3. Open within 15pts of HIGH &#8594; <span class="r">BEAR 100%</span><br>
-    4. Vol &gt;2x + bear candle &#8594; <span class="r">SHORT 78%</span><br>
-    <b style="color:#a855f7">Body &gt;0.50: follow body direction. RSI overridden. &#9733; NEW</b></div>
+    <div class="bt">First candle</div>
+    <div class="bd">1. Gap&gt;1%UP + RSI&gt;75 + body&lt;0.30 + LW bigger &#8594; <span class="g">PUT 93%</span><br>
+    2. Gap&gt;1%DOWN + RSI&lt;25 + body&lt;0.30 + UW bigger &#8594; <span class="g">CALL 80%</span><br>
+    3. Open within 15pts of HIGH &#8594; <span class="r">BEAR 100%</span> &nbsp; 4. Vol&gt;2x + bear &#8594; <span class="r">SHORT 78%</span><br>
+    <b style="color:#a855f7">Body &gt;0.50: follow body. RSI overridden. &#9733;</b></div>
   </div></div>
-
   <div class="blk info"><div class="bdg">10:35</div><div class="bb">
-    <div class="bt">RSI at 10:30 &#8212; day classifier</div>
-    <div class="bd">30&#8211;40 &#8594; <span class="r">Bear 79%</span> &ensp; 40&#8211;50 &#8594; <span class="g">Bull 60%</span> &ensp; 50&#8211;70 &#8594; <span class="y">Wait</span> &ensp; &gt;70 &#8594; <span class="r">Bear 80%</span> &ensp; &lt;30 &#8594; <span class="y">Wait</span><br>
-    <span style="color:#ef4444">&#9888; SUSPENDED if Brent crude moved &gt;3% overnight (fired 0/3 correct this week)</span></div>
+    <div class="bt">RSI at 10:30</div>
+    <div class="bd">30-40&#8594;<span class="r">Bear 79%</span> &nbsp; 40-50&#8594;<span class="g">Bull 60%</span> &nbsp; 50-70&#8594;<span class="y">Wait</span> &nbsp; &gt;70&#8594;<span class="r">Bear 80%</span> &nbsp; &lt;30&#8594;<span class="y">Wait</span><br>
+    <span style="color:#ef4444">&#9888; SUSPENDED if Brent crude moved &gt;3% overnight</span></div>
   </div></div>
-
   <div class="blk bull"><div class="bdg">11:35 &#9733;</div><div class="bb">
-    <div class="bt">MAIN TRADE &#8212; 5-factor checklist &#9733; UPDATED</div>
-    <div class="ba bull">(Close &#8722; Low) &#247; (High &#8722; Low): &lt;0.25=CALL &middot; &gt;0.75=PUT &middot; else SKIP</div>
-    <div class="bd">Confirm all 5 before entering:<br>
-    <b style="color:#aaa">&#9312; Position</b> &lt;25%=CALL &middot; &gt;75%=PUT<br>
-    <b style="color:#aaa">&#9313; Swing structure</b> 3+ HLs in lows=CALL &middot; 3+ LLs=PUT &middot; mixed=reduce<br>
-    <b style="color:#aaa">&#9314; FVG</b> Unfilled FVG in trade direction = higher confidence + use mid as target<br>
-    <b style="color:#aaa">&#9315; Prev levels</b> Within 10pts of PDH/PDL/PC = use as exit not 2x rule<br>
-    <b style="color:#aaa">&#9316; OR break</b> Trade must match which side of OR broke<br>
-    <span class="g">5/5 = 2 lots full &middot; 3&#8211;4/5 = 2 lots tighter stop &middot; &lt;3/5 = 1 lot or skip</span></div>
+    <div class="bt">MAIN TRADE &#8212; 5 factors</div>
+    <div class="ba bull">(C&#8722;L)/(H&#8722;L): &lt;0.25=CALL &middot; &gt;0.75=PUT &middot; else SKIP</div>
+    <div class="bd"><b style="color:#aaa">&#9312; Position</b> &lt;25%=CALL &middot; &gt;75%=PUT &nbsp; <b style="color:#aaa">&#9313; Structure</b> 3+HLs=CALL &middot; 3+LLs=PUT<br>
+    <b style="color:#aaa">&#9314; FVG</b> unfilled in direction=higher confidence, use mid as target<br>
+    <b style="color:#aaa">&#9315; Prev levels</b> within 10pts PDH/PDL/PC=use as exit<br>
+    <b style="color:#aaa">&#9316; OR break</b> trade must match OR break side<br>
+    <span class="g">5/5=2lots &middot; 3-4/5=2lots tighter &middot; &lt;3/5=1lot or skip</span></div>
   </div></div>
-
   <div class="blk info"><div class="bdg">12:05</div><div class="bb">
-    <div class="bt">Midday RSI &#8212; updated &#9733; NEW</div>
-    <div class="bd">RSI &lt;45 or &gt;60 &#8594; directional PM ahead, hold position<br>
-    RSI 45&#8211;58 &#8594; <b style="color:#f59e0b">CHOP signature</b> &#8594; cut to 1 lot, no new entries</div>
+    <div class="bt">Midday RSI &#9733;</div>
+    <div class="bd">RSI&lt;45 or &gt;60 &#8594; directional PM, hold &nbsp;|&nbsp; RSI 45-58 &#8594; <b style="color:#f59e0b">CHOP</b>, cut to 1 lot</div>
   </div></div>
-
   <div class="blk bear"><div class="bdg">14:30</div><div class="bb">
     <div class="ba bear">CLOSE ALL. No exceptions.</div>
-    <div class="bd">Bear days: biggest moves 13:00&#8211;14:30. Hold puts to 14:30.</div>
   </div></div>
-
-  <div class="sec">FVG rules &#9733; NEW</div>
-  <div style="background:#161616;border:1px solid #222;border-radius:8px;padding:10px 13px;font-size:12px;color:#ccc;line-height:1.8;margin-bottom:8px">
-    <b style="color:#a855f7">FVGs fill 82&#8211;87% within the same session (76 FVGs across 7 days).</b><br>
-    Bull FVG = candle[i-1].high &lt; candle[i+1].low &ensp; Bear FVG = candle[i-1].low &gt; candle[i+1].high<br>
-    Minimum 5pts to be meaningful. &gt;20pts = strong magnet.<br>
-    &#8594; Unfilled FVG from prev session = next day price magnet<br>
-    &#8594; FVG midpoint in trade direction = use as profit target<br>
-    &#8594; Large FVG aligned with 11:30 signal = 5th factor confirmed
-  </div>
-
-  <div class="sec">Liquidity sweep rules &#9733; NEW</div>
-  <div style="background:#161616;border:1px solid #222;border-radius:8px;padding:10px 13px;font-size:12px;color:#ccc;line-height:1.8;margin-bottom:8px">
-    <b style="color:#a855f7">Every day has sweeps. The sweep is the fake. The reversal is the trade.</b><br>
-    HIGH SWEEP: price takes out recent high by &gt;5pts then closes back below &#8594; short<br>
-    LOW SWEEP: price takes out recent low by &gt;5pts then closes back above &#8594; long<br>
-    Entry = candle AFTER sweep candle. Sweep + RSI extreme = strongest entry.<br>
-    Timing: 9:20&#8211;10:15 and 11:30&#8211;12:00
-  </div>
-
-  <div class="sec">Day of week</div>
+  <div class="sec">Day bias</div>
   <table><tr><th>Day</th><th>Bias</th><th>Key rule</th></tr>
-  <tr><td style="color:#60a5fa;font-weight:700">Monday</td><td class="g">58% Bull</td><td style="color:#555">Morning trap if prev close &gt;80%. 14:00 drift. No shorts after 13:30.</td></tr>
-  <tr><td style="color:#f87171;font-weight:700">Tuesday</td><td class="r">58% Bear</td><td style="color:#555">Expiry. OS+Low reversal 83%.</td></tr>
-  <tr><td style="color:#4ade80;font-weight:700">Wednesday</td><td class="g">69% Bull</td><td style="color:#555">Suppressed in current war regime.</td></tr>
-  <tr><td style="color:#f87171;font-weight:700">Thursday</td><td class="r">82% Bear</td><td style="color:#555">Gap-down NEVER fills (0%). RSI&#8805;70 reverses 70%.</td></tr>
-  <tr><td style="color:#fb923c;font-weight:700">Friday</td><td class="r">64% Bear</td><td style="color:#555">Gap fills only if &lt;0.5%. OS signals fail 71%.</td></tr></table>
-
-  <div class="sec">Pattern status &#8212; updated Apr 10</div>
+  <tr><td style="color:#60a5fa;font-weight:700">Monday</td><td class="g">58% Bull</td><td style="color:#555">Morning trap if prev close&gt;80%. 14:00 drift. No shorts after 13:30.</td></tr>
+  <tr><td style="color:#f87171;font-weight:700">Tuesday</td><td class="r">58% Bear</td><td style="color:#555">Expiry. OS+Low 83%.</td></tr>
+  <tr><td style="color:#4ade80;font-weight:700">Wednesday</td><td class="g">69% Bull</td><td style="color:#555">Suppressed in regime.</td></tr>
+  <tr><td style="color:#f87171;font-weight:700">Thursday</td><td class="r">82% Bear</td><td style="color:#555">Gap-down NEVER fills. RSI&#8805;70 reverses.</td></tr>
+  <tr><td style="color:#fb923c;font-weight:700">Friday</td><td class="r">64% Bear</td><td style="color:#555">Gap fills only if &lt;0.5%.</td></tr></table>
+  <div class="sec">Patterns</div>
   <div class="pills">
-    <span class="pill pon">11:30 position &#10003;</span>
-    <span class="pill pon">OB+High before noon &#10003;</span>
-    <span class="pill pon">Thu bear 82% &#10003;</span>
-    <span class="pill pon">Thu gap-down no fill &#10003;</span>
-    <span class="pill pon">Open near high=Bear &#10003;</span>
-    <span class="pill pon">OS+Low no new lows &#10003;</span>
-    <span class="pill pon">OR direction=day &#10003; 7/7</span>
-    <span class="pill pnew">FVG fills 82-87% NEW</span>
-    <span class="pill pnew">OR midpoint magnet NEW</span>
-    <span class="pill pnew">Liquidity sweeps NEW</span>
-    <span class="pill pnew">Swing structure filter NEW</span>
-    <span class="pill pnew">PDH/PDL/PC rejection NEW</span>
-    <span class="pill pnew">Body&gt;0.50 overrides RSI NEW</span>
+    <span class="pill pon">11:30 position &#10003;</span><span class="pill pon">OB+High before noon &#10003;</span>
+    <span class="pill pon">Thu bear 82% &#10003;</span><span class="pill pon">OR direction=day &#10003; 7/7</span>
+    <span class="pill pnew">FVG fills 82-87% NEW</span><span class="pill pnew">OR midpoint magnet NEW</span>
+    <span class="pill pnew">Liquidity sweeps NEW</span><span class="pill pnew">Swing structure NEW</span>
+    <span class="pill pnew">PDH/PDL/PC rejection NEW</span><span class="pill pnew">Body&gt;0.50 overrides RSI NEW</span>
     <span class="pill pnew">Midday RSI 45-58=chop NEW</span>
-    <span class="pill pwarn">10:30 RSI &#9888; suspended crude&gt;3%</span>
-    <span class="pill pwarn">Gap fill &#9888; only if &lt;0.5%</span>
+    <span class="pill pwarn">10:30 RSI &#9888; crude&gt;3%</span><span class="pill pwarn">Gap fill &#9888; only &lt;0.5%</span>
     <span class="pill pwarn">OB+High after 13:00 &#9888; dead</span>
-    <span class="pill pwarn">Wed bull &#9888; suppressed</span>
-    <span class="pill pdead">15:00 dump dead (8 days)</span>
+    <span class="pill pdead">15:00 dump dead</span>
   </div>
 </div>
 
+<!-- CALC PAGE -->
 <div id="calc" class="page">
   <div class="calc" style="margin-top:4px">
     <div class="ct">&#9733; 11:30 Position Check</div>
     <div class="cr"><label>Day High</label><input type="number" id="dh" placeholder="24074" oninput="cP()"></div>
     <div class="cr"><label>Day Low</label><input type="number" id="dl" placeholder="23856" oninput="cP()"></div>
-    <div class="cr"><label>Close at 11:30</label><input type="number" id="dc" placeholder="24000" oninput="cP()"></div>
-    <div class="cres cnone" id="pres">Enter the three numbers above</div>
+    <div class="cr"><label>Close 11:30</label><input type="number" id="dc" placeholder="24000" oninput="cP()"></div>
+    <div class="cres cnone" id="pres">Enter the three numbers</div>
   </div>
   <div class="calc">
-    <div class="ct">OR Midpoint Calculator</div>
+    <div class="ct">OR Midpoint</div>
     <div class="cr"><label>OR High (9:45)</label><input type="number" id="orh" placeholder="24060" oninput="cOR()"></div>
     <div class="cr"><label>OR Low (9:45)</label><input type="number" id="orl" placeholder="23920" oninput="cOR()"></div>
-    <div id="ores" style="font-size:12px;color:#555;padding:4px 0;line-height:1.8">Enter OR high and low above</div>
+    <div id="ores" style="font-size:12px;color:#555;padding:4px 0;line-height:1.8">Enter OR values</div>
   </div>
   <div class="calc">
     <div class="ct">Stop Loss and Target</div>
-    <div class="cr"><label>Premium paid (&#8377;)</label><input type="number" id="prem" placeholder="180" oninput="cOpt()"></div>
-    <div class="cr"><label>FVG target (opt)</label><input type="number" id="fvg" placeholder="24020" oninput="cOpt()"></div>
-    <div id="optres" style="font-size:12px;color:#555;padding:4px 0;line-height:1.8">Enter premium above</div>
+    <div class="cr"><label>Premium (&#8377;)</label><input type="number" id="prem" placeholder="180" oninput="cOpt()"></div>
+    <div id="optres" style="font-size:12px;color:#555;padding:4px 0;line-height:1.8">Enter premium</div>
   </div>
   <div class="calc">
     <div class="ct">Gap Calculator</div>
     <div class="cr"><label>Prev close</label><input type="number" id="pci" placeholder="24052" oninput="cG()"></div>
     <div class="cr"><label>Today open</label><input type="number" id="toi" placeholder="24000" oninput="cG()"></div>
-    <div id="gres" style="font-size:12px;color:#555;padding:4px 0;line-height:1.6">Enter values above</div>
-  </div>
-  <div class="calc">
-    <div class="ct">Delta Guide</div>
-    <div style="font-size:12px;color:#ccc;line-height:1.9">
-      <b style="color:#aaa">9:20 signal</b> &#8594; Delta 0.27&#8211;0.38 (100&#8211;200 below ATM)<br>
-      <b style="color:#aaa">10:30 signal</b> &#8594; Delta 0.32&#8211;0.40 (100&#8211;150 below ATM)<br>
-      <b style="color:#aaa">11:30 signal</b> &#8594; Delta 0.38&#8211;0.48 (50&#8211;100 below ATM)<br>
-      <span class="r">Gap &gt;1.5%: go 1 strike closer to ATM (compressed range day)</span>
-    </div>
+    <div id="gres" style="font-size:12px;color:#555;padding:4px 0;line-height:1.6">Enter values</div>
   </div>
   <div class="rules" style="margin-top:4px">
-    <div class="sec" style="color:#ef4444;border-color:#2a1a1a;margin-top:0;margin-bottom:8px">Iron rules</div>
+    <div class="sec" style="color:#ef4444;border-color:#2a1a1a;margin-top:0;margin-bottom:6px">Iron rules</div>
     <div class="rule"><span class="ri">&#128290;</span>Max 2 lots. Always.</div>
     <div class="rule"><span class="ri">&#128721;</span>Stop = 35% of premium. Set before entering.</div>
-    <div class="rule"><span class="ri">&#127919;</span>Target = 100% premium OR FVG midpoint, whichever comes first.</div>
+    <div class="rule"><span class="ri">&#127919;</span>Target = 100% premium OR FVG midpoint, whichever first.</div>
     <div class="rule"><span class="ri">&#9200;</span>Last entry 11:30 AM.</div>
     <div class="rule"><span class="ri">&#128682;</span>Exit all by 14:30. Always.</div>
     <div class="rule"><span class="ri">&#10060;</span>NO averaging down. EVER.</div>
@@ -246,38 +253,295 @@ tr:hover td{background:#161616}
 </div>
 
 <script>
+const CHART=[{"label": "Mon Mar30", "date": "2026-03-30", "day": "Monday", "gap_pct": 0.19, "pc": 22535.85, "dir": "Bear", "o": 22579.0, "h": 22714.1, "l": 22283.8, "c": 22379.2, "rng": 430.2, "or_high": 22714.1, "or_low": 22470.2, "or_mid": 22592.1, "candles": [["09:15", 22579.0, 22618.0, 22470.2, 22522.5, 1.65, 11.2], ["09:20", 22521.2, 22551.4, 22500.1, 22529.3, 1.69, 12.6], ["09:25", 22526.1, 22590.4, 22516.9, 22580.8, 1.61, 22.7], ["09:30", 22581.4, 22685.5, 22576.8, 22683.6, 1.55, 38.0], ["09:35", 22681.5, 22714.1, 22661.9, 22677.4, 1.29, 37.5], ["09:40", 22675.8, 22703.7, 22652.7, 22659.2, 1.09, 36.1], ["09:45", 22659.5, 22690.0, 22628.8, 22630.5, 1.07, 33.8], ["09:50", 22630.2, 22665.3, 22617.2, 22618.5, 1.0, 32.9], ["09:55", 22618.0, 22629.8, 22597.0, 22615.3, 0.97, 32.7], ["10:00", 22614.7, 22665.5, 22604.7, 22651.2, 1.0, 38.4], ["10:05", 22650.0, 22650.0, 22594.0, 22601.6, 1.09, 34.1], ["10:10", 22600.2, 22600.2, 22556.6, 22596.8, 1.1, 33.7], ["10:15", 22595.9, 22604.0, 22553.5, 22556.3, 1.02, 30.5], ["10:20", 22555.3, 22564.5, 22537.7, 22544.3, 1.37, 29.6], ["10:25", 22542.7, 22564.0, 22534.8, 22534.8, 1.2, 28.9], ["10:30", 22535.5, 22540.2, 22519.2, 22529.2, 1.07, 28.4], ["10:35", 22528.5, 22549.5, 22526.2, 22538.3, 1.19, 30.3], ["10:40", 22538.8, 22554.6, 22512.2, 22514.5, 0.97, 28.2], ["10:45", 22513.3, 22535.0, 22509.5, 22527.3, 0.9, 31.0], ["10:50", 22528.0, 22538.3, 22491.4, 22493.3, 1.08, 27.9], ["10:55", 22493.2, 22524.2, 22478.3, 22490.2, 1.18, 27.6], ["11:00", 22489.6, 22509.0, 22483.7, 22504.3, 0.89, 30.9], ["11:05", 22503.5, 22509.3, 22472.3, 22472.3, 1.05, 27.8], ["11:10", 22471.5, 22482.1, 22454.0, 22478.5, 1.18, 29.3], ["11:15", 22479.2, 22483.5, 22466.9, 22481.3, 0.76, 30.0], ["11:20", 22480.3, 22486.8, 22467.5, 22482.3, 1.05, 30.3], ["11:25", 22481.2, 22488.2, 22465.8, 22468.2, 1.05, 28.6], ["11:30", 22468.1, 22506.3, 22457.3, 22503.8, 0.79, 37.7], ["11:35", 22503.3, 22535.8, 22503.2, 22516.2, 1.4, 40.5], ["11:40", 22515.0, 22519.2, 22484.8, 22486.7, 0.95, 36.3], ["11:45", 22485.7, 22485.7, 22460.4, 22464.5, 1.27, 33.5], ["11:50", 22465.0, 22480.2, 22453.0, 22478.6, 1.04, 36.8], ["11:55", 22477.7, 22489.8, 22468.2, 22484.0, 1.02, 38.1], ["12:00", 22483.2, 22560.6, 22480.3, 22549.3, 1.29, 51.1], ["12:05", 22549.0, 22594.5, 22545.7, 22558.3, 1.76, 52.6], ["12:10", 22557.5, 22578.1, 22553.8, 22567.1, 1.08, 54.1], ["12:15", 22566.9, 22577.5, 22550.8, 22555.3, 1.0, 51.8], ["12:20", 22555.3, 22594.1, 22531.0, 22531.3, 1.06, 47.3], ["12:25", 22531.2, 22534.6, 22502.8, 22519.2, 1.13, 45.2], ["12:30", 22519.8, 22523.5, 22508.0, 22517.4, 0.86, 44.9], ["12:35", 22516.7, 22569.5, 22514.0, 22565.6, 1.26, 54.2], ["12:40", 22564.7, 22579.3, 22555.8, 22557.0, 0.91, 52.5], ["12:45", 22557.3, 22560.7, 22530.5, 22530.5, 0.82, 47.6], ["12:50", 22530.1, 22533.0, 22484.0, 22504.0, 1.08, 43.2], ["12:55", 22501.8, 22506.7, 22491.8, 22505.8, 0.69, 43.5], ["13:00", 22506.1, 22511.4, 22486.2, 22491.3, 1.03, 41.2], ["13:05", 22490.8, 22504.9, 22485.3, 22495.8, 0.89, 42.2], ["13:10", 22495.3, 22507.0, 22481.5, 22499.2, 0.79, 43.0], ["13:15", 22498.5, 22516.3, 22479.1, 22485.0, 0.94, 40.4], ["13:20", 22485.3, 22495.0, 22482.2, 22484.3, 0.96, 40.3], ["13:25", 22484.2, 22486.4, 22456.5, 22476.5, 1.05, 38.8], ["13:30", 22476.2, 22486.0, 22464.0, 22485.8, 0.86, 41.6], ["13:35", 22485.6, 22502.1, 22474.2, 22493.7, 0.98, 43.9], ["13:40", 22494.3, 22500.5, 22454.8, 22462.0, 1.16, 37.4], ["13:45", 22461.2, 22468.2, 22446.5, 22448.0, 0.96, 35.0], ["13:50", 22445.5, 22452.9, 22420.2, 22422.1, 1.19, 30.9], ["13:55", 22421.0, 22441.6, 22420.0, 22428.8, 1.35, 33.1], ["14:00", 22428.1, 22487.2, 22423.8, 22462.3, 1.31, 42.7], ["14:05", 22461.2, 22475.8, 22449.5, 22449.5, 1.15, 40.3], ["14:10", 22449.0, 22451.9, 22418.0, 22420.5, 1.21, 35.5], ["14:15", 22420.2, 22425.3, 22409.3, 22411.5, 1.15, 34.1], ["14:20", 22412.3, 22431.8, 22383.2, 22388.0, 1.6, 30.8], ["14:25", 22386.0, 22394.4, 22375.8, 22378.0, 1.26, 29.5], ["14:30", 22376.5, 22410.6, 22359.5, 22362.5, 2.3, 27.5], ["14:35", 22361.4, 22378.5, 22350.7, 22362.9, 1.94, 27.6], ["14:40", 22363.5, 22383.9, 22358.7, 22366.8, 1.6, 29.0], ["14:45", 22365.6, 22383.4, 22340.0, 22362.0, 1.95, 28.3], ["14:50", 22361.3, 22376.9, 22344.7, 22348.5, 1.62, 26.3], ["14:55", 22347.7, 22357.8, 22337.8, 22350.0, 1.68, 26.9], ["15:00", 22348.5, 22348.5, 22283.8, 22291.2, 1.55, 19.9], ["15:05", 22291.7, 22307.7, 22289.1, 22299.4, 6.77, 22.9], ["15:10", 22297.1, 22342.0, 22295.5, 22335.6, 7.07, 34.6], ["15:15", 22335.5, 22356.5, 22325.2, 22341.8, 7.28, 36.3], ["15:20", 22342.3, 22381.2, 22341.8, 22377.5, 6.54, 45.5], ["15:25", 22376.0, 22391.0, 22359.2, 22379.2, 5.46, 45.9]], "signals": [], "ob": [], "os": [{"i": 60, "price": 22406.3, "rsi": 34.0}, {"i": 61, "price": 22380.2, "rsi": 31.0}, {"i": 62, "price": 22372.8, "rsi": 29.0}, {"i": 63, "price": 22356.55, "rsi": 27.0}, {"i": 64, "price": 22347.65, "rsi": 28.0}], "sweeps": [{"type": "high_sweep", "i": 3, "price": 22685.55, "pts": 26.0}, {"type": "high_sweep", "i": 4, "price": 22714.1, "pts": 84.0}, {"type": "low_sweep", "i": 20, "price": 22478.35, "pts": 26.0}, {"type": "low_sweep", "i": 23, "price": 22454.0, "pts": 28.0}, {"type": "high_sweep", "i": 28, "price": 22535.8, "pts": 71.0}, {"type": "high_sweep", "i": 34, "price": 22594.5, "pts": 39.0}], "fvgs": [{"type": "bull", "top": 22576.75, "bot": 22551.4, "mid": 22564.075, "time": "09:25", "i": 2, "filled": 1}, {"type": "bull", "top": 22661.9, "bot": 22590.4, "mid": 22626.15, "time": "09:30", "i": 3, "filled": 1}, {"type": "bull", "top": 22503.2, "bot": 22488.25, "mid": 22495.725, "time": "11:30", "i": 27, "filled": 1}, {"type": "bear", "top": 22503.2, "bot": 22485.7, "mid": 22494.45, "time": "11:40", "i": 29, "filled": 1}, {"type": "bull", "top": 22545.65, "bot": 22489.85, "mid": 22517.75, "time": "12:00", "i": 33, "filled": 1}, {"type": "bear", "top": 22550.85, "bot": 22534.6, "mid": 22542.725, "time": "12:20", "i": 37, "filled": 1}, {"type": "bear", "top": 22531.05, "bot": 22523.5, "mid": 22527.275, "time": "12:25", "i": 38, "filled": 1}, {"type": "bull", "top": 22555.8, "bot": 22523.5, "mid": 22539.65, "time": "12:35", "i": 40, "filled": 1}, {"type": "bear", "top": 22555.8, "bot": 22533.05, "mid": 22544.425, "time": "12:45", "i": 42, "filled": 0}, {"type": "bear", "top": 22530.55, "bot": 22506.7, "mid": 22518.625, "time": "12:50", "i": 43, "filled": 1}], "sh": [{"i": 4, "price": 22714.1, "time": "09:35"}, {"i": 9, "price": 22665.5, "time": "10:00"}, {"i": 17, "price": 22554.6, "time": "10:40"}, {"i": 28, "price": 22535.8, "time": "11:35"}, {"i": 34, "price": 22594.5, "time": "12:05"}, {"i": 37, "price": 22594.1, "time": "12:20"}], "sl": [{"i": 23, "price": 22454.0, "time": "11:10"}, {"i": 27, "price": 22457.35, "time": "11:30"}, {"i": 31, "price": 22453.0, "time": "11:50"}, {"i": 38, "price": 22502.85, "time": "12:25"}, {"i": 43, "price": 22484.05, "time": "12:50"}, {"i": 50, "price": 22456.55, "time": "13:25"}]}, {"label": "Wed Apr01", "date": "2026-04-01", "day": "Wednesday", "gap_pct": 2.21, "pc": 22379.2, "dir": "Bear", "o": 22872.8, "h": 22941.3, "l": 22618.6, "c": 22703.2, "rng": 322.7, "or_high": 22937.7, "or_low": 22809.0, "or_mid": 22873.3, "candles": [["09:15", 22872.8, 22902.2, 22809.0, 22887.0, 1.59, 83.9], ["09:20", 22888.6, 22904.0, 22872.5, 22899.5, 1.3, 84.2], ["09:25", 22900.0, 22930.4, 22898.2, 22929.8, 1.08, 84.9], ["09:30", 22928.5, 22937.7, 22845.5, 22854.5, 1.53, 75.7], ["09:35", 22853.2, 22854.0, 22824.2, 22828.1, 1.39, 72.7], ["09:40", 22828.5, 22873.7, 22827.4, 22855.0, 1.17, 73.8], ["09:45", 22851.5, 22898.1, 22848.5, 22897.5, 1.1, 75.6], ["09:50", 22897.8, 22932.1, 22896.2, 22915.2, 1.46, 76.3], ["09:55", 22915.0, 22919.1, 22885.0, 22893.2, 1.35, 73.4], ["10:00", 22892.9, 22941.3, 22890.5, 22927.2, 1.24, 75.0], ["10:05", 22927.5, 22932.0, 22905.1, 22906.8, 0.91, 72.3], ["10:10", 22907.5, 22907.5, 22862.5, 22868.8, 0.9, 67.4], ["10:15", 22867.9, 22878.8, 22857.4, 22871.2, 1.2, 67.5], ["10:20", 22871.7, 22879.5, 22822.0, 22828.3, 1.33, 62.1], ["10:25", 22827.8, 22828.2, 22771.7, 22796.5, 1.48, 58.3], ["10:30", 22797.1, 22816.3, 22778.3, 22796.0, 0.93, 58.2], ["10:35", 22796.4, 22816.4, 22796.2, 22813.8, 0.87, 59.8], ["10:40", 22813.2, 22815.0, 22787.3, 22807.5, 0.98, 59.0], ["10:45", 22808.6, 22820.2, 22791.9, 22797.2, 0.9, 57.5], ["10:50", 22797.6, 22802.0, 22783.5, 22789.8, 0.8, 56.5], ["10:55", 22791.5, 22791.5, 22769.5, 22770.8, 1.13, 53.7], ["11:00", 22771.3, 22771.3, 22743.6, 22749.1, 0.95, 50.7], ["11:05", 22748.7, 22786.0, 22738.2, 22770.5, 1.03, 53.5], ["11:10", 22771.2, 22791.7, 22758.1, 22763.8, 0.84, 52.5], ["11:15", 22763.5, 22767.5, 22747.7, 22767.2, 0.93, 52.9], ["11:20", 22766.8, 22782.8, 22764.9, 22781.7, 0.74, 55.0], ["11:25", 22781.5, 22800.7, 22781.5, 22790.1, 1.14, 56.3], ["11:30", 22788.8, 22811.7, 22786.5, 22798.5, 1.21, 57.5], ["11:35", 22797.9, 22814.3, 22788.8, 22813.5, 1.1, 59.7], ["11:40", 22813.5, 22822.7, 22798.2, 22799.2, 0.92, 56.7], ["11:45", 22797.7, 22798.7, 22743.7, 22754.1, 1.31, 48.4], ["11:50", 22752.0, 22765.0, 22742.6, 22745.6, 1.16, 47.0], ["11:55", 22743.2, 22778.2, 22736.6, 22775.9, 0.85, 52.3], ["12:00", 22774.1, 22841.2, 22774.1, 22838.8, 1.04, 61.0], ["12:05", 22834.5, 22842.4, 22827.0, 22839.2, 1.43, 61.0], ["12:10", 22837.8, 22864.6, 22828.2, 22859.3, 0.97, 63.5], ["12:15", 22857.8, 22864.2, 22834.7, 22837.8, 1.1, 59.2], ["12:20", 22836.3, 22842.0, 22825.5, 22831.4, 0.72, 57.9], ["12:25", 22829.5, 22837.0, 22817.8, 22832.8, 0.76, 58.1], ["12:30", 22831.0, 22847.4, 22824.2, 22829.5, 0.75, 57.4], ["12:35", 22828.0, 22842.7, 22816.5, 22842.5, 0.76, 59.5], ["12:40", 22841.5, 22856.3, 22829.5, 22834.6, 0.91, 57.6], ["12:45", 22835.0, 22881.1, 22833.8, 22868.7, 0.85, 63.1], ["12:50", 22868.5, 22875.5, 22860.4, 22873.5, 0.71, 63.8], ["12:55", 22873.0, 22874.3, 22855.7, 22862.0, 0.79, 60.8], ["13:00", 22862.1, 22873.6, 22855.5, 22864.6, 0.97, 61.3], ["13:05", 22864.9, 22878.5, 22862.1, 22869.2, 0.66, 62.1], ["13:10", 22869.0, 22883.4, 22842.7, 22883.3, 0.8, 64.6], ["13:15", 22883.2, 22898.0, 22839.8, 22843.0, 0.89, 53.7], ["13:20", 22843.5, 22843.5, 22805.6, 22810.6, 0.99, 46.9], ["13:25", 22810.5, 22812.5, 22795.0, 22808.0, 0.97, 46.4], ["13:30", 22808.3, 22808.3, 22760.1, 22776.8, 0.91, 40.7], ["13:35", 22776.2, 22776.3, 22748.5, 22764.8, 1.06, 38.8], ["13:40", 22763.9, 22763.9, 22648.3, 22675.2, 1.91, 27.9], ["13:45", 22674.8, 22720.5, 22658.7, 22703.2, 1.14, 34.1], ["13:50", 22702.5, 22708.6, 22691.5, 22698.0, 0.85, 33.5], ["13:55", 22697.5, 22725.9, 22690.5, 22703.7, 0.72, 34.8], ["14:00", 22703.8, 22730.5, 22688.2, 22720.8, 0.58, 38.7], ["14:05", 22720.7, 22739.8, 22715.5, 22737.2, 0.86, 42.3], ["14:10", 22739.0, 22756.6, 22727.9, 22753.0, 0.78, 45.5], ["14:15", 22754.3, 22756.8, 22723.8, 22742.0, 0.64, 43.7], ["14:20", 22741.3, 22743.1, 22710.0, 22723.4, 0.87, 40.7], ["14:25", 22723.2, 22736.0, 22717.0, 22733.4, 0.69, 43.0], ["14:30", 22734.5, 22734.9, 22704.5, 22709.2, 0.95, 39.0], ["14:35", 22708.2, 22709.3, 22665.2, 22667.8, 1.06, 33.4], ["14:40", 22666.2, 22678.5, 22641.3, 22662.7, 1.14, 32.8], ["14:45", 22660.6, 22662.5, 22618.6, 22641.2, 1.23, 30.2], ["14:50", 22640.9, 22666.8, 22629.8, 22657.2, 1.16, 34.4], ["14:55", 22656.8, 22685.3, 22644.8, 22647.8, 1.24, 33.1], ["15:00", 22651.2, 22692.5, 22651.2, 22676.8, 0.45, 40.3], ["15:05", 22677.0, 22684.4, 22669.9, 22682.1, 2.16, 41.5], ["15:10", 22682.8, 22691.3, 22670.0, 22671.7, 2.77, 39.8], ["15:15", 22671.1, 22688.5, 22668.6, 22681.1, 2.51, 42.1], ["15:20", 22681.2, 22683.9, 22673.0, 22683.5, 2.66, 42.7], ["15:25", 22683.5, 22706.3, 22674.6, 22703.2, 2.52, 47.6]], "signals": [], "ob": [{"i": 0, "price": 22905.25, "rsi": 84.0}, {"i": 1, "price": 22906.95, "rsi": 84.0}, {"i": 2, "price": 22933.4, "rsi": 85.0}, {"i": 3, "price": 22940.65, "rsi": 76.0}, {"i": 5, "price": 22876.7, "rsi": 74.0}], "os": [{"i": 53, "price": 22645.35, "rsi": 28.0}, {"i": 54, "price": 22655.7, "rsi": 34.0}, {"i": 55, "price": 22688.5, "rsi": 34.0}, {"i": 56, "price": 22687.5, "rsi": 35.0}, {"i": 64, "price": 22662.2, "rsi": 33.0}], "sweeps": [{"type": "high_sweep", "i": 3, "price": 22937.65, "pts": 110.0}, {"type": "low_sweep", "i": 14, "price": 22771.65, "pts": 42.0}, {"type": "low_sweep", "i": 21, "price": 22743.6, "pts": 27.0}, {"type": "low_sweep", "i": 22, "price": 22738.25, "pts": 29.0}, {"type": "high_sweep", "i": 29, "price": 22822.65, "pts": 77.0}, {"type": "low_sweep", "i": 32, "price": 22736.6, "pts": 103.0}], "fvgs": [{"type": "bear", "top": 22898.25, "bot": 22854.0, "mid": 22876.125, "time": "09:30", "i": 3, "filled": 1}, {"type": "bull", "top": 22896.2, "bot": 22873.7, "mid": 22884.95, "time": "09:45", "i": 6, "filled": 1}, {"type": "bear", "top": 22905.1, "bot": 22878.85, "mid": 22891.975, "time": "10:10", "i": 11, "filled": 1}, {"type": "bear", "top": 22857.4, "bot": 22828.15, "mid": 22842.775, "time": "10:20", "i": 13, "filled": 1}, {"type": "bear", "top": 22822.05, "bot": 22816.3, "mid": 22819.175, "time": "10:25", "i": 14, "filled": 1}, {"type": "bear", "top": 22783.45, "bot": 22771.35, "mid": 22777.4, "time": "10:55", "i": 20, "filled": 1}, {"type": "bull", "top": 22781.5, "bot": 22767.55, "mid": 22774.525, "time": "11:20", "i": 25, "filled": 1}, {"type": "bear", "top": 22798.2, "bot": 22765.0, "mid": 22781.6, "time": "11:45", "i": 30, "filled": 1}, {"type": "bull", "top": 22774.1, "bot": 22765.0, "mid": 22769.55, "time": "11:55", "i": 32, "filled": 1}, {"type": "bull", "top": 22827.0, "bot": 22778.15, "mid": 22802.575, "time": "12:00", "i": 33, "filled": 1}], "sh": [{"i": 3, "price": 22937.65, "time": "09:30"}, {"i": 9, "price": 22941.3, "time": "10:00"}, {"i": 18, "price": 22820.25, "time": "10:45"}, {"i": 23, "price": 22791.65, "time": "11:10"}, {"i": 29, "price": 22822.65, "time": "11:40"}, {"i": 35, "price": 22864.6, "time": "12:10"}], "sl": [{"i": 4, "price": 22824.15, "time": "09:35"}, {"i": 14, "price": 22771.65, "time": "10:25"}, {"i": 22, "price": 22738.25, "time": "11:05"}, {"i": 32, "price": 22736.6, "time": "11:55"}, {"i": 40, "price": 22816.55, "time": "12:35"}, {"i": 53, "price": 22648.35, "time": "13:40"}]}, {"label": "Mon Apr06", "date": "2026-04-06", "day": "Monday", "gap_pct": 0.39, "pc": 22700.25, "dir": "Bull", "o": 22789.0, "h": 22998.3, "l": 22543.0, "c": 22959.5, "rng": 455.4, "or_high": 22798.2, "or_low": 22589.9, "or_mid": 22694.1, "candles": [["09:15", 22789.0, 22798.2, 22591.7, 22666.0, 0.86, 58.3], ["09:20", 22671.3, 22714.3, 22646.7, 22653.5, 0.99, 56.3], ["09:25", 22657.2, 22662.0, 22602.2, 22609.0, 0.93, 49.7], ["09:30", 22604.8, 22684.8, 22596.5, 22681.0, 0.96, 58.2], ["09:35", 22681.7, 22746.9, 22678.2, 22704.3, 1.42, 60.5], ["09:40", 22704.8, 22714.3, 22602.2, 22620.2, 1.22, 49.7], ["09:45", 22621.5, 22636.3, 22589.9, 22589.9, 0.74, 46.5], ["09:50", 22588.2, 22603.2, 22567.8, 22573.0, 0.86, 44.8], ["09:55", 22571.1, 22586.5, 22566.7, 22569.3, 0.71, 44.4], ["10:00", 22569.1, 22591.6, 22561.9, 22589.6, 0.84, 47.1], ["10:05", 22590.5, 22632.0, 22586.0, 22615.0, 0.74, 50.4], ["10:10", 22615.8, 22656.8, 22597.2, 22654.8, 1.13, 55.1], ["10:15", 22659.8, 22679.7, 22613.3, 22638.6, 1.23, 52.9], ["10:20", 22639.5, 22662.8, 22637.0, 22640.5, 0.82, 53.2], ["10:25", 22638.3, 22645.0, 22591.3, 22634.5, 1.11, 52.2], ["10:30", 22634.0, 22640.4, 22598.8, 22636.8, 0.62, 52.6], ["10:35", 22637.7, 22661.8, 22634.5, 22661.0, 0.95, 56.0], ["10:40", 22661.7, 22662.7, 22627.3, 22653.5, 0.88, 54.7], ["10:45", 22654.0, 22663.2, 22641.2, 22657.0, 0.86, 55.2], ["10:50", 22657.3, 22669.2, 22610.2, 22617.4, 1.14, 48.3], ["10:55", 22618.7, 22651.3, 22609.6, 22635.8, 0.93, 51.4], ["11:00", 22635.6, 22635.8, 22587.8, 22590.0, 1.01, 44.4], ["11:05", 22590.3, 22603.3, 22577.4, 22588.5, 0.91, 44.2], ["11:10", 22587.4, 22587.4, 22543.0, 22567.8, 1.09, 41.2], ["11:15", 22567.5, 22612.0, 22558.7, 22612.0, 0.82, 49.0], ["11:20", 22611.3, 22635.7, 22597.1, 22614.0, 0.74, 49.3], ["11:25", 22615.0, 22629.5, 22596.8, 22629.3, 0.62, 51.9], ["11:30", 22629.2, 22633.1, 22595.9, 22610.0, 0.57, 48.6], ["11:35", 22610.2, 22648.0, 22606.2, 22618.8, 0.64, 50.1], ["11:40", 22619.6, 22650.6, 22604.9, 22644.4, 0.56, 54.5], ["11:45", 22644.3, 22663.3, 22634.5, 22645.7, 0.64, 54.7], ["11:50", 22646.2, 22675.2, 22644.8, 22668.2, 0.65, 58.3], ["11:55", 22669.0, 22707.8, 22665.7, 22676.4, 0.97, 59.6], ["12:00", 22678.0, 22684.8, 22663.8, 22667.8, 0.58, 57.6], ["12:05", 22668.0, 22692.0, 22664.8, 22673.6, 0.79, 58.6], ["12:10", 22673.0, 22680.8, 22659.4, 22659.6, 0.59, 55.2], ["12:15", 22660.3, 22672.5, 22653.1, 22660.2, 0.67, 55.3], ["12:20", 22661.7, 22731.1, 22659.2, 22700.8, 1.59, 62.6], ["12:25", 22702.0, 22728.0, 22699.2, 22713.4, 0.73, 64.6], ["12:30", 22713.5, 22714.9, 22648.3, 22650.1, 0.96, 50.4], ["12:35", 22649.4, 22682.6, 22644.5, 22667.7, 0.9, 53.5], ["12:40", 22668.0, 22684.8, 22652.7, 22675.7, 0.83, 54.8], ["12:45", 22676.2, 22757.0, 22675.5, 22757.0, 1.06, 65.8], ["12:50", 22756.0, 22785.3, 22746.5, 22775.2, 1.23, 67.7], ["12:55", 22776.2, 22804.0, 22774.3, 22802.5, 1.05, 70.3], ["13:00", 22804.2, 22814.4, 22758.5, 22767.4, 1.32, 63.2], ["13:05", 22769.0, 22807.0, 22768.4, 22806.0, 0.79, 67.1], ["13:10", 22807.2, 22865.2, 22806.2, 22860.7, 1.29, 71.8], ["13:15", 22861.3, 22876.1, 22844.8, 22864.2, 1.04, 72.0], ["13:20", 22864.4, 22899.0, 22863.2, 22878.4, 0.99, 73.2], ["13:25", 22878.5, 22881.2, 22843.8, 22860.2, 0.8, 69.3], ["13:30", 22863.7, 22893.6, 22863.0, 22884.8, 0.79, 71.5], ["13:35", 22885.7, 22900.5, 22863.4, 22863.4, 0.74, 67.0], ["13:40", 22863.5, 22877.8, 22843.5, 22850.9, 0.97, 64.5], ["13:45", 22852.7, 22874.3, 22843.8, 22843.8, 0.79, 63.0], ["13:50", 22845.8, 22886.8, 22843.4, 22882.7, 0.68, 67.4], ["13:55", 22883.0, 22887.4, 22859.6, 22862.8, 0.71, 63.3], ["14:00", 22862.5, 22898.7, 22861.8, 22890.5, 0.8, 66.3], ["14:05", 22890.7, 22898.7, 22866.0, 22866.0, 0.77, 61.4], ["14:10", 22866.9, 22913.4, 22866.0, 22911.4, 0.87, 66.4], ["14:15", 22911.7, 22929.7, 22897.7, 22915.0, 1.36, 66.8], ["14:20", 22916.2, 22928.5, 22907.2, 22907.2, 0.98, 65.1], ["14:25", 22908.0, 22913.3, 22881.4, 22895.5, 1.01, 62.6], ["14:30", 22896.7, 22925.8, 22895.9, 22922.2, 1.03, 65.8], ["14:35", 22923.1, 22940.7, 22902.7, 22918.0, 1.23, 64.9], ["14:40", 22918.7, 22928.5, 22904.2, 22913.8, 0.79, 63.9], ["14:45", 22914.3, 22928.7, 22911.5, 22922.0, 0.87, 65.0], ["14:50", 22924.2, 22929.2, 22905.3, 22911.2, 1.3, 62.3], ["14:55", 22910.6, 22930.3, 22886.3, 22917.2, 1.67, 63.2], ["15:00", 22917.0, 22969.0, 22912.5, 22959.7, 0.38, 69.0], ["15:05", 22960.2, 22977.4, 22959.8, 22975.3, 1.7, 70.8], ["15:10", 22974.7, 22998.3, 22965.3, 22989.3, 1.84, 72.4], ["15:15", 22990.3, 22991.2, 22967.0, 22970.9, 2.14, 67.3], ["15:20", 22970.8, 22973.0, 22958.0, 22969.8, 2.0, 67.0], ["15:25", 22969.9, 22972.2, 22954.2, 22959.5, 1.8, 64.0]], "signals": [{"type": "call", "i": 27, "label": "BUY CALL 87%", "price": 22587.9}], "ob": [], "os": [], "sweeps": [{"type": "low_sweep", "i": 7, "price": 22567.85, "pts": 22.0}, {"type": "high_sweep", "i": 12, "price": 22679.7, "pts": 45.0}, {"type": "high_sweep", "i": 19, "price": 22669.2, "pts": 79.0}, {"type": "low_sweep", "i": 22, "price": 22577.4, "pts": 35.0}, {"type": "low_sweep", "i": 23, "price": 22542.95, "pts": 71.0}, {"type": "high_sweep", "i": 32, "price": 22707.8, "pts": 40.0}], "fvgs": [{"type": "bull", "top": 22678.2, "bot": 22661.95, "mid": 22670.075, "time": "09:30", "i": 3, "filled": 1}, {"type": "bear", "top": 22678.2, "bot": 22636.35, "mid": 22657.275, "time": "09:40", "i": 5, "filled": 1}, {"type": "bull", "top": 22597.25, "bot": 22591.6, "mid": 22594.425, "time": "10:05", "i": 10, "filled": 1}, {"type": "bear", "top": 22609.6, "bot": 22603.3, "mid": 22606.449999999997, "time": "11:00", "i": 21, "filled": 1}, {"type": "bull", "top": 22597.1, "bot": 22587.4, "mid": 22592.25, "time": "11:15", "i": 24, "filled": 1}, {"type": "bull", "top": 22699.25, "bot": 22672.45, "mid": 22685.85, "time": "12:20", "i": 37, "filled": 1}, {"type": "bear", "top": 22699.25, "bot": 22682.6, "mid": 22690.925, "time": "12:30", "i": 39, "filled": 1}, {"type": "bull", "top": 22746.55, "bot": 22684.8, "mid": 22715.675, "time": "12:45", "i": 42, "filled": 0}, {"type": "bull", "top": 22774.3, "bot": 22757.0, "mid": 22765.65, "time": "12:50", "i": 43, "filled": 1}, {"type": "bull", "top": 22844.85, "bot": 22806.95, "mid": 22825.9, "time": "13:10", "i": 47, "filled": 1}], "sh": [{"i": 4, "price": 22746.9, "time": "09:35"}, {"i": 12, "price": 22679.7, "time": "10:15"}, {"i": 19, "price": 22669.2, "time": "10:50"}, {"i": 25, "price": 22635.65, "time": "11:20"}, {"i": 32, "price": 22707.8, "time": "11:55"}, {"i": 37, "price": 22731.1, "time": "12:20"}], "sl": [{"i": 3, "price": 22596.5, "time": "09:30"}, {"i": 9, "price": 22561.9, "time": "10:00"}, {"i": 14, "price": 22591.3, "time": "10:25"}, {"i": 23, "price": 22542.95, "time": "11:10"}, {"i": 27, "price": 22595.9, "time": "11:30"}, {"i": 36, "price": 22653.1, "time": "12:15"}]}, {"label": "Tue Apr07", "date": "2026-04-07", "day": "Tuesday", "gap_pct": -0.52, "pc": 22959.45, "dir": "Bull", "o": 22839.8, "h": 23153.8, "l": 22719.3, "c": 23130.0, "rng": 434.5, "or_high": 22901.0, "or_low": 22719.3, "or_mid": 22810.2, "candles": [["09:15", 22839.8, 22844.0, 22719.3, 22773.0, 0.76, 34.6], ["09:20", 22773.8, 22825.8, 22758.8, 22802.2, 0.96, 39.3], ["09:25", 22804.7, 22893.4, 22801.3, 22889.8, 0.95, 50.7], ["09:30", 22891.5, 22901.0, 22856.8, 22858.3, 0.83, 47.3], ["09:35", 22860.2, 22880.3, 22837.7, 22851.2, 0.8, 46.5], ["09:40", 22854.9, 22868.5, 22793.0, 22801.8, 0.95, 41.5], ["09:45", 22803.2, 22863.0, 22803.2, 22818.2, 0.72, 43.7], ["09:50", 22819.7, 22853.8, 22811.2, 22841.4, 0.67, 46.7], ["09:55", 22844.0, 22892.7, 22842.5, 22886.2, 0.96, 52.1], ["10:00", 22889.3, 22923.5, 22879.3, 22913.9, 1.35, 55.1], ["10:05", 22914.5, 22928.7, 22893.8, 22897.5, 0.7, 53.0], ["10:10", 22899.5, 22923.5, 22887.0, 22920.0, 0.58, 55.5], ["10:15", 22921.8, 22952.2, 22917.5, 22943.2, 0.97, 58.0], ["10:20", 22945.8, 22966.6, 22915.8, 22926.5, 1.1, 55.6], ["10:25", 22928.8, 22945.7, 22922.8, 22943.7, 0.73, 57.5], ["10:30", 22944.5, 22947.9, 22910.5, 22913.7, 0.63, 53.1], ["10:35", 22915.9, 22930.0, 22887.6, 22928.8, 0.63, 55.0], ["10:40", 22930.7, 22965.2, 22928.2, 22958.8, 0.83, 58.6], ["10:45", 22960.3, 22961.0, 22924.0, 22931.8, 0.8, 54.4], ["10:50", 22933.2, 22933.5, 22862.4, 22879.2, 1.08, 47.3], ["10:55", 22881.1, 22904.0, 22834.7, 22844.0, 1.08, 43.3], ["11:00", 22845.1, 22864.3, 22827.8, 22850.5, 1.2, 44.2], ["11:05", 22853.8, 22886.7, 22844.8, 22865.0, 1.28, 46.4], ["11:10", 22867.6, 22879.0, 22848.4, 22862.5, 1.23, 46.0], ["11:15", 22866.0, 22903.2, 22852.2, 22893.7, 1.11, 50.8], ["11:20", 22895.0, 22928.2, 22887.5, 22927.5, 1.09, 55.3], ["11:25", 22928.8, 22947.0, 22921.0, 22943.6, 0.94, 57.3], ["11:30", 22943.5, 22946.4, 22933.1, 22944.0, 0.74, 57.4], ["11:35", 22944.5, 22960.2, 22927.6, 22944.2, 1.0, 57.4], ["11:40", 22945.0, 22945.0, 22911.8, 22921.2, 0.88, 53.1], ["11:45", 22922.4, 22928.0, 22903.8, 22917.1, 0.68, 52.4], ["11:50", 22918.7, 22943.1, 22917.1, 22943.0, 0.48, 56.5], ["11:55", 22944.3, 22991.7, 22943.5, 22984.7, 0.96, 62.3], ["12:00", 22986.2, 22987.8, 22943.2, 22944.4, 0.9, 54.8], ["12:05", 22945.8, 22950.3, 22926.0, 22949.0, 0.56, 55.4], ["12:10", 22950.5, 22950.5, 22906.2, 22942.5, 0.82, 54.2], ["12:15", 22940.0, 22947.2, 22922.5, 22930.0, 0.6, 51.9], ["12:20", 22931.8, 22932.7, 22905.7, 22912.8, 0.6, 48.8], ["12:25", 22915.0, 22929.3, 22909.5, 22924.8, 0.94, 51.0], ["12:30", 22926.2, 22945.3, 22920.3, 22934.8, 0.7, 52.8], ["12:35", 22937.5, 22946.3, 22924.5, 22946.3, 0.61, 54.9], ["12:40", 22947.2, 22951.9, 22933.1, 22946.0, 0.48, 54.8], ["12:45", 22947.2, 22948.8, 22931.5, 22942.8, 0.56, 54.1], ["12:50", 22944.8, 22952.0, 22925.2, 22939.8, 1.04, 53.3], ["12:55", 22940.5, 22944.6, 22912.5, 22915.9, 0.68, 47.6], ["13:00", 22917.4, 22942.2, 22907.8, 22937.7, 0.81, 52.6], ["13:05", 22939.7, 22939.7, 22911.3, 22912.8, 0.79, 47.1], ["13:10", 22914.1, 22956.0, 22906.2, 22938.8, 1.04, 52.7], ["13:15", 22941.7, 22970.7, 22940.5, 22967.3, 0.67, 57.9], ["13:20", 22969.3, 22969.3, 22948.5, 22954.2, 0.71, 54.9], ["13:25", 22954.8, 22961.1, 22933.8, 22960.0, 0.56, 56.0], ["13:30", 22961.9, 23045.4, 22961.8, 23012.8, 1.49, 64.4], ["13:35", 23014.2, 23033.1, 23003.2, 23030.2, 0.74, 66.7], ["13:40", 23031.1, 23062.4, 23016.5, 23056.0, 0.94, 69.7], ["13:45", 23057.5, 23063.5, 23017.8, 23020.8, 0.96, 61.4], ["13:50", 23022.2, 23044.1, 22995.0, 23027.0, 1.06, 62.3], ["13:55", 23029.0, 23032.7, 22960.0, 22977.7, 1.02, 52.3], ["14:00", 22979.9, 23020.5, 22974.1, 23013.5, 0.73, 57.6], ["14:05", 23016.4, 23022.7, 22993.9, 23015.5, 0.79, 57.9], ["14:10", 23016.2, 23018.3, 22986.0, 23012.0, 0.93, 57.2], ["14:15", 23014.5, 23026.2, 22994.8, 22996.6, 0.94, 54.0], ["14:20", 22998.9, 23011.8, 22982.2, 23004.8, 0.81, 55.4], ["14:25", 23006.0, 23025.4, 22999.0, 23014.1, 0.71, 57.1], ["14:30", 23015.0, 23050.0, 23013.0, 23034.2, 1.05, 60.4], ["14:35", 23036.0, 23036.5, 22989.5, 23001.3, 1.02, 53.1], ["14:40", 23004.2, 23041.2, 23003.5, 23028.6, 1.25, 57.7], ["14:45", 23031.4, 23055.3, 23020.7, 23044.5, 1.01, 60.1], ["14:50", 23046.4, 23069.0, 23045.2, 23060.0, 1.29, 62.4], ["14:55", 23064.6, 23101.4, 23064.2, 23096.7, 2.44, 67.1], ["15:00", 23096.8, 23130.2, 23076.5, 23118.5, 0.79, 69.6], ["15:05", 23118.0, 23134.8, 23102.2, 23127.0, 4.86, 70.5], ["15:10", 23125.0, 23130.0, 23099.3, 23109.2, 3.94, 66.0], ["15:15", 23109.4, 23142.3, 23106.1, 23123.5, 4.44, 67.8], ["15:20", 23125.3, 23145.2, 23123.1, 23135.3, 3.95, 69.2], ["15:25", 23137.0, 23153.8, 23124.2, 23130.0, 2.87, 67.7]], "signals": [], "ob": [], "os": [{"i": 0, "price": 22716.3, "rsi": 35.0}], "sweeps": [{"type": "high_sweep", "i": 3, "price": 22901.05, "pts": 99.0}, {"type": "high_sweep", "i": 9, "price": 22923.5, "pts": 26.0}, {"type": "high_sweep", "i": 12, "price": 22952.2, "pts": 26.0}, {"type": "high_sweep", "i": 13, "price": 22966.6, "pts": 53.0}, {"type": "low_sweep", "i": 20, "price": 22834.65, "pts": 30.0}, {"type": "low_sweep", "i": 21, "price": 22827.75, "pts": 37.0}], "fvgs": [{"type": "bull", "top": 22856.75, "bot": 22825.8, "mid": 22841.275, "time": "09:25", "i": 2, "filled": 1}, {"type": "bull", "top": 22879.3, "bot": 22853.85, "mid": 22866.574999999997, "time": "09:55", "i": 8, "filled": 1}, {"type": "bear", "top": 22924.0, "bot": 22904.05, "mid": 22914.025, "time": "10:50", "i": 19, "filled": 1}, {"type": "bull", "top": 22887.5, "bot": 22878.95, "mid": 22883.225, "time": "11:15", "i": 24, "filled": 0}, {"type": "bull", "top": 22920.95, "bot": 22903.15, "mid": 22912.050000000003, "time": "11:20", "i": 25, "filled": 1}, {"type": "bull", "top": 22943.45, "bot": 22928.0, "mid": 22935.725, "time": "11:50", "i": 31, "filled": 1}, {"type": "bull", "top": 23003.15, "bot": 22961.1, "mid": 22982.125, "time": "13:30", "i": 51, "filled": 1}, {"type": "bull", "top": 23064.2, "bot": 23055.3, "mid": 23059.75, "time": "14:50", "i": 67, "filled": 0}, {"type": "bull", "top": 23076.5, "bot": 23068.95, "mid": 23072.725, "time": "14:55", "i": 68, "filled": 0}], "sh": [{"i": 3, "price": 22901.05, "time": "09:30"}, {"i": 13, "price": 22966.6, "time": "10:20"}, {"i": 17, "price": 22965.25, "time": "10:40"}, {"i": 28, "price": 22960.25, "time": "11:35"}, {"i": 32, "price": 22991.7, "time": "11:55"}, {"i": 43, "price": 22952.05, "time": "12:50"}], "sl": [{"i": 5, "price": 22793.0, "time": "09:40"}, {"i": 16, "price": 22887.6, "time": "10:35"}, {"i": 21, "price": 22827.75, "time": "11:00"}, {"i": 30, "price": 22903.8, "time": "11:45"}, {"i": 37, "price": 22905.7, "time": "12:20"}, {"i": 47, "price": 22906.15, "time": "13:10"}]}, {"label": "Wed Apr08", "date": "2026-04-08", "day": "Wednesday", "gap_pct": 3.14, "pc": 23129.95, "dir": "Bull", "o": 23856.2, "h": 24025.2, "l": 23828.5, "c": 24010.6, "rng": 196.7, "or_high": 23961.1, "or_low": 23828.5, "or_mid": 23894.8, "candles": [["09:15", 23856.2, 23938.8, 23828.5, 23900.0, 2.31, 92.5], ["09:20", 23900.0, 23928.1, 23859.8, 23862.6, 2.28, 88.9], ["09:25", 23863.3, 23893.7, 23855.2, 23877.8, 2.21, 89.1], ["09:30", 23877.8, 23909.3, 23875.9, 23879.5, 2.03, 89.2], ["09:35", 23880.0, 23916.2, 23879.9, 23913.9, 2.31, 89.6], ["09:40", 23913.3, 23921.3, 23899.5, 23921.0, 2.09, 89.7], ["09:45", 23920.2, 23961.1, 23920.2, 23941.5, 1.88, 90.0], ["09:50", 23941.0, 23961.2, 23912.5, 23921.2, 2.07, 87.4], ["09:55", 23922.0, 23936.6, 23891.8, 23897.4, 1.75, 84.3], ["10:00", 23896.9, 23923.9, 23892.8, 23900.3, 1.53, 84.4], ["10:05", 23900.4, 23935.1, 23893.2, 23901.8, 1.39, 84.4], ["10:10", 23902.0, 23903.4, 23878.6, 23880.2, 1.28, 81.2], ["10:15", 23880.5, 23905.0, 23869.1, 23904.6, 1.78, 82.1], ["10:20", 23905.2, 23913.0, 23877.4, 23893.1, 1.68, 80.3], ["10:25", 23892.8, 23915.2, 23880.0, 23908.8, 1.83, 80.9], ["10:30", 23909.8, 23928.3, 23908.0, 23921.5, 1.58, 81.4], ["10:35", 23922.0, 23930.9, 23904.0, 23921.5, 1.61, 81.4], ["10:40", 23921.7, 23953.0, 23906.7, 23950.5, 1.32, 82.6], ["10:45", 23951.0, 23956.0, 23925.2, 23940.3, 1.92, 80.6], ["10:50", 23940.1, 23972.8, 23935.2, 23971.8, 1.51, 82.1], ["10:55", 23970.2, 23984.5, 23965.1, 23982.5, 1.55, 82.5], ["11:00", 23982.2, 23999.5, 23981.3, 23992.0, 1.53, 83.0], ["11:05", 23992.3, 24001.5, 23985.7, 23990.0, 1.13, 82.5], ["11:10", 23990.5, 24004.7, 23983.5, 23991.8, 1.03, 82.6], ["11:15", 23991.6, 24014.0, 23991.1, 24001.0, 1.31, 83.1], ["11:20", 24001.7, 24013.5, 23998.8, 24002.1, 1.14, 83.2], ["11:25", 24001.8, 24004.2, 23975.5, 23981.9, 1.07, 77.5], ["11:30", 23982.8, 23982.8, 23965.7, 23968.3, 0.89, 73.9], ["11:35", 23968.5, 23981.1, 23947.1, 23963.8, 1.37, 72.6], ["11:40", 23964.0, 23988.3, 23954.5, 23980.5, 1.01, 74.3], ["11:45", 23981.5, 23998.6, 23980.0, 23986.5, 0.96, 74.9], ["11:50", 23985.8, 23987.4, 23930.2, 23948.7, 1.13, 64.7], ["11:55", 23949.3, 23951.5, 23923.5, 23931.0, 1.25, 60.5], ["12:00", 23931.2, 23957.5, 23920.2, 23951.4, 0.99, 63.4], ["12:05", 23951.2, 23971.0, 23950.8, 23971.0, 1.2, 66.0], ["12:10", 23969.6, 23971.2, 23957.7, 23963.3, 0.91, 64.1], ["12:15", 23963.2, 23967.3, 23958.0, 23963.5, 0.83, 64.2], ["12:20", 23963.5, 23974.0, 23962.8, 23971.5, 0.8, 65.4], ["12:25", 23971.0, 23973.5, 23949.2, 23949.2, 0.82, 59.3], ["12:30", 23950.1, 23951.0, 23902.2, 23917.1, 0.98, 51.9], ["12:35", 23916.5, 23934.0, 23910.6, 23922.7, 0.88, 53.0], ["12:40", 23923.5, 23950.5, 23916.2, 23947.1, 0.92, 57.6], ["12:45", 23946.3, 23953.2, 23932.3, 23952.4, 0.8, 58.5], ["12:50", 23952.5, 23958.8, 23944.4, 23953.1, 0.86, 58.6], ["12:55", 23953.4, 23979.8, 23953.2, 23977.7, 0.87, 63.0], ["13:00", 23978.8, 23979.2, 23957.0, 23967.9, 1.07, 60.3], ["13:05", 23967.8, 23969.7, 23948.8, 23961.8, 1.09, 58.6], ["13:10", 23962.3, 23988.6, 23961.8, 23974.1, 1.13, 61.0], ["13:15", 23974.3, 23991.3, 23965.2, 23974.7, 1.17, 61.1], ["13:20", 23973.9, 23984.7, 23969.7, 23984.0, 0.77, 63.0], ["13:25", 23983.2, 24001.6, 23983.0, 23999.5, 0.85, 66.0], ["13:30", 23999.2, 24000.3, 23981.2, 23994.4, 0.7, 64.2], ["13:35", 23994.2, 24025.2, 23994.0, 24015.5, 1.04, 68.1], ["13:40", 24017.5, 24017.5, 23975.5, 23976.0, 1.11, 55.8], ["13:45", 23975.4, 23990.0, 23968.8, 23976.8, 0.99, 55.9], ["13:50", 23977.3, 23985.5, 23953.1, 23963.0, 0.91, 52.1], ["13:55", 23964.0, 23988.4, 23964.0, 23985.7, 0.68, 57.3], ["14:00", 23985.5, 23986.3, 23964.5, 23968.4, 0.71, 52.6], ["14:05", 23967.3, 23971.7, 23951.2, 23965.2, 0.92, 51.8], ["14:10", 23964.3, 23980.0, 23944.0, 23948.2, 1.07, 47.5], ["14:15", 23948.2, 23966.6, 23946.8, 23963.5, 1.12, 51.4], ["14:20", 23965.3, 23985.4, 23962.9, 23976.9, 1.17, 54.6], ["14:25", 23977.3, 23988.8, 23973.8, 23979.0, 1.2, 55.1], ["14:30", 23979.5, 23988.8, 23971.9, 23979.0, 1.08, 55.1], ["14:35", 23977.5, 23990.5, 23973.8, 23978.8, 1.23, 55.0], ["14:40", 23979.2, 24006.2, 23977.8, 23998.9, 1.24, 60.3], ["14:45", 23999.0, 24017.6, 23978.8, 23984.3, 1.35, 55.2], ["14:50", 23982.8, 23990.6, 23972.5, 23987.5, 1.33, 56.1], ["14:55", 23987.7, 24005.0, 23984.2, 24002.2, 1.24, 59.9], ["15:00", 24002.7, 24002.7, 23955.8, 23992.0, 0.41, 56.3], ["15:05", 23992.2, 24011.5, 23992.2, 24000.1, 2.33, 58.4], ["15:10", 23999.0, 24008.1, 23989.2, 23994.8, 3.11, 56.5], ["15:15", 23994.2, 23998.1, 23985.3, 23992.7, 3.12, 55.6], ["15:20", 23993.0, 24004.5, 23991.4, 24003.8, 2.95, 59.0], ["15:25", 24004.2, 24018.2, 24000.3, 24010.6, 2.74, 60.9]], "signals": [], "ob": [{"i": 19, "price": 23975.75, "rsi": 82.0}, {"i": 20, "price": 23987.5, "rsi": 83.0}, {"i": 21, "price": 24002.45, "rsi": 83.0}, {"i": 22, "price": 24004.5, "rsi": 82.0}, {"i": 23, "price": 24007.65, "rsi": 83.0}], "os": [], "sweeps": [{"type": "high_sweep", "i": 6, "price": 23961.1, "pts": 64.0}, {"type": "low_sweep", "i": 11, "price": 23878.6, "pts": 26.0}, {"type": "low_sweep", "i": 12, "price": 23869.1, "pts": 40.0}, {"type": "high_sweep", "i": 24, "price": 24014.0, "pts": 32.0}, {"type": "low_sweep", "i": 28, "price": 23947.1, "pts": 39.0}, {"type": "low_sweep", "i": 31, "price": 23930.2, "pts": 21.0}], "fvgs": [{"type": "bull", "top": 23965.1, "bot": 23955.95, "mid": 23960.525, "time": "10:50", "i": 19, "filled": 1}, {"type": "bull", "top": 23981.3, "bot": 23972.75, "mid": 23977.025, "time": "10:55", "i": 20, "filled": 1}, {"type": "bear", "top": 23998.75, "bot": 23982.75, "mid": 23990.75, "time": "11:25", "i": 26, "filled": 1}, {"type": "bear", "top": 23979.95, "bot": 23951.45, "mid": 23965.7, "time": "11:50", "i": 31, "filled": 1}, {"type": "bear", "top": 23962.8, "bot": 23950.95, "mid": 23956.875, "time": "12:25", "i": 38, "filled": 1}, {"type": "bear", "top": 23949.25, "bot": 23934.0, "mid": 23941.625, "time": "12:30", "i": 39, "filled": 1}, {"type": "bull", "top": 23973.75, "bot": 23966.6, "mid": 23970.175, "time": "14:20", "i": 61, "filled": 1}], "sh": [{"i": 7, "price": 23961.25, "time": "09:50"}, {"i": 24, "price": 24014.0, "time": "11:15"}, {"i": 30, "price": 23998.6, "time": "11:45"}, {"i": 37, "price": 23973.95, "time": "12:20"}, {"i": 44, "price": 23979.8, "time": "12:55"}, {"i": 52, "price": 24025.15, "time": "13:35"}], "sl": [{"i": 8, "price": 23891.85, "time": "09:55"}, {"i": 12, "price": 23869.1, "time": "10:15"}, {"i": 28, "price": 23947.1, "time": "11:35"}, {"i": 33, "price": 23920.15, "time": "12:00"}, {"i": 39, "price": 23902.25, "time": "12:30"}, {"i": 46, "price": 23948.8, "time": "13:05"}]}, {"label": "Thu Apr09", "date": "2026-04-09", "day": "Thursday", "gap_pct": -0.37, "pc": 24010.6, "dir": "Bear", "o": 23922.6, "h": 23990.8, "l": 23682.8, "c": 23766.0, "rng": 308.0, "or_high": 23990.8, "or_low": 23815.2, "or_mid": 23903.0, "candles": [["09:15", 23922.6, 23937.2, 23815.2, 23935.7, 0.99, 39.1], ["09:20", 23932.0, 23974.6, 23926.5, 23969.4, 1.16, 48.1], ["09:25", 23968.5, 23990.8, 23961.2, 23984.2, 1.17, 51.5], ["09:30", 23983.6, 23986.1, 23891.0, 23891.0, 1.15, 35.7], ["09:35", 23891.8, 23929.3, 23882.0, 23891.1, 0.95, 35.7], ["09:40", 23891.3, 23899.3, 23856.7, 23861.2, 0.88, 32.0], ["09:45", 23863.9, 23883.0, 23817.0, 23817.3, 0.86, 27.6], ["09:50", 23816.0, 23826.0, 23795.0, 23805.0, 0.92, 26.5], ["09:55", 23806.0, 23806.6, 23771.0, 23786.3, 1.09, 24.8], ["10:00", 23785.3, 23826.5, 23759.5, 23817.4, 1.09, 32.3], ["10:05", 23815.3, 23831.3, 23807.4, 23824.0, 0.96, 33.9], ["10:10", 23824.0, 23853.2, 23824.0, 23839.0, 0.75, 37.3], ["10:15", 23839.0, 23870.7, 23820.8, 23870.7, 1.1, 43.9], ["10:20", 23870.0, 23871.3, 23843.5, 23864.8, 0.91, 43.0], ["10:25", 23863.5, 23867.5, 23820.2, 23848.2, 0.93, 40.4], ["10:30", 23848.5, 23863.6, 23841.8, 23858.5, 0.78, 42.7], ["10:35", 23858.0, 23872.2, 23832.2, 23837.6, 0.86, 39.4], ["10:40", 23836.8, 23839.5, 23803.7, 23807.9, 0.88, 35.3], ["10:45", 23808.0, 23829.2, 23808.0, 23824.3, 0.59, 39.1], ["10:50", 23823.8, 23830.4, 23811.2, 23825.4, 1.03, 39.4], ["10:55", 23826.0, 23843.5, 23820.8, 23828.8, 0.82, 40.2], ["11:00", 23829.0, 23864.1, 23828.5, 23849.3, 1.41, 45.1], ["11:05", 23848.7, 23866.4, 23828.2, 23860.7, 1.01, 47.7], ["11:10", 23860.3, 23869.5, 23852.0, 23855.8, 1.0, 46.7], ["11:15", 23855.6, 23863.2, 23824.2, 23830.0, 0.8, 41.6], ["11:20", 23830.3, 23850.5, 23814.2, 23839.5, 1.02, 44.1], ["11:25", 23838.3, 23863.8, 23838.3, 23855.2, 0.75, 47.9], ["11:30", 23855.0, 23875.5, 23844.4, 23855.3, 0.84, 47.9], ["11:35", 23852.9, 23862.1, 23847.7, 23856.2, 0.63, 48.1], ["11:40", 23856.2, 23871.3, 23846.0, 23864.8, 0.67, 50.4], ["11:45", 23866.3, 23887.6, 23849.4, 23887.2, 0.83, 55.9], ["11:50", 23887.0, 23898.0, 23870.5, 23883.7, 0.8, 54.9], ["11:55", 23884.6, 23905.4, 23871.8, 23886.3, 0.73, 55.5], ["12:00", 23887.2, 23902.8, 23868.9, 23876.5, 0.61, 52.5], ["12:05", 23875.8, 23902.7, 23860.2, 23901.0, 0.76, 58.6], ["12:10", 23899.8, 23907.3, 23877.1, 23881.2, 0.88, 52.7], ["12:15", 23881.0, 23884.0, 23873.7, 23875.3, 0.66, 51.0], ["12:20", 23875.3, 23883.8, 23867.0, 23869.5, 0.69, 49.4], ["12:25", 23868.5, 23886.9, 23854.8, 23872.5, 0.7, 50.3], ["12:30", 23871.8, 23885.3, 23862.5, 23864.5, 0.7, 47.9], ["12:35", 23864.7, 23871.5, 23845.1, 23855.3, 0.63, 45.2], ["12:40", 23854.2, 23867.5, 23848.5, 23852.3, 0.54, 44.3], ["12:45", 23853.3, 23855.2, 23805.2, 23807.2, 1.06, 33.7], ["12:50", 23807.1, 23839.4, 23801.6, 23831.3, 1.02, 41.7], ["12:55", 23830.6, 23843.6, 23828.4, 23830.7, 0.62, 41.6], ["13:00", 23830.2, 23842.6, 23824.3, 23831.0, 0.72, 41.7], ["13:05", 23831.2, 23837.0, 23816.8, 23829.6, 0.55, 41.3], ["13:10", 23829.2, 23831.0, 23804.7, 23815.4, 0.77, 37.8], ["13:15", 23815.8, 23817.3, 23801.0, 23803.2, 0.64, 35.0], ["13:20", 23803.0, 23804.3, 23767.8, 23787.2, 1.13, 31.7], ["13:25", 23786.6, 23790.3, 23767.9, 23769.3, 0.69, 28.4], ["13:30", 23769.2, 23792.5, 23758.8, 23788.7, 0.9, 36.1], ["13:35", 23789.0, 23799.0, 23767.7, 23773.2, 0.74, 33.0], ["13:40", 23773.3, 23776.7, 23755.6, 23760.2, 0.65, 30.7], ["13:45", 23759.8, 23770.5, 23740.2, 23762.5, 1.07, 31.6], ["13:50", 23762.9, 23785.5, 23753.5, 23770.5, 0.66, 34.9], ["13:55", 23770.3, 23782.3, 23764.5, 23767.8, 0.82, 34.3], ["14:00", 23769.5, 23790.2, 23755.0, 23781.8, 0.45, 39.9], ["14:05", 23781.8, 23800.0, 23767.8, 23785.5, 0.82, 41.4], ["14:10", 23785.3, 23787.0, 23751.8, 23753.2, 0.87, 33.8], ["14:15", 23753.5, 23761.0, 23746.2, 23746.6, 0.73, 32.5], ["14:20", 23746.3, 23758.7, 23721.4, 23731.7, 1.16, 29.7], ["14:25", 23731.7, 23733.8, 23709.8, 23720.3, 1.08, 27.7], ["14:30", 23720.0, 23722.2, 23682.8, 23697.2, 1.48, 24.2], ["14:35", 23697.2, 23708.8, 23690.4, 23705.8, 1.01, 27.9], ["14:40", 23707.2, 23744.9, 23702.7, 23729.8, 1.01, 37.0], ["14:45", 23728.8, 23748.3, 23720.5, 23738.0, 1.59, 39.8], ["14:50", 23737.8, 23751.5, 23723.5, 23748.4, 1.15, 43.3], ["14:55", 23747.8, 23752.2, 23733.1, 23741.0, 1.04, 41.4], ["15:00", 23742.5, 23806.8, 23726.9, 23741.6, 0.94, 41.6], ["15:05", 23744.2, 23800.6, 23733.4, 23787.8, 3.98, 55.2], ["15:10", 23789.1, 23801.2, 23778.7, 23793.3, 2.96, 56.6], ["15:15", 23793.0, 23794.3, 23769.1, 23771.2, 2.99, 50.3], ["15:20", 23772.8, 23784.5, 23765.5, 23781.4, 3.31, 52.9], ["15:25", 23782.2, 23791.2, 23759.0, 23766.0, 2.52, 48.7]], "signals": [], "ob": [], "os": [{"i": 50, "price": 23764.9, "rsi": 28.0}, {"i": 52, "price": 23764.65, "rsi": 33.0}, {"i": 53, "price": 23752.6, "rsi": 31.0}, {"i": 54, "price": 23737.15, "rsi": 32.0}, {"i": 55, "price": 23750.5, "rsi": 35.0}], "sweeps": [{"type": "low_sweep", "i": 7, "price": 23794.95, "pts": 22.0}, {"type": "low_sweep", "i": 8, "price": 23771.05, "pts": 53.0}, {"type": "low_sweep", "i": 9, "price": 23759.45, "pts": 80.0}, {"type": "low_sweep", "i": 17, "price": 23803.65, "pts": 22.0}, {"type": "high_sweep", "i": 31, "price": 23898.0, "pts": 21.0}, {"type": "high_sweep", "i": 32, "price": 23905.4, "pts": 29.0}], "fvgs": [{"type": "bull", "top": 23961.2, "bot": 23937.15, "mid": 23949.175000000003, "time": "09:20", "i": 1, "filled": 1}, {"type": "bear", "top": 23961.2, "bot": 23929.35, "mid": 23945.275, "time": "09:30", "i": 3, "filled": 0}, {"type": "bear", "top": 23856.65, "bot": 23826.0, "mid": 23841.325, "time": "09:45", "i": 6, "filled": 1}, {"type": "bear", "top": 23816.95, "bot": 23806.6, "mid": 23811.775, "time": "09:50", "i": 7, "filled": 1}, {"type": "bear", "top": 23848.45, "bot": 23839.4, "mid": 23843.925000000003, "time": "12:45", "i": 42, "filled": 1}, {"type": "bear", "top": 23800.95, "bot": 23790.35, "mid": 23795.65, "time": "13:20", "i": 49, "filled": 1}, {"type": "bear", "top": 23767.75, "bot": 23760.95, "mid": 23764.35, "time": "14:10", "i": 59, "filled": 1}, {"type": "bear", "top": 23746.2, "bot": 23733.8, "mid": 23740.0, "time": "14:20", "i": 61, "filled": 1}, {"type": "bull", "top": 23720.5, "bot": 23708.85, "mid": 23714.675, "time": "14:40", "i": 65, "filled": 0}], "sh": [{"i": 2, "price": 23990.75, "time": "09:25"}, {"i": 13, "price": 23871.35, "time": "10:20"}, {"i": 16, "price": 23872.2, "time": "10:35"}, {"i": 23, "price": 23869.5, "time": "11:10"}, {"i": 27, "price": 23875.5, "time": "11:30"}, {"i": 32, "price": 23905.4, "time": "11:55"}], "sl": [{"i": 9, "price": 23759.45, "time": "10:00"}, {"i": 14, "price": 23820.2, "time": "10:25"}, {"i": 17, "price": 23803.65, "time": "10:40"}, {"i": 25, "price": 23814.2, "time": "11:20"}, {"i": 34, "price": 23860.25, "time": "12:05"}, {"i": 43, "price": 23801.6, "time": "12:50"}]}, {"label": "Fri Apr10", "date": "2026-04-10", "day": "Friday", "gap_pct": 0.51, "pc": 23766.05, "dir": "Bull", "o": 23886.8, "h": 24074.0, "l": 23856.3, "c": 24051.8, "rng": 217.7, "or_high": 23992.5, "or_low": 23856.3, "or_mid": 23924.4, "candles": [["09:15", 23886.8, 23968.8, 23856.3, 23965.7, 1.07, 75.6], ["09:20", 23966.2, 23978.7, 23917.0, 23918.7, 0.99, 66.7], ["09:25", 23918.8, 23944.2, 23902.2, 23936.9, 1.24, 68.3], ["09:30", 23937.3, 23959.5, 23931.2, 23943.6, 0.99, 68.8], ["09:35", 23943.2, 23944.0, 23921.8, 23936.5, 0.97, 67.4], ["09:40", 23937.2, 23958.0, 23935.0, 23948.2, 1.79, 68.6], ["09:45", 23948.6, 23992.5, 23943.7, 23974.3, 1.18, 71.0], ["09:50", 23973.2, 23988.0, 23971.2, 23986.8, 0.94, 72.1], ["09:55", 23986.7, 23998.2, 23980.8, 23988.0, 1.1, 72.2], ["10:00", 23988.5, 24002.8, 23971.8, 23972.3, 1.15, 68.4], ["10:05", 23971.7, 23974.0, 23916.3, 23961.5, 1.53, 65.9], ["10:10", 23960.7, 23995.9, 23960.0, 23994.4, 1.01, 69.6], ["10:15", 23995.0, 24018.8, 23995.0, 24015.0, 1.32, 71.7], ["10:20", 24014.2, 24024.1, 24010.8, 24021.5, 0.89, 72.3], ["10:25", 24022.5, 24036.2, 24002.5, 24009.1, 0.95, 69.1], ["10:30", 24010.0, 24023.9, 24001.0, 24019.8, 0.96, 70.3], ["10:35", 24019.7, 24026.1, 24003.5, 24007.0, 0.76, 66.9], ["10:40", 24007.4, 24017.6, 24003.8, 24003.8, 0.78, 66.0], ["10:45", 24003.8, 24009.0, 23993.7, 23995.0, 0.96, 63.5], ["10:50", 23994.7, 23997.3, 23984.8, 23985.7, 0.9, 61.0], ["10:55", 23985.3, 24000.0, 23972.3, 23998.8, 1.02, 63.2], ["11:00", 23999.7, 24010.4, 23994.9, 24001.8, 0.84, 63.8], ["11:05", 24001.5, 24011.2, 23994.0, 24010.0, 0.7, 65.2], ["11:10", 24010.0, 24021.3, 24007.3, 24013.3, 0.75, 65.8], ["11:15", 24012.0, 24015.3, 23985.2, 23992.7, 1.09, 59.0], ["11:20", 23992.8, 24001.5, 23990.1, 23992.3, 1.03, 58.9], ["11:25", 23992.6, 24005.2, 23971.3, 23972.5, 0.95, 52.9], ["11:30", 23972.2, 24007.4, 23972.2, 24004.6, 1.06, 60.0], ["11:35", 24004.3, 24006.7, 23980.1, 23983.8, 1.26, 54.3], ["11:40", 23984.3, 23990.0, 23970.0, 23980.2, 0.77, 53.3], ["11:45", 23981.0, 23987.1, 23953.8, 23963.3, 0.84, 49.0], ["11:50", 23964.7, 23988.5, 23964.0, 23982.5, 0.86, 53.6], ["11:55", 23982.4, 23996.0, 23979.0, 23994.2, 0.6, 56.2], ["12:00", 23994.7, 24008.0, 23985.0, 24008.0, 0.61, 59.1], ["12:05", 24007.5, 24019.2, 24002.6, 24015.0, 1.1, 60.6], ["12:10", 24014.7, 24019.5, 24008.3, 24009.0, 0.84, 58.7], ["12:15", 24009.1, 24011.0, 23991.2, 24003.9, 0.77, 57.0], ["12:20", 24003.3, 24020.2, 23991.8, 24019.2, 0.88, 60.6], ["12:25", 24019.2, 24032.6, 23994.8, 24009.6, 0.98, 57.4], ["12:30", 24009.3, 24016.8, 23995.3, 23998.2, 0.75, 53.8], ["12:35", 23996.0, 24020.5, 23996.0, 24014.4, 0.83, 57.8], ["12:40", 24014.3, 24022.0, 24003.3, 24004.2, 0.7, 54.6], ["12:45", 24004.3, 24019.0, 24001.1, 24011.3, 0.88, 56.4], ["12:50", 24011.3, 24012.2, 23986.2, 24000.8, 1.21, 53.0], ["12:55", 24000.6, 24007.7, 23993.2, 24004.5, 0.9, 54.1], ["13:00", 24004.9, 24018.5, 24003.7, 24014.0, 0.98, 56.8], ["13:05", 24013.3, 24021.8, 24007.3, 24020.3, 0.6, 58.5], ["13:10", 24019.5, 24021.4, 23999.3, 24002.5, 0.89, 52.1], ["13:15", 24003.2, 24010.8, 23999.3, 23999.3, 1.01, 51.0], ["13:20", 23999.5, 24004.0, 23996.5, 23999.3, 1.1, 51.0], ["13:25", 23999.2, 24009.9, 23996.0, 24007.0, 1.0, 53.7], ["13:30", 24007.5, 24016.5, 24003.6, 24004.2, 1.01, 52.6], ["13:35", 24004.1, 24012.1, 23999.2, 24011.6, 0.78, 55.2], ["13:40", 24011.5, 24025.7, 24011.5, 24020.4, 0.87, 58.2], ["13:45", 24020.7, 24030.2, 24009.6, 24012.8, 0.8, 54.8], ["13:50", 24012.0, 24021.8, 24002.3, 24018.6, 0.93, 56.9], ["13:55", 24018.8, 24044.9, 24016.6, 24041.0, 0.86, 63.8], ["14:00", 24041.2, 24048.2, 24026.7, 24029.0, 0.89, 58.4], ["14:05", 24029.2, 24037.6, 24025.5, 24031.5, 0.77, 59.2], ["14:10", 24031.8, 24046.5, 23998.5, 24020.1, 1.13, 54.2], ["14:15", 24020.4, 24021.8, 23938.6, 23994.8, 1.85, 45.2], ["14:20", 23995.1, 24010.6, 23956.6, 23956.9, 1.04, 35.5], ["14:25", 23956.6, 23969.7, 23947.9, 23964.8, 1.1, 38.5], ["14:30", 23965.3, 23989.9, 23959.8, 23964.5, 1.47, 38.4], ["14:35", 23962.8, 23981.0, 23947.2, 23971.2, 1.21, 41.1], ["14:40", 23970.5, 23993.5, 23969.2, 23982.7, 1.33, 45.4], ["14:45", 23982.9, 24005.5, 23956.8, 24000.7, 1.79, 51.4], ["14:50", 24000.5, 24006.2, 23991.2, 23994.8, 1.28, 49.5], ["14:55", 23995.0, 24005.7, 23993.5, 23993.5, 1.19, 49.0], ["15:00", 23994.2, 24035.2, 23994.2, 24035.1, 0.39, 60.9], ["15:05", 24035.0, 24064.5, 24035.0, 24060.8, 2.37, 66.1], ["15:10", 24060.4, 24074.0, 24057.2, 24057.5, 2.43, 64.9], ["15:15", 24058.1, 24061.5, 24045.9, 24055.1, 2.73, 64.0], ["15:20", 24053.7, 24061.4, 24049.7, 24054.7, 2.6, 63.9], ["15:25", 24054.5, 24063.5, 24046.2, 24051.8, 2.28, 62.6]], "signals": [], "ob": [{"i": 12, "price": 24021.75, "rsi": 72.0}, {"i": 13, "price": 24027.1, "rsi": 72.0}, {"i": 14, "price": 24039.2, "rsi": 69.0}, {"i": 15, "price": 24026.9, "rsi": 70.0}, {"i": 22, "price": 24014.2, "rsi": 65.0}], "os": [], "sweeps": [{"type": "high_sweep", "i": 8, "price": 23998.25, "pts": 37.0}, {"type": "low_sweep", "i": 10, "price": 23916.3, "pts": 99.0}, {"type": "high_sweep", "i": 14, "price": 24036.2, "pts": 29.0}, {"type": "low_sweep", "i": 20, "price": 23972.3, "pts": 38.0}, {"type": "low_sweep", "i": 30, "price": 23953.8, "pts": 40.0}, {"type": "high_sweep", "i": 38, "price": 24032.6, "pts": 34.0}], "fvgs": [{"type": "bull", "top": 23971.25, "bot": 23957.95, "mid": 23964.6, "time": "09:45", "i": 6, "filled": 1}, {"type": "bear", "top": 23980.75, "bot": 23973.95, "mid": 23977.35, "time": "10:00", "i": 9, "filled": 1}, {"type": "bull", "top": 23994.95, "bot": 23973.95, "mid": 23984.45, "time": "10:10", "i": 11, "filled": 1}, {"type": "bull", "top": 24010.85, "bot": 23995.9, "mid": 24003.375, "time": "10:15", "i": 12, "filled": 1}, {"type": "bear", "top": 24003.8, "bot": 23997.35, "mid": 24000.574999999997, "time": "10:45", "i": 18, "filled": 1}, {"type": "bear", "top": 24007.3, "bot": 24001.55, "mid": 24004.425, "time": "11:15", "i": 24, "filled": 1}, {"type": "bull", "top": 24002.6, "bot": 23996.0, "mid": 23999.3, "time": "12:00", "i": 33, "filled": 1}, {"type": "bull", "top": 24035.0, "bot": 24005.65, "mid": 24020.325, "time": "15:00", "i": 69, "filled": 0}, {"type": "bull", "top": 24057.2, "bot": 24035.25, "mid": 24046.225, "time": "15:05", "i": 70, "filled": 1}], "sh": [{"i": 9, "price": 24002.85, "time": "10:00"}, {"i": 14, "price": 24036.2, "time": "10:25"}, {"i": 23, "price": 24021.35, "time": "11:10"}, {"i": 27, "price": 24007.4, "time": "11:30"}, {"i": 38, "price": 24032.6, "time": "12:25"}, {"i": 41, "price": 24022.0, "time": "12:40"}], "sl": [{"i": 10, "price": 23916.3, "time": "10:05"}, {"i": 15, "price": 24001.0, "time": "10:30"}, {"i": 20, "price": 23972.3, "time": "10:55"}, {"i": 26, "price": 23971.3, "time": "11:25"}, {"i": 30, "price": 23953.8, "time": "11:45"}, {"i": 36, "price": 23991.15, "time": "12:15"}]}];
 const DAYS=[{"date": "2026-03-30", "dow": "Monday", "gap_pts": 43.1, "gap_pct": 0.19, "open": 22578.95, "high": 22714.1, "low": 22283.85, "close": 22379.2, "range": 430.2, "direction": "Bear", "return_pct": -0.88, "close_pos": 0.22, "rsi_open": 11.2, "rsi_1030": 28.4, "pos_1130": 0.51, "rsi_mid": 49.6, "ob_count": 0, "os_count": 12, "or_high": 22714.1, "or_low": 22470.15, "or_mid": 22592.12, "signals": [{"t": "9:15", "s": "Open RSI extreme low", "id": "RSI 11 \u2014 OS at open. Gap +0.19%. body 0.38", "a": "WATCH (not a buy)", "hr": "\u2014"}, {"t": "9:35", "s": "High sweep", "id": "High 22,714 swept then rejected 84pts. Bear confirmed.", "a": "BUY PUT", "hr": "78%"}, {"t": "10:30", "s": "RSI Classifier", "id": "RSI 28 \u2192 Neutral (not a buy)", "a": "WAIT", "hr": "\u2014"}, {"t": "11:30", "s": "Position Check", "id": "51% of range \u2014 middle", "a": "NO TRADE", "hr": "\u2014"}, {"t": "intraday", "s": "Swing structure", "id": "LH pattern from 9:35. LL in lows from 11:50 onward", "a": "Structural bear confirmed", "hr": "\u2014"}, {"t": "14:15-15:00", "s": "OS+Low 12x", "id": "New lows kept forming \u2014 skip, not capitulation", "a": "SKIP", "hr": "0%"}, {"t": "close", "s": "OR direction", "id": "OR broke DOWN at 11:10. Closed below OR. Bear confirmed 7/7.", "a": "\u2014", "hr": "100%"}]}, {"date": "2026-04-01", "dow": "Wednesday", "gap_pts": 493.6, "gap_pct": 2.21, "open": 22872.85, "high": 22941.3, "low": 22618.6, "close": 22703.15, "range": 322.7, "direction": "Bear", "return_pct": -0.74, "close_pos": 0.26, "rsi_open": 83.9, "rsi_1030": 58.2, "pos_1130": 0.56, "rsi_mid": 59.7, "ob_count": 12, "os_count": 9, "or_high": 22937.65, "or_low": 22809.0, "or_mid": 22873.33, "signals": [{"t": "9:15", "s": "Gap up 2.21% + RSI 84", "id": "Body 0.15 (doji). LW dominant. OB short signal.", "a": "BUY PUT", "hr": "93%"}, {"t": "9:30", "s": "High sweep 110pts", "id": "Swept 22,938 \u2192 rejected 110pts immediately", "a": "SHORT confirmed", "hr": "\u2014"}, {"t": "10:30", "s": "RSI Classifier", "id": "RSI 58 \u2192 Neutral", "a": "WAIT", "hr": "\u2014"}, {"t": "11:30", "s": "Position Check", "id": "56% of range \u2014 middle", "a": "NO TRADE", "hr": "\u2014"}, {"t": "intraday", "s": "Swing structure", "id": "LH from 9:30. LL lows persistent. Bear structure.", "a": "Bear confirmed", "hr": "\u2014"}, {"t": "intraday", "s": "FVGs", "id": "Bear FVG 22854-22898 filled 09:40. Multiple FVGs filled all day.", "a": "82-87% fill rate confirmed", "hr": "\u2014"}, {"t": "close", "s": "OR direction", "id": "OR broke DOWN. Closed below OR. Bear. 7/7.", "a": "\u2014", "hr": "100%"}]}, {"date": "2026-04-06", "dow": "Monday", "gap_pts": 88.7, "gap_pct": 0.39, "open": 22788.95, "high": 22998.35, "low": 22542.95, "close": 22959.45, "range": 455.4, "direction": "Bull", "return_pct": 0.75, "close_pos": 0.91, "rsi_open": 58.3, "rsi_1030": 52.6, "pos_1130": 0.15, "rsi_mid": 57.8, "ob_count": 16, "os_count": 0, "or_high": 22798.25, "or_low": 22589.9, "or_mid": 22694.08, "signals": [{"t": "9:15", "s": "Moderate gap + RSI 58", "id": "Body 0.60 \u2014 strong bull candle. Follow body not RSI.", "a": "BULL bias", "hr": "\u2014"}, {"t": "10:30", "s": "RSI Classifier", "id": "RSI 52 \u2192 Neutral", "a": "WAIT for 11:30", "hr": "\u2014"}, {"t": "11:30", "s": "Position Check", "id": "15% of range \u2014 BOTTOM 25%", "a": "BUY CALL", "hr": "87%"}, {"t": "11:30", "s": "5-factor check", "id": "Pos \u2713 | Structure HL forming \u2713 | OR broke UP \u2713 | FVG above \u2713", "a": "BUY CALL \u2014 4/5 aligned", "hr": "87%"}, {"t": "11:30-14:30", "s": "Bull trend confirmed", "id": "HL structure from 11:10. Consistent HLs all afternoon.", "a": "HOLD to 14:30", "hr": "\u2014"}, {"t": "close", "s": "OR direction", "id": "OR broke UP. Closed above OR. Bull. 7/7.", "a": "\u2014", "hr": "100%"}]}, {"date": "2026-04-07", "dow": "Tuesday", "gap_pts": -119.7, "gap_pct": -0.52, "open": 22839.75, "high": 23153.85, "low": 22719.3, "close": 23129.95, "range": 434.5, "direction": "Bull", "return_pct": 1.27, "close_pos": 0.95, "rsi_open": 34.6, "rsi_1030": 53.1, "pos_1130": 0.52, "rsi_mid": 52.7, "ob_count": 9, "os_count": 1, "or_high": 22901.05, "or_low": 22719.3, "or_mid": 22810.17, "signals": [{"t": "9:15", "s": "Gap down -0.52% + RSI 35", "id": "Body 0.54 \u2014 strong bull candle. Low sweep at open.", "a": "WATCH \u2014 body says bull", "hr": "\u2014"}, {"t": "9:30", "s": "High sweep 99pts", "id": "Swept 22,901 \u2192 rejected 99pts. Then market reversed UP.", "a": "LOW SWEEP = real move UP", "hr": "\u2014"}, {"t": "10:30", "s": "RSI Classifier", "id": "RSI 53 \u2192 Neutral", "a": "WAIT", "hr": "\u2014"}, {"t": "11:30", "s": "Position Check", "id": "52% of range \u2014 middle", "a": "NO TRADE", "hr": "\u2014"}, {"t": "13:30", "s": "Vol breakout", "id": "Vol 2.4x bull. 13:30 breakout. RSI 67.", "a": "LONG", "hr": "\u2014"}, {"t": "intraday", "s": "9 consecutive HLs", "id": "HL from 9:40 all the way to close \u2014 perfect bull structure", "a": "Bull confirmed", "hr": "\u2014"}, {"t": "close", "s": "OR direction", "id": "OR broke UP. Closed above. Bull. 7/7.", "a": "\u2014", "hr": "100%"}]}, {"date": "2026-04-08", "dow": "Wednesday", "gap_pts": 726.3, "gap_pct": 3.14, "open": 23856.25, "high": 24025.15, "low": 23828.5, "close": 24010.6, "range": 196.7, "direction": "Bull", "return_pct": 0.65, "close_pos": 0.93, "rsi_open": 92.5, "rsi_1030": 81.4, "pos_1130": 0.71, "rsi_mid": 62.0, "ob_count": 15, "os_count": 0, "or_high": 23961.1, "or_low": 23828.5, "or_mid": 23894.8, "signals": [{"t": "9:15", "s": "Gap +3.14% + RSI 92", "id": "Body 0.40 \u2014 NOT doji. Follow body = bull. Range compressed 197pts.", "a": "No short. Body wins.", "hr": "\u2014"}, {"t": "9:15-9:50", "s": "6x vol spikes 2x+", "id": "Institutional absorption. Every candle high vol.", "a": "Bull accumulation", "hr": "\u2014"}, {"t": "10:30", "s": "RSI 81 \u2014 SUSPENDED", "id": "Crude moved 14% overnight. Classifier suspended.", "a": "SKIP", "hr": "0% this week"}, {"t": "11:30", "s": "Position Check", "id": "71% of range \u2014 middle (borderline)", "a": "NO TRADE", "hr": "\u2014"}, {"t": "11:50", "s": "Bearish divergence", "id": "RSI 72\u219264 price flat. Only clean signal.", "a": "BUY PUT short-term", "hr": "65%"}, {"t": "close", "s": "OR direction", "id": "OR broke UP. Closed above. Bull. 7/7.", "a": "\u2014", "hr": "100%"}]}, {"date": "2026-04-09", "dow": "Thursday", "gap_pts": -88.0, "gap_pct": -0.37, "open": 23922.6, "high": 23990.75, "low": 23682.8, "close": 23766.05, "range": 308.0, "direction": "Bear", "return_pct": -0.65, "close_pos": 0.27, "rsi_open": 39.1, "rsi_1030": 42.7, "pos_1130": 0.56, "rsi_mid": 51.8, "ob_count": 0, "os_count": 12, "or_high": 23990.75, "or_low": 23815.15, "or_mid": 23902.95, "signals": [{"t": "9:15", "s": "Open near day HIGH", "id": "High set 9:25 at 23,991. Within 15pts of open = Bear 100%", "a": "BUY PUT", "hr": "100%"}, {"t": "9:25", "s": "Day high 23,991", "id": "Market fell 308pts from 9:25 high. Bear confirmed.", "a": "BEAR day", "hr": "\u2014"}, {"t": "10:30", "s": "RSI 42 \u2014 SUSPENDED", "id": "Crude back to $100 (ceasefire breach). Classifier suspended.", "a": "SKIP", "hr": "0% this week"}, {"t": "11:30", "s": "Position Check", "id": "56% of range \u2014 middle", "a": "NO TRADE", "hr": "\u2014"}, {"t": "13:25-14:35", "s": "OS+Low 12x \u2014 SKIP", "id": "New lows kept forming every candle. Not capitulation.", "a": "SKIP", "hr": "0%"}, {"t": "intraday", "s": "LL structure confirmed", "id": "LL in swing lows from 12:50 through 14:30", "a": "Bear structural", "hr": "\u2014"}, {"t": "close", "s": "OR direction", "id": "OR broke DOWN at 9:50. Closed below OR. Bear. 7/7.", "a": "\u2014", "hr": "100%"}]}, {"date": "2026-04-10", "dow": "Friday", "gap_pts": 120.8, "gap_pct": 0.51, "open": 23886.8, "high": 24074.05, "low": 23856.35, "close": 24051.8, "range": 217.7, "direction": "Bull", "return_pct": 0.69, "close_pos": 0.9, "rsi_open": 75.6, "rsi_1030": 70.3, "pos_1130": 0.68, "rsi_mid": 58.2, "ob_count": 7, "os_count": 0, "or_high": 23992.5, "or_low": 23856.35, "or_mid": 23924.42, "signals": [{"t": "9:15", "s": "Gap +0.51% Friday", "id": "RSI 75. Body 0.70 (strong bull). Borderline gap fill (>0.5% = 50%).", "a": "WATCH", "hr": "\u2014"}, {"t": "9:20", "s": "Gap fade", "id": "9:20 bear candle -47pts. Friday gap-up fades.", "a": "SHORT bias", "hr": "\u2014"}, {"t": "10:05", "s": "Low sweep 99pts recovery", "id": "Swept 23,916 then recovered 99pts. Real move = UP.", "a": "LOW SWEEP = LONG", "hr": "\u2014"}, {"t": "10:15-10:30", "s": "OB+High 4x (before noon)", "id": "RSI 69-72 pos 0.70-0.76. Before 12:00 = valid.", "a": "BUY PUT", "hr": "74%"}, {"t": "10:30", "s": "RSI 70 OB Bear", "id": "10:30 was local high. Faded to 23,948 by 14:20.", "a": "SHORT", "hr": "80%"}, {"t": "11:30", "s": "Position Check", "id": "68% of range \u2014 middle", "a": "NO TRADE", "hr": "\u2014"}, {"t": "14:15", "s": "Vol spike 1.9x bear", "id": "RSI 54\u219236. -81pts one candle.", "a": "SHORT signal", "hr": "62%"}, {"t": "15:05", "s": "Late ramp \u2014 trap", "id": "Close 90% of range. FVG 24006-24035 left unfilled above.", "a": "DO NOT CHASE", "hr": "\u2014"}, {"t": "close", "s": "OR direction + FVGs", "id": "OR broke UP. Closed above. Bull. Unfilled FVGs: 24006-24035, 23929-23961", "a": "\u2014", "hr": "100%"}], "fvg_unfilled": [{"type": "BULL", "bot": 24006, "top": 24035, "size": 29, "created": "Fri 15:00", "note": "Above Friday close \u2014 first upside target Monday"}, {"type": "BEAR", "bot": 23929, "top": 23961, "size": 32, "created": "Thu 09:30", "note": "90pts below \u2014 fills if gap-down Monday"}, {"type": "BULL", "bot": 23709, "top": 23720, "size": 12, "created": "Thu 14:40", "note": "330pts below \u2014 major floor support"}]}];
-function SP(id,el){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nt').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');if(el)el.classList.add('active');}
-function AT(a){if(a.includes('CALL'))return'<span class="tag tc">'+a+'</span>';if(a.includes('PUT'))return'<span class="tag tp">'+a+'</span>';if(['NO TRADE','SKIP','WAIT','WATCH','DO NOT'].some(x=>a.includes(x)))return'<span class="tag tn">'+a+'</span>';return'<span class="tag tw">'+a+'</span>';}
-function ND(d){const o=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],ds=['Monday','Tuesday','Wednesday','Thursday','Friday'];let i=o.indexOf(d);while(true){i=(i+1)%7;if(ds.includes(o[i]))return o[i];}}
-function NDate(ds){const d=new Date(ds);do{d.setDate(d.getDate()+1);}while(d.getDay()===0||d.getDay()===6);return d.toISOString().split('T')[0];}
 
+// ── NAV ──────────────────────────────────────────────────────
+function SP(id,el){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nt').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(el)el.classList.add('active');
+  if(id==='chart') setTimeout(drawChart,50);
+  if(id==='dashboard') renderDash();
+  if(id==='scorecards') renderSC();
+}
+
+// ── CHART ENGINE ─────────────────────────────────────────────
+let curDay=0, overlays={or:1,fvg:1,ob:1,os:1,sw:1,sig:1,prev:1};
+let isDragging=false, dragStart=0, viewStart=0, viewEnd=0;
+
+function TG(el,key){
+  overlays[key]=overlays[key]?0:1;
+  el.classList.toggle('on',overlays[key]===1);
+  drawChart();
+}
+
+function buildDaySelector(){
+  const wrap=document.getElementById('day-selector');
+  wrap.innerHTML='';
+  CHART.forEach((d,i)=>{
+    const btn=document.createElement('div');
+    btn.className='ds-btn '+(d.dir==='Bull'?'bull-d':'bear-d')+(i===curDay?' active':'');
+    btn.textContent=d.label+' '+(d.dir==='Bull'?'▲':'▼');
+    btn.onclick=()=>{curDay=i;document.querySelectorAll('.ds-btn').forEach((b,j)=>b.classList.toggle('active',j===i));drawChart();};
+    wrap.appendChild(btn);
+  });
+}
+
+function drawChart(){
+  const d=CHART[curDay];
+  const C=d.candles;
+  const wrap=document.getElementById('chart-canvas-wrap');
+  const W=wrap.clientWidth||window.innerWidth-30;
+  const mainH=Math.min(400,Math.floor(W*0.5));
+  const rsiH=60;
+  const mc=document.getElementById('main-canvas');
+  const rc=document.getElementById('rsi-canvas');
+  mc.width=W*2; mc.height=mainH*2; mc.style.width=W+'px'; mc.style.height=mainH+'px';
+  rc.width=W*2; rc.height=rsiH*2; rc.style.width=W+'px'; rc.style.height=rsiH+'px';
+  const mctx=mc.getContext('2d'); mctx.scale(2,2);
+  const rctx=rc.getContext('2d'); rctx.scale(2,2);
+
+  const PAD={l:52,r:8,t:10,b:20};
+  const chartW=W-PAD.l-PAD.r;
+  const chartH=mainH-PAD.t-PAD.b;
+  const n=C.length;
+  const cw=Math.max(2,Math.floor(chartW/n)-1);
+  const gap=Math.max(1,Math.floor(chartW/n)-cw);
+  const step=cw+gap;
+
+  // Price range
+  let pMin=Infinity,pMax=-Infinity;
+  C.forEach(c=>{pMin=Math.min(pMin,c[3]);pMax=Math.max(pMax,c[2]);});
+  // Add FVG range
+  d.fvgs.forEach(f=>{pMin=Math.min(pMin,f.bot);pMax=Math.max(pMax,f.top);});
+  const pad=(pMax-pMin)*0.05;
+  pMin-=pad; pMax+=pad;
+
+  function yP(p){return PAD.t+chartH*(1-(p-pMin)/(pMax-pMin));}
+  function xP(i){return PAD.l+i*step+cw/2;}
+
+  // Background
+  mctx.fillStyle='#161616'; mctx.fillRect(0,0,W,mainH);
+
+  // Grid
+  mctx.strokeStyle='#1e1e1e'; mctx.lineWidth=0.5;
+  for(let g=0;g<=5;g++){
+    const y=PAD.t+chartH*g/5;
+    mctx.beginPath();mctx.moveTo(PAD.l,y);mctx.lineTo(W-PAD.r,y);mctx.stroke();
+    const price=pMax-(pMax-pMin)*g/5;
+    mctx.fillStyle='#444';mctx.font='10px sans-serif';mctx.textAlign='right';
+    mctx.fillText(price.toFixed(0),PAD.l-3,y+4);
+  }
+
+  // Previous day levels
+  if(overlays.prev && curDay>0){
+    const pd=CHART[curDay-1];
+    const lvls=[[pd.h,'#6b7280','PDH'],[pd.l,'#6b7280','PDL'],[pd.c,'#9ca3af','PC']];
+    lvls.forEach(([p,col,lbl])=>{
+      if(p<pMin||p>pMax)return;
+      const y=yP(p);
+      mctx.setLineDash([4,4]);mctx.strokeStyle=col;mctx.lineWidth=0.8;
+      mctx.beginPath();mctx.moveTo(PAD.l,y);mctx.lineTo(W-PAD.r,y);mctx.stroke();
+      mctx.setLineDash([]);mctx.fillStyle=col;mctx.font='9px sans-serif';mctx.textAlign='left';
+      mctx.fillText(lbl+' '+p.toFixed(0),PAD.l+2,y-2);
+    });
+    mctx.setLineDash([]);
+  }
+
+  // OR zone
+  if(overlays.or){
+    const orY1=yP(d.or_high),orY2=yP(d.or_low),orYm=yP(d.or_mid);
+    mctx.fillStyle='rgba(59,130,246,0.06)';
+    mctx.fillRect(PAD.l,orY1,chartW,orY2-orY1);
+    mctx.strokeStyle='#3b82f6';mctx.lineWidth=1;mctx.setLineDash([2,3]);
+    mctx.beginPath();mctx.moveTo(PAD.l,orY1);mctx.lineTo(W-PAD.r,orY1);mctx.stroke();
+    mctx.beginPath();mctx.moveTo(PAD.l,orY2);mctx.lineTo(W-PAD.r,orY2);mctx.stroke();
+    mctx.strokeStyle='rgba(59,130,246,0.4)';mctx.lineWidth=0.5;
+    mctx.beginPath();mctx.moveTo(PAD.l,orYm);mctx.lineTo(W-PAD.r,orYm);mctx.stroke();
+    mctx.setLineDash([]);
+    mctx.fillStyle='#3b82f6';mctx.font='9px sans-serif';mctx.textAlign='left';
+    mctx.fillText('OR '+d.or_high.toFixed(0),PAD.l+2,orY1-2);
+    mctx.fillText('OR mid '+d.or_mid.toFixed(0),PAD.l+2,orYm-2);
+  }
+
+  // FVGs
+  if(overlays.fvg){
+    d.fvgs.forEach(f=>{
+      const y1=yP(f.top),y2=yP(f.bot);
+      if(y1>mainH||y2<0)return;
+      const col=f.type==='bull'?'rgba(168,85,247,':'rgba(239,68,68,';
+      const alpha=f.filled?'0.06)':'0.15)';
+      mctx.fillStyle=col+alpha.replace('0.','f.filled?0.06:0.').replace('f.filled?0.06:0.','');
+      // simpler:
+      mctx.fillStyle=f.filled?(f.type==='bull'?'rgba(168,85,247,0.06)':'rgba(239,68,68,0.06)'):(f.type==='bull'?'rgba(168,85,247,0.18)':'rgba(239,68,68,0.18)');
+      mctx.fillRect(PAD.l,y1,chartW,y2-y1);
+      mctx.strokeStyle=f.type==='bull'?'rgba(168,85,247,0.5)':'rgba(239,68,68,0.5)';
+      mctx.lineWidth=0.5;mctx.setLineDash([2,2]);
+      mctx.beginPath();mctx.moveTo(PAD.l,y1);mctx.lineTo(W-PAD.r,y1);mctx.stroke();
+      mctx.beginPath();mctx.moveTo(PAD.l,y2);mctx.lineTo(W-PAD.r,y2);mctx.stroke();
+      mctx.setLineDash([]);
+      // Midpoint line
+      const ym=yP(f.mid);
+      mctx.strokeStyle=f.type==='bull'?'rgba(168,85,247,0.3)':'rgba(239,68,68,0.3)';
+      mctx.lineWidth=0.5;
+      mctx.beginPath();mctx.moveTo(PAD.l,ym);mctx.lineTo(W-PAD.r,ym);mctx.stroke();
+    });
+  }
+
+  // Sweeps
+  if(overlays.sw){
+    d.sweeps.forEach(sw=>{
+      const x=xP(sw.i);
+      const y=yP(sw.price);
+      mctx.strokeStyle='#f59e0b';mctx.lineWidth=1.5;
+      mctx.beginPath();
+      if(sw.type==='high_sweep'){
+        mctx.moveTo(x-8,y-12);mctx.lineTo(x,y);mctx.lineTo(x+8,y-12);
+      } else {
+        mctx.moveTo(x-8,y+12);mctx.lineTo(x,y);mctx.lineTo(x+8,y+12);
+      }
+      mctx.stroke();
+      mctx.fillStyle='#f59e0b';mctx.font='8px sans-serif';mctx.textAlign='center';
+      const lbl=sw.type==='high_sweep'?'H↓':'L↑';
+      mctx.fillText(lbl+sw.pts,x,sw.type==='high_sweep'?y-15:y+22);
+    });
+  }
+
+  // Candles
+  C.forEach((c,i)=>{
+    const x=PAD.l+i*step;
+    const isBull=c[4]>=c[1];
+    const col=isBull?'#22c55e':'#ef4444';
+    const open=c[1],high=c[2],low=c[3],close=c[4];
+    const yO=yP(open),yC=yP(close),yH=yP(high),yL=yP(low);
+    const bodyTop=Math.min(yO,yC),bodyBot=Math.max(yO,yC),bodyH=Math.max(1,bodyBot-bodyTop);
+    // Wick
+    mctx.strokeStyle=col;mctx.lineWidth=1;
+    mctx.beginPath();mctx.moveTo(x+cw/2,yH);mctx.lineTo(x+cw/2,yL);mctx.stroke();
+    // Body
+    mctx.fillStyle=col;
+    mctx.fillRect(x,bodyTop,cw,bodyH);
+    // High vol outline
+    if(c[5]>1.8){
+      mctx.strokeStyle='rgba(255,255,255,0.3)';mctx.lineWidth=0.5;
+      mctx.strokeRect(x,bodyTop,cw,bodyH);
+    }
+  });
+
+  // OB+High markers
+  if(overlays.ob){
+    d.ob.forEach(ob=>{
+      const x=xP(ob.i);const y=yP(ob.price);
+      mctx.fillStyle='#ef4444';
+      mctx.beginPath();mctx.moveTo(x,y);mctx.lineTo(x-5,y-8);mctx.lineTo(x+5,y-8);mctx.closePath();mctx.fill();
+      mctx.fillStyle='#ef4444';mctx.font='8px sans-serif';mctx.textAlign='center';
+      mctx.fillText('OB',x,y-11);
+    });
+  }
+
+  // OS+Low markers
+  if(overlays.os){
+    d.os.forEach(os=>{
+      const x=xP(os.i);const y=yP(os.price);
+      mctx.fillStyle='#22c55e';
+      mctx.beginPath();mctx.moveTo(x,y);mctx.lineTo(x-5,y+8);mctx.lineTo(x+5,y+8);mctx.closePath();mctx.fill();
+      mctx.fillStyle='#22c55e';mctx.font='8px sans-serif';mctx.textAlign='center';
+      mctx.fillText('OS',x,y+19);
+    });
+  }
+
+  // 11:30 signals
+  if(overlays.sig){
+    d.signals.forEach(sig=>{
+      const x=xP(sig.i);const y=yP(sig.price);
+      const isCall=sig.type==='call';
+      mctx.strokeStyle='#fff';mctx.fillStyle='#fff';
+      mctx.beginPath();mctx.arc(x,y,5,0,Math.PI*2);mctx.fill();
+      mctx.strokeStyle=isCall?'#22c55e':'#ef4444';mctx.lineWidth=1.5;
+      mctx.beginPath();mctx.arc(x,y,7,0,Math.PI*2);mctx.stroke();
+      mctx.fillStyle=isCall?'#22c55e':'#ef4444';mctx.font='bold 9px sans-serif';mctx.textAlign='center';
+      mctx.fillText(isCall?'CALL':'PUT',x,isCall?y+18:y-10);
+    });
+  }
+
+  // X-axis time labels
+  mctx.fillStyle='#333';mctx.font='9px sans-serif';mctx.textAlign='center';
+  const labelEvery=Math.ceil(n/10);
+  C.forEach((c,i)=>{
+    if(i%labelEvery===0){
+      const x=xP(i);
+      mctx.fillText(c[0],x,mainH-PAD.b+12);
+    }
+  });
+
+  // Day title
+  mctx.fillStyle='#555';mctx.font='bold 11px sans-serif';mctx.textAlign='left';
+  const title=d.label+' ('+d.dir+') '+d.day+' gap:'+(d.gap_pct>0?'+':'')+d.gap_pct+'%';
+  mctx.fillText(title,PAD.l,PAD.t+11);
+
+  // RSI canvas
+  rctx.fillStyle='#111';rctx.fillRect(0,0,W,rsiH);
+  rctx.strokeStyle='#1e1e1e';rctx.lineWidth=0.5;
+  [30,50,70].forEach(r=>{
+    const y=rsiH*(1-r/100);
+    rctx.beginPath();rctx.moveTo(PAD.l,y);rctx.lineTo(W-PAD.r,y);rctx.stroke();
+    rctx.fillStyle='#333';rctx.font='9px sans-serif';rctx.textAlign='right';
+    rctx.fillText(r,PAD.l-3,y+4);
+  });
+  rctx.strokeStyle='#818cf8';rctx.lineWidth=1.2;rctx.beginPath();
+  C.forEach((c,i)=>{
+    const x=xP(i),y=rsiH*(1-c[6]/100);
+    i===0?rctx.moveTo(x,y):rctx.lineTo(x,y);
+  });
+  rctx.stroke();
+  rctx.fillStyle='#333';rctx.font='9px sans-serif';rctx.textAlign='left';
+  rctx.fillText('RSI',PAD.l,10);
+
+  // Hover
+  mc.onmousemove=function(e){
+    const rect=mc.getBoundingClientRect();
+    const mx=(e.clientX-rect.left);
+    const idx=Math.min(n-1,Math.max(0,Math.floor((mx-PAD.l)/step)));
+    if(idx<0||idx>=n)return;
+    const c=C[idx];
+    const tt=document.getElementById('tooltip');
+    tt.style.display='block';
+    tt.style.left=(Math.min(mx+10,W-170))+'px';
+    tt.style.top='10px';
+    tt.innerHTML=`<b style="color:#aaa">${c[0]}</b><br>
+      O: <b>${c[1]}</b> H: <b style="color:#22c55e">${c[2]}</b><br>
+      L: <b style="color:#ef4444">${c[3]}</b> C: <b>${c[4]}</b><br>
+      Vol: <b style="color:${c[5]>1.8?'#f59e0b':'#666'}">${c[5]}x</b> RSI: <b style="color:${c[6]>70?'#ef4444':c[6]<30?'#22c55e':'#818cf8'}">${c[6]}</b>`;
+    document.getElementById('rsi-val').textContent='RSI: '+c[6];
+    document.getElementById('candle-info').textContent=c[0]+' O:'+c[1]+' H:'+c[2]+' L:'+c[3]+' C:'+c[4];
+  };
+  mc.onmouseleave=function(){document.getElementById('tooltip').style.display='none';};
+}
+
+// ── DASHBOARD ────────────────────────────────────────────────
 function renderDash(){
-  const L=DAYS[DAYS.length-1],nd=ND(L.dow),ndt=NDate(L.date),cp=L.close_pos;
+  const L=DAYS[DAYS.length-1],nd=nextDay(L.dow),ndt=nextDate(L.date),cp=L.close_pos;
   let cpS='Neutral',cpC='#aaa';
   if(cp>0.80){cpS='Morning trap &#8212; first hour avg -0.46%';cpC='#ef4444';}
   else if(cp<0.20){cpS='71% Bull next day';cpC='#22c55e';}
   else if(cp>=0.40&&cp<=0.60){cpS='BEAR next day 89%';cpC='#ef4444';}
-  const DB={Monday:{p:'58% Bull',c:'#22c55e',n:'Morning trap first hour. No shorts after 13:30. 14:00 positive drift.'},Tuesday:{p:'58% Bear',c:'#ef4444',n:'Expiry. OS+Low 83%. High/low often set at open.'},Wednesday:{p:'69% Bull',c:'#22c55e',n:'Suppressed in current regime. Check open signal first.'},Thursday:{p:'82% Bear',c:'#ef4444',n:'Gap-downs NEVER fill (0%). RSI&#8805;70 reverses 70%.'},Friday:{p:'64% Bear',c:'#ef4444',n:'Gap fills only if &lt;0.5%. OS signals fail 71%.'}};
+  const DB={Monday:{p:'58% Bull',c:'#22c55e',n:'Morning trap. No shorts after 13:30. 14:00 drift.'},Tuesday:{p:'58% Bear',c:'#ef4444',n:'Expiry. OS+Low 83%.'},Wednesday:{p:'69% Bull',c:'#22c55e',n:'Suppressed in regime.'},Thursday:{p:'82% Bear',c:'#ef4444',n:'Gap-down NEVER fills.'},Friday:{p:'64% Bear',c:'#ef4444',n:'Gap fills only if &lt;0.5%.'}};
   const db=DB[nd]||{p:'&#8212;',c:'#aaa',n:''};
-  const alertClass=cp>0.80||cp>=0.40&&cp<=0.60?'warn':cp<0.20?'bull':'info';
-
   document.getElementById('dash-content').innerHTML=`
-<div style="display:flex;justify-content:space-between;align-items:center;margin:4px 0 10px">
+<div style="display:flex;justify-content:space-between;align-items:center;margin:4px 0 9px">
   <div><div style="font-size:15px;font-weight:700;color:#fff">Tomorrow &#8212; ${nd}, ${ndt}</div>
-  <div style="font-size:11px;color:#555">Based on ${L.date} (${L.dow}) close</div></div>
+  <div style="font-size:11px;color:#555">${L.date} (${L.dow}) close</div></div>
   <div style="text-align:right"><div style="font-size:14px;font-weight:700;color:${db.c}">${db.p}</div>
   <div style="font-size:10px;color:#555">DOW bias</div></div>
 </div>
-<div class="al ${alertClass}"><div class="al-t">&#9888;&#65039; ${nd} &#8212; ${cpS}</div>
-  Prev close at <b>${(cp*100).toFixed(0)}%</b> of range &#8594; ${cpS}<br>
-  ${db.n}<br>PDH: ${L.high} &nbsp;&#183;&nbsp; PDL: ${L.low} &nbsp;&#183;&nbsp; PClose: ${L.close}
-</div>
-<div class="al purple"><div class="al-t">&#127919; Active FVG Price Magnets &#8212; mark these on your chart</div>
-  <b style="color:#a855f7">ABOVE</b> (${L.close}): Bull FVG 24006&#8211;24035 (mid 24020) &#8594; fills on gap-up Monday<br>
+<div class="al warn"><div class="al-t">&#9888;&#65039; ${nd} &#8212; ${cpS}</div>
+  Close at <b>${(cp*100).toFixed(0)}%</b> of range. ${db.n}<br>PDH: ${L.high} &middot; PDL: ${L.low} &middot; PClose: ${L.close}</div>
+<div class="al purple"><div class="al-t">&#127919; Active FVG Magnets &#8212; mark on chart</div>
+  <b style="color:#a855f7">ABOVE</b>: Bull FVG 24006&#8211;24035 (mid 24020) &#8594; fills on gap-up<br>
   <b style="color:#a855f7">BELOW</b>: Bear FVG 23929&#8211;23961 (mid 23945) &#8594; target on gap-down<br>
-  <b style="color:#a855f7">FLOOR</b>: Bull FVG 23709&#8211;23720 &#8594; major support 330pts below
-</div>
+  <b style="color:#a855f7">FLOOR</b>: Bull FVG 23709&#8211;23720 &#8594; major support</div>
 <div class="sec">Yesterday &#8212; ${L.date} (${L.dow})</div>
 <div class="g4">
   <div class="card"><div class="cl">Gap</div><div class="cv" style="color:${L.gap_pct>=0?'#22c55e':'#ef4444'}">${L.gap_pct>=0?'+':''}${L.gap_pct}%</div><div class="cs">${L.gap_pts>=0?'+':''}${L.gap_pts}pts</div></div>
@@ -285,49 +549,50 @@ function renderDash(){
   <div class="card"><div class="cl">Range</div><div class="cv">${L.range}pts</div><div class="cs">${L.low}&#8211;${L.high}</div></div>
   <div class="card"><div class="cl">Close pos</div><div class="cv" style="color:${cpC}">${(cp*100).toFixed(0)}%</div><div class="cs">${cpS}</div></div>
 </div>
-<div class="sec">Signal table &#8212; ${L.date}</div>
+<div class="sec">Signal table</div>
 <table><tr><th>Time</th><th>Signal</th><th>Identifier</th><th>Action</th><th>Hit%</th></tr>
 ${L.signals.map(s=>`<tr><td style="color:#555;white-space:nowrap">${s.t}</td><td style="color:#ccc;font-weight:600">${s.s}</td><td style="color:#555;font-size:11px">${s.id}</td><td>${AT(s.a)}</td><td style="color:#555">${s.hr}</td></tr>`).join('')}
 </table>
-<div class="sec">${nd} ${ndt} &#8212; checklist</div>
-<div style="background:#161616;border:1px solid #222;border-radius:8px;padding:10px 13px;font-size:12px;color:#ccc;line-height:2.1">
-  &#9200; <b>8AM</b> &#8594; Brent crude (Iran talks outcome?) + GIFT Nifty + mark FVG zones on chart<br>
-  &#9200; <b>9:15&#8211;9:45</b> &#8594; Record OR H/L + mid. Watch for sweeps at OR edges.<br>
-  &#9200; <b>9:20</b> &#8594; First candle: RSI + body + wick. Body &gt;0.50 overrides RSI.<br>
-  &#9200; <b>9:45+</b> &#8594; OR break direction = day bias confirmed<br>
-  &#9200; <b>10:35</b> &#8594; RSI at 10:30 (only if crude &lt;3% overnight move)<br>
-  &#9200; <b style="color:#22c55e">11:35 &#9733;</b> &#8594; 5-factor checklist &#8594; MAIN TRADE<br>
-  &#9200; <b>12:05</b> &#8594; Midday RSI: 45&#8211;58 = chop, cut to 1 lot<br>
-  &#9200; <b style="color:#f59e0b">13:30</b> &#8594; No new short entries on Monday after this<br>
-  &#9200; <b style="color:#ef4444">14:30</b> &#8594; CLOSE ALL
+<div class="sec">Monday ${ndt} checklist</div>
+<div style="background:#161616;border:1px solid #222;border-radius:8px;padding:9px 12px;font-size:12px;color:#ccc;line-height:2.1">
+  &#9200; <b>8AM</b> Brent crude + GIFT Nifty + mark FVG zones<br>
+  &#9200; <b>9:15&#8211;9:45</b> Record OR H/L + midpoint. Watch sweeps.<br>
+  &#9200; <b>9:20</b> First candle: RSI + body (body&gt;0.50 overrides RSI)<br>
+  &#9200; <b>10:35</b> RSI at 10:30 (only if crude moved &lt;3% overnight)<br>
+  &#9200; <b style="color:#22c55e">11:35 &#9733;</b> 5-factor checklist &#8594; MAIN TRADE<br>
+  &#9200; <b>12:05</b> Midday RSI: 45&#8211;58=chop, cut to 1 lot<br>
+  &#9200; <b style="color:#f59e0b">13:30</b> No new short entries on Monday<br>
+  &#9200; <b style="color:#ef4444">14:30</b> CLOSE ALL
 </div>`;
 }
+
+// ── SCORECARDS ───────────────────────────────────────────────
+function AT(a){if(!a)return'<span class="tag tw">—</span>';if(a.includes('CALL'))return'<span class="tag tc">'+a+'</span>';if(a.includes('PUT'))return'<span class="tag tp">'+a+'</span>';if(['NO TRADE','SKIP','WAIT','WATCH','DO NOT','CHOP'].some(x=>a.includes(x)))return'<span class="tag tn">'+a+'</span>';return'<span class="tag tw">'+a+'</span>';}
 
 function renderSC(){
   document.getElementById('sc-grid').innerHTML=[...DAYS].reverse().map((d,i)=>`
 <div class="sc ${d.direction==='Bull'?'bd':'rd'}" onclick="openSC(${DAYS.length-1-i})">
-  <div class="sd">${d.date} <span style="color:#555;font-weight:400">${d.dow}</span></div>
-  <div class="ss"><span style="color:${d.direction==='Bull'?'#22c55e':'#ef4444'};font-weight:700">${d.direction} ${d.return_pct>=0?'+':''}${d.return_pct}%</span> &#183; Gap ${d.gap_pct>=0?'+':''}${d.gap_pct}%<br>
-  Range ${d.range}pts &#183; Close ${(d.close_pos*100).toFixed(0)}% &#183; RSI open ${d.rsi_open}</div>
+  <div class="scd">${d.date} <span style="color:#555;font-weight:400">${d.dow}</span></div>
+  <div class="scs"><span style="color:${d.direction==='Bull'?'#22c55e':'#ef4444'};font-weight:700">${d.direction} ${d.return_pct>=0?'+':''}${d.return_pct}%</span> &middot; Gap ${d.gap_pct>=0?'+':''}${d.gap_pct}%<br>
+  Range ${d.range}pts &middot; Close ${(d.close_pos*100).toFixed(0)}% &middot; RSI open ${d.rsi_open}</div>
 </div>`).join('');
 }
 
 function openSC(idx){
   const d=DAYS[idx],cp=d.close_pos;
-  const cpN=cp>0.80?'Trap next day':cp<0.20?'Bull 71% next':cp>=0.40&&cp<=0.60?'Bear 89% next':'Neutral';
+  const cpN=cp>0.80?'Trap next':cp<0.20?'Bull 71%':cp>=0.40&&cp<=0.60?'Bear 89%':'Neutral';
   document.getElementById('sc-detail').innerHTML=`
 <span class="dcl" onclick="closeSC()">Close &#10005;</span>
 <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:4px">${d.date} &#8212; ${d.dow}</div>
-<div style="font-size:11px;color:#555;margin-bottom:10px">
-<span style="color:${d.direction==='Bull'?'#22c55e':'#ef4444'};font-weight:700">${d.direction} ${d.return_pct>=0?'+':''}${d.return_pct}%</span>
-&#183; Gap ${d.gap_pct>=0?'+':''}${d.gap_pct}% &#183; Range ${d.range}pts &#183; Close ${(cp*100).toFixed(0)}% &#8594; ${cpN}</div>
-<div class="g4" style="margin-bottom:10px">
+<div style="font-size:11px;color:#555;margin-bottom:9px"><span style="color:${d.direction==='Bull'?'#22c55e':'#ef4444'};font-weight:700">${d.direction} ${d.return_pct>=0?'+':''}${d.return_pct}%</span>
+&middot; Gap ${d.gap_pct>=0?'+':''}${d.gap_pct}% &middot; Range ${d.range}pts &middot; Close ${(cp*100).toFixed(0)}% &#8594; ${cpN}</div>
+<div class="g4" style="margin-bottom:9px">
   <div class="card"><div class="cl">Open</div><div class="cv" style="font-size:14px">${d.open}</div></div>
   <div class="card"><div class="cl">High</div><div class="cv" style="font-size:14px;color:#22c55e">${d.high}</div></div>
   <div class="card"><div class="cl">Low</div><div class="cv" style="font-size:14px;color:#ef4444">${d.low}</div></div>
   <div class="card"><div class="cl">Close</div><div class="cv" style="font-size:14px">${d.close}</div></div>
 </div>
-<div class="g4" style="margin-bottom:10px">
+<div class="g4" style="margin-bottom:9px">
   <div class="card"><div class="cl">RSI open</div><div class="cv" style="font-size:14px;color:${d.rsi_open>70?'#ef4444':d.rsi_open<30?'#22c55e':'#aaa'}">${d.rsi_open}</div></div>
   <div class="card"><div class="cl">RSI 10:30</div><div class="cv" style="font-size:14px">${d.rsi_1030||'&#8212;'}</div></div>
   <div class="card"><div class="cl">Pos 11:30</div><div class="cv" style="font-size:14px;color:${d.pos_1130<0.25?'#22c55e':d.pos_1130>0.75?'#ef4444':'#aaa'}">${d.pos_1130!==null?(d.pos_1130*100).toFixed(0)+'%':'&#8212;'}</div></div>
@@ -341,35 +606,42 @@ ${d.signals.map(s=>`<tr><td style="color:#555;white-space:nowrap">${s.t}</td><td
 }
 function closeSC(){document.getElementById('sc-detail').classList.remove('open');}
 
+// ── CALCULATORS ──────────────────────────────────────────────
 function cP(){
   const h=parseFloat(document.getElementById('dh').value),l=parseFloat(document.getElementById('dl').value),c=parseFloat(document.getElementById('dc').value),el=document.getElementById('pres');
-  if(isNaN(h)||isNaN(l)||isNaN(c)||h<=l){el.className='cres cnone';el.textContent='Enter the three numbers above';return;}
+  if(isNaN(h)||isNaN(l)||isNaN(c)||h<=l){el.className='cres cnone';el.textContent='Enter the three numbers';return;}
   const pos=(c-l)/(h-l),pct=Math.round(pos*100);
-  if(pos<0.25){el.className='cres cbull';el.innerHTML='&#9989; BUY CALL &#8212; '+pct+'% of range. Confirm all 5 factors.';}
-  else if(pos>0.75){el.className='cres cbear';el.innerHTML='&#128308; BUY PUT &#8212; '+pct+'% of range. Confirm all 5 factors.';}
-  else{el.className='cres cwait';el.innerHTML='&#8987; NO TRADE &#8212; '+pct+'% of range. Middle zone. Skip.';}
+  if(pos<0.25){el.className='cres cbull';el.innerHTML='BUY CALL &#8212; '+pct+'% of range. Confirm all 5 factors.';}
+  else if(pos>0.75){el.className='cres cbear';el.innerHTML='BUY PUT &#8212; '+pct+'% of range. Confirm all 5 factors.';}
+  else{el.className='cres cwait';el.innerHTML='NO TRADE &#8212; '+pct+'% of range. Middle zone. Skip.';}
 }
 function cOR(){
   const h=parseFloat(document.getElementById('orh').value),l=parseFloat(document.getElementById('orl').value),el=document.getElementById('ores');
-  if(isNaN(h)||isNaN(l)||h<=l){el.innerHTML='Enter OR high and low';return;}
-  const mid=(h+l)/2,rng=h-l;
-  el.innerHTML='OR range: <b style="color:#aaa">'+rng.toFixed(0)+'pts</b> &nbsp;&#183;&nbsp; OR midpoint: <b style="color:#a855f7">'+mid.toFixed(0)+'</b> &#8212; magnetic center all day<br>Break+retest OR High &#8594; LONG &nbsp;|&nbsp; Break+retest OR Low &#8594; SHORT';
+  if(isNaN(h)||isNaN(l)||h<=l){el.innerHTML='Enter OR values';return;}
+  const mid=(h+l)/2;
+  el.innerHTML='OR range: <b style="color:#aaa">'+(h-l).toFixed(0)+'pts</b> &middot; OR midpoint: <b style="color:#a855f7">'+mid.toFixed(0)+'</b><br>Break+retest OR High &#8594; LONG &middot; Break+retest OR Low &#8594; SHORT';
 }
 function cOpt(){
-  const p=parseFloat(document.getElementById('prem').value),fvg=parseFloat(document.getElementById('fvg').value),el=document.getElementById('optres');
-  if(isNaN(p)){el.innerHTML='Enter premium above';return;}
-  let extra=!isNaN(fvg)?'<br>FVG target: <b style="color:#a855f7">'+fvg+'</b> &#8212; use this if reached before 2x':'';
-  el.innerHTML='Stop: <b style="color:#ef4444">&#8377;'+(p*0.65).toFixed(1)+'</b> &nbsp;&#183;&nbsp; 2x target: <b style="color:#22c55e">&#8377;'+(p*2).toFixed(1)+'</b><br>2 lots: max loss <b style="color:#ef4444">&#8377;'+Math.round(p*.35*25*2).toLocaleString()+'</b> &nbsp;&#183;&nbsp; target profit <b style="color:#22c55e">&#8377;'+Math.round(p*25*2).toLocaleString()+'</b>'+extra;
+  const p=parseFloat(document.getElementById('prem').value),el=document.getElementById('optres');
+  if(isNaN(p)){el.innerHTML='Enter premium';return;}
+  el.innerHTML='Stop: <b style="color:#ef4444">&#8377;'+(p*0.65).toFixed(1)+'</b> &middot; Target: <b style="color:#22c55e">&#8377;'+(p*2).toFixed(1)+'</b><br>2 lots: loss <b style="color:#ef4444">&#8377;'+Math.round(p*.35*25*2).toLocaleString()+'</b> &middot; profit <b style="color:#22c55e">&#8377;'+Math.round(p*25*2).toLocaleString()+'</b>';
 }
 function cG(){
   const pc=parseFloat(document.getElementById('pci').value),to=parseFloat(document.getElementById('toi').value),el=document.getElementById('gres');
-  if(isNaN(pc)||isNaN(to)){el.innerHTML='Enter values above';return;}
+  if(isNaN(pc)||isNaN(to)){el.innerHTML='Enter values';return;}
   const gap=to-pc,pct=(gap/pc*100).toFixed(2),abs=Math.abs(parseFloat(pct)),dir=gap>0?'UP':'DOWN',col=gap>0?'#22c55e':'#ef4444';
-  const fill=abs<0.5?'&lt;0.5% &#8594; fills (94%)':abs<1.5?'0.5&#8211;1.5% &#8594; 50% fill probability. Do not assume.':'&gt;1.5% &#8594; will NOT fill. Compressed range. Go 1 strike closer to ATM.';
+  const fill=abs<0.5?'&lt;0.5% &#8594; fills 94%':abs<1.5?'0.5-1.5% &#8594; 50% fill. Do not assume.':'&gt;1.5% &#8594; will NOT fill. Compressed range.';
   el.innerHTML='Gap <b style="color:'+col+'">'+dir+': '+(gap>0?'+':'')+gap.toFixed(0)+'pts ('+(gap>0?'+':'')+pct+'%)</b><br><span style="color:#555">'+fill+'</span>';
 }
-renderDash();
-renderSC();
+function nextDay(d){const o=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],ds=['Monday','Tuesday','Wednesday','Thursday','Friday'];let i=o.indexOf(d);while(true){i=(i+1)%7;if(ds.includes(o[i]))return o[i];}}
+function nextDate(ds){const d=new Date(ds);do{d.setDate(d.getDate()+1);}while(d.getDay()===0||d.getDay()===6);return d.toISOString().split('T')[0];}
+
+// ── INIT ─────────────────────────────────────────────────────
+buildDaySelector();
+curDay=CHART.length-1; // start on most recent day
+document.querySelectorAll('.ds-btn').forEach((b,i)=>b.classList.toggle('active',i===curDay));
+drawChart();
+window.addEventListener('resize',()=>{if(document.getElementById('chart').classList.contains('active'))drawChart();});
 </script>
 </body>
 </html>
